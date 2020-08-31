@@ -1,2 +1,2 @@
-# CS522
-Masters Mobile Development Class @ Stevens Institute of Technology
+# CS522: Mobile Systems & Application
+Masters Android Development Class @ Stevens Institute of Technology
