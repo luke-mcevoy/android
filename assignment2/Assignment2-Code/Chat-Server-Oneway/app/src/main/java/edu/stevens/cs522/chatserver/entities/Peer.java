@@ -23,8 +23,6 @@ public class Peer implements Parcelable {
     // Where we heard from them
     public InetAddress address;
 
-    public int port;
-
     @Override
     public int describeContents() {
         return 0;
@@ -33,10 +31,12 @@ public class Peer implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         // TODO
+        out.writeLong(id);
     }
 
     public Peer(Parcel in) {
         // TODO
+        in.readLong();
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {

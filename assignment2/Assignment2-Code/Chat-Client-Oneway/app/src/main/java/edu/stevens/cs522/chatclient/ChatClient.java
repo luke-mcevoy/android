@@ -96,19 +96,19 @@ public class ChatClient extends Activity implements OnClickListener {
 			 * (an AVD alias for) the host loopback interface, with the server
 			 * port on the host redirected to the server port on the server AVD.
 			 */
-			
+
 			InetAddress destAddr;
-			
+
 			int destPort = getResources().getInteger(R.integer.app_port);
 
 			String clientName;
-			
+
 			byte[] sendData;  // Combine sender and message text; default encoding is UTF-8
-			
+
 			// TODO get data from UI (no-op if chat name is blank)
 
 
-			
+
 			// End todo
 
 			Log.d(TAG, String.format("Sending data from address %s:%d", clientSocket.getInetAddress(), clientSocket.getPort()));
@@ -120,7 +120,7 @@ public class ChatClient extends Activity implements OnClickListener {
 
 			Log.d(TAG, "Sent packet: " + line);
 
-			
+
 		} catch (UnknownHostException e) {
 			throw new IllegalStateException("Unknown host exception: " + e.getMessage());
 		} catch (IOException e) {
