@@ -68,8 +68,18 @@ public class ChatClient extends Activity implements OnClickListener {
 
 		// TODO initialize the UI.
 
+		destinationHost = (EditText)findViewById(R.id.message_text);
+		destinationHost.setOnClickListener(this);
 
-		
+		chatName = (EditText)findViewById(R.id.chat_name);
+		chatName.setOnClickListener(this);
+
+		messageText = (EditText)findViewById(R.id.message_text);
+		messageText.setOnClickListener(this);
+
+		sendButton = (Button)findViewById(R.id.send_button);
+		sendButton.setOnClickListener(this);
+
 		// End todo
 
 		try {
