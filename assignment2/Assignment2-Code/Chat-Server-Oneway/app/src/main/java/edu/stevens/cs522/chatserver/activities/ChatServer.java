@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import java.net.DatagramPacket;
@@ -31,7 +30,6 @@ import java.util.ArrayList;
 
 import edu.stevens.cs522.base.DatagramSendReceive;
 import edu.stevens.cs522.chatserver.R;
-import edu.stevens.cs522.chatserver.entities.Message;
 import edu.stevens.cs522.chatserver.entities.Peer;
 
 public class ChatServer extends Activity implements OnClickListener {
@@ -54,8 +52,8 @@ public class ChatServer extends Activity implements OnClickListener {
     /*
      * TODO: Declare a listview for messagesAdapter, and an adapter for displaying messagesAdapter.
      */
-    ListView messageAdapter;
-    ArrayAdapter<Message> messageArrayAdapter;
+    ListView messageListView;
+    ArrayAdapter<String> messageAdapter;
     /*
      * End Todo
      */
@@ -97,6 +95,9 @@ public class ChatServer extends Activity implements OnClickListener {
         /*
          * TODO: Initialize the UI.
          */
+        messageListView = (ListView)findViewById(R.id.message_list);
+        messageListView.setAdapter(messageAdapter);
+
         next = (Button)findViewById(R.id.next);
         next.setOnClickListener(this);
         /*
@@ -130,10 +131,9 @@ public class ChatServer extends Activity implements OnClickListener {
             /*
              * TODO: Add message with sender to the display.
              */
-            messageAdapter = (ListView)findViewById(R.id.message_list);
-            ArrayList<Message> messages = new ArrayList<Message>();
-            messageArrayAdapter = new ArrayAdapter<Message>(this, android.R.layout.simple_list_item_1, messages);
-            messageAdapter.setAdapter(messageArrayAdapter);
+            ArrayList<String> messages = new ArrayList<>();
+            messages.add(name + ": " + message);
+            messageAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messages);
             /*
              * End Todo
              */

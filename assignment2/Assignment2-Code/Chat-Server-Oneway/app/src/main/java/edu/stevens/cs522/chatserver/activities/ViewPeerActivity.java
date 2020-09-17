@@ -3,6 +3,12 @@ package edu.stevens.cs522.chatserver.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import edu.stevens.cs522.chatserver.R;
 import edu.stevens.cs522.chatserver.entities.Peer;
@@ -26,6 +32,28 @@ public class ViewPeerActivity extends Activity {
         }
 
         // TODO init the UI
+        TextView username = findViewById(R.id.view_user_name);
+        TextView lastSeen = findViewById(R.id.view_timestamp);
+        TextView address = findViewById(R.id.view_address);
+        TextView port = findViewById(R.id.view_port);
+
+        username.setText(peer.name);
+        lastSeen.setText((CharSequence) peer.timestamp);
+        address.setText((CharSequence) peer.address);
+        port.setText((int) peer.id);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 

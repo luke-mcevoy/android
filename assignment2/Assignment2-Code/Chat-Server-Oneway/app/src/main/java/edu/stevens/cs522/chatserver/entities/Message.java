@@ -41,13 +41,13 @@ public class Message implements Parcelable {
         @Override
         public Message createFromParcel(Parcel source) {
             // TODO
-            return null;
+            return new Message();
         }
 
         @Override
         public Message[] newArray(int size) {
             // TODO
-            return null;
+            return new Message[size];
         }
 
     };

@@ -3,8 +3,12 @@ package edu.stevens.cs522.chatserver.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -27,7 +31,12 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
         peers = getIntent().getParcelableArrayListExtra(PEERS_KEY);
 
         // TODO display the list of peers, set this activity as onClick listener
-
+        ListView peersListView = (ListView)findViewById(R.id.peer_list);
+        ArrayAdapter<Peer> peersAdapter = new ArrayAdapter<Peer>(this, android.R.layout.simple_list_item_1, peers);
+        peersListView.setAdapter(peersAdapter);
+        Log.i("DEBUG", "setOnItemClickListener to be initialized");
+        peersListView.setOnItemClickListener(this);
+        Log.i("DEBUG", "setOnItemClickListener is initialized");
     }
 
 
