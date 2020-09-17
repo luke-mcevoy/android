@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -67,14 +68,9 @@ public class ChatClient extends Activity implements OnClickListener {
 		StrictMode.setThreadPolicy(policy);
 
 		// TODO initialize the UI.
-		destinationHost = (EditText)findViewById(R.id.message_text);
-		destinationHost.setOnClickListener(this);
-
+		destinationHost = (EditText)findViewById(R.id.destination_host);
 		chatName = (EditText)findViewById(R.id.chat_name);
-		chatName.setOnClickListener(this);
-
 		messageText = (EditText)findViewById(R.id.message_text);
-		messageText.setOnClickListener(this);
 
 		sendButton = (Button)findViewById(R.id.send_button);
 		sendButton.setOnClickListener(this);
@@ -98,6 +94,7 @@ public class ChatClient extends Activity implements OnClickListener {
 	 * Callback for the SEND button.
 	 */
 	public void onClick(View v) {
+		Log.i("DEBUG", "***** onClick has executed");
 		try {
 			/*
 			 * On the emulator, which does not support WIFI stack, we'll send to
@@ -111,21 +108,21 @@ public class ChatClient extends Activity implements OnClickListener {
 
 			String clientName;
 
-			/*  I added messageContent */
 			String line = messageText.getText().toString();
 
 			byte[] sendData;  // Combine sender and message text; default encoding is UTF-8
 
+
 			// TODO get data from UI (no-op if chat name is blank)
+			destAddr = InetAddress.getByName(destinationHost.getText().toString());
 			if (!chatName.toString().isEmpty()) {
 				clientName = chatName.getText().toString();
 				sendData = (clientName + line).getBytes();
-				destAddr = InetAddress.getByAddress(destinationHost.getText().toString().getBytes());
 			} else {
-				destAddr = InetAddress.getLocalHost();
 				sendData = new byte[0];
 			}
 			// End todo
+
 
 			Log.d(TAG, String.format("Sending data from address %s:%d", clientSocket.getInetAddress(), clientSocket.getPort()));
 
