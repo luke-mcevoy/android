@@ -52,6 +52,12 @@ public class ChatServer extends Activity implements OnClickListener {
     /*
      * TODO: Declare a listview for messagesAdapter, and an adapter for displaying messagesAdapter.
      */
+    ListView messageAdapter = (ListView)findViewById(R.id.message_list);
+    ArrayAdapter<Peer> arrayAdapter = new ArrayAdapter<Peer>(this,
+            android.R.layout.simple_list_item_1,
+            peers);
+
+    // messageAdapter.setAdapter(arrayAdapter);
 
     /*
      * End Todo
@@ -95,6 +101,8 @@ public class ChatServer extends Activity implements OnClickListener {
         /*
          * TODO: Initialize the UI.
          */
+
+
 
         /*
          * End Todo
@@ -178,8 +186,8 @@ public class ChatServer extends Activity implements OnClickListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         // TODO inflate a menu with PEERS option
-
-
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chatserver_menu, menu);
         return true;
     }
 
@@ -191,6 +199,7 @@ public class ChatServer extends Activity implements OnClickListener {
             case R.id.peers:
                 // TODO PEERS provide the UI for viewing list of peers
                 // Send the list of peers to the subactivity as a parcelable list
+                
 
                 break;
 
