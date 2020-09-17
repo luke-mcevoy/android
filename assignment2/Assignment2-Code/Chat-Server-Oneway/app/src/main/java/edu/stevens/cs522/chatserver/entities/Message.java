@@ -29,6 +29,11 @@ public class Message implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         // TODO
+        dest.writeLong(id);
+        dest.writeString(messageText);
+        dest.writeSerializable(timestamp);
+        dest.writeString(sender);
+        dest.writeLong(senderId);
     }
 
     public static final Creator<Message> CREATOR = new Creator<Message>() {

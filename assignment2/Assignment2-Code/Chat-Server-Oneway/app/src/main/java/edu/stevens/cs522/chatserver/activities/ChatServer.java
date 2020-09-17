@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import edu.stevens.cs522.base.DatagramSendReceive;
 import edu.stevens.cs522.chatserver.R;
+import edu.stevens.cs522.chatserver.entities.Message;
 import edu.stevens.cs522.chatserver.entities.Peer;
 
 public class ChatServer extends Activity implements OnClickListener {
@@ -53,13 +54,8 @@ public class ChatServer extends Activity implements OnClickListener {
     /*
      * TODO: Declare a listview for messagesAdapter, and an adapter for displaying messagesAdapter.
      */
-    ListView messageAdapter = (ListView)findViewById(R.id.message_list);
-    ArrayAdapter<Peer> arrayAdapter = new ArrayAdapter<Peer>(this,
-            android.R.layout.simple_list_item_1,
-            peers);
-
-    // messageAdapter.setAdapter(arrayAdapter);
-
+    ListView messageAdapter;
+    ArrayAdapter<Message> messageArrayAdapter;
     /*
      * End Todo
      */
@@ -89,7 +85,6 @@ public class ChatServer extends Activity implements OnClickListener {
             int port = getResources().getInteger(R.integer.app_port);
 
             // serverSocket = new DatagramSocket(port);
-
             serverSocket = new DatagramSendReceive(port);
 
         } catch (Exception e) {
@@ -102,13 +97,8 @@ public class ChatServer extends Activity implements OnClickListener {
         /*
          * TODO: Initialize the UI.
          */
-
         next = (Button)findViewById(R.id.next);
         next.setOnClickListener(this);
-
-        
-
-
         /*
          * End Todo
          */
@@ -117,12 +107,13 @@ public class ChatServer extends Activity implements OnClickListener {
 
     public void onClick(View v) {
 
+        Log.i("DEBUG", "***** onClick executed");
+
         byte[] receiveData = new byte[1024];
 
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
         try {
-
 
             serverSocket.receive(receivePacket);
             Log.d(TAG, "Received a packet");
@@ -139,11 +130,10 @@ public class ChatServer extends Activity implements OnClickListener {
             /*
              * TODO: Add message with sender to the display.
              */
-            peers.add(peer.getText().toString());
-            peer.setText("");
-            arrayAdapter.notifyDataSetChanged();
-
-
+            messageAdapter = (ListView)findViewById(R.id.message_list);
+            ArrayList<Message> messages = new ArrayList<Message>();
+            messageArrayAdapter = new ArrayAdapter<Message>(this, android.R.layout.simple_list_item_1, messages);
+            messageAdapter.setAdapter(messageArrayAdapter);
             /*
              * End Todo
              */
@@ -207,6 +197,10 @@ public class ChatServer extends Activity implements OnClickListener {
             case R.id.peers:
                 // TODO PEERS provide the UI for viewing list of peers
                 // Send the list of peers to the subactivity as a parcelable list
+                Intent intent = new Intent(this, Peer.class);
+                intent.putParcelableArrayListExtra(
+                        ViewPeerActivity.PEER_KEY, peers);
+                startActivity(intent);
 
                 break;
 

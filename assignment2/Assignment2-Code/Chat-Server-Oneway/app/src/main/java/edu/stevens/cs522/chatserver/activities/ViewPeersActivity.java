@@ -27,6 +27,7 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
         peers = getIntent().getParcelableArrayListExtra(PEERS_KEY);
 
         // TODO display the list of peers, set this activity as onClick listener
+
     }
 
 

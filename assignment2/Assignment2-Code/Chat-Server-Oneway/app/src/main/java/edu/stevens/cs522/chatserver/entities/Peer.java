@@ -32,11 +32,17 @@ public class Peer implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         // TODO
         out.writeLong(id);
+        out.writeString(name);
+        out.writeSerializable(timestamp);
+        out.writeSerializable(address);
     }
 
     public Peer(Parcel in) {
         // TODO
-        in.readLong();
+        id = in.readLong();
+        name = in.readString();
+        timestamp = (Date) in.readSerializable();
+        address = (InetAddress) in.readSerializable();
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {
