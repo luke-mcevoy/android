@@ -116,8 +116,11 @@ public class ChatClient extends Activity implements OnClickListener {
 			// TODO get data from UI (no-op if chat name is blank)
 			destAddr = InetAddress.getByName(destinationHost.getText().toString());
 			if (!chatName.toString().isEmpty()) {
-				clientName = chatName.getText().toString() + ":";
-				sendData = (clientName + line).getBytes();
+				clientName = chatName.getText().toString();
+				Log.i("DEBUG", "*** clientName: " + clientName);
+				Log.i("DEBUG", "*** line: " + line);
+				Log.i("DEBUG", "*** sendData-> " + clientName + ":" + line);
+				sendData = (clientName + ":" + line).getBytes();
 			} else {
 				messageText.setText("");
 				return;

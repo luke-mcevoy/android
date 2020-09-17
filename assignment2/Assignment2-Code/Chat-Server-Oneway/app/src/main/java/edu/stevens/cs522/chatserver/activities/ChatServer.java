@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -68,6 +69,8 @@ public class ChatServer extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_messages);
 
+        Log.i("DEBUG", "*** onCreate of ChatServer");
+
         /**
          * Let's be clear, this is a HACK to allow you to do network communication on the view_messages thread.
          * This WILL cause an ANR, and is only provided to simplify the pedagogy.  We will see how to do
@@ -108,13 +111,16 @@ public class ChatServer extends Activity implements OnClickListener {
 
     public void onClick(View v) {
 
-        Log.i("DEBUG", "***** onClick executed");
-
         byte[] receiveData = new byte[1024];
 
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
+//        Log.i("DEBUG", "*** receiveData: " + Base64.encodeToString(receiveData, receiveData.length));
+        Log.i("DEBUG", "*** About to enter the try");
+
         try {
+
+            Log.i("DEBUG", "*** Entered the try");
 
             serverSocket.receive(receivePacket);
             Log.d(TAG, "Received a packet");
@@ -131,8 +137,9 @@ public class ChatServer extends Activity implements OnClickListener {
             /*
              * TODO: Add message with sender to the display.
              */
+
             ArrayList<String> messages = new ArrayList<>();
-            messages.add(name + ": " + message);
+            messages.add(name + ":" + message);
             messageAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messages);
             /*
              * End Todo
@@ -197,9 +204,9 @@ public class ChatServer extends Activity implements OnClickListener {
             case R.id.peers:
                 // TODO PEERS provide the UI for viewing list of peers
                 // Send the list of peers to the subactivity as a parcelable list
-                Intent intent = new Intent(this, Peer.class);
+                Intent intent = new Intent(this, ViewPeersActivity.class);
                 intent.putParcelableArrayListExtra(
-                        ViewPeerActivity.PEER_KEY, peers);
+                        ViewPeersActivity.PEERS_KEY, peers);
                 startActivity(intent);
 
                 break;

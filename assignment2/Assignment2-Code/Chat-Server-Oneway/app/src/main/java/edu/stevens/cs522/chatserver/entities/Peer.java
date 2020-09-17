@@ -34,8 +34,9 @@ public class Peer implements Parcelable {
         out.writeLong(id);
         out.writeString(name);
         out.writeSerializable(timestamp);
-//        out.writeLong(timestamp.getTime());
         out.writeSerializable(address);
+
+//        out.writeLong(timestamp.getTime());
     }
 
     public Peer(Parcel in) {
@@ -43,8 +44,9 @@ public class Peer implements Parcelable {
         id = in.readLong();
         name = in.readString();
         timestamp = (Date) in.readSerializable();
-//        timestamp = new Date(in.readLong());
         address = (InetAddress) in.readSerializable();
+
+//        timestamp = new Date(in.readLong());
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {

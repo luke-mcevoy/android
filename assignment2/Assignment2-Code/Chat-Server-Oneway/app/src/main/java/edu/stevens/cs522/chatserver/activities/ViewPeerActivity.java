@@ -42,19 +42,6 @@ public class ViewPeerActivity extends Activity {
         address.setText((CharSequence) peer.address);
         port.setText((int) peer.id);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 }
