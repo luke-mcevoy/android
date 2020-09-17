@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.net.DatagramPacket;
@@ -102,6 +103,10 @@ public class ChatServer extends Activity implements OnClickListener {
          * TODO: Initialize the UI.
          */
 
+        next = (Button)findViewById(R.id.next);
+        next.setOnClickListener(this);
+
+        
 
 
         /*
@@ -134,6 +139,9 @@ public class ChatServer extends Activity implements OnClickListener {
             /*
              * TODO: Add message with sender to the display.
              */
+            peers.add(peer.getText().toString());
+            peer.setText("");
+            arrayAdapter.notifyDataSetChanged();
 
 
             /*
@@ -199,7 +207,6 @@ public class ChatServer extends Activity implements OnClickListener {
             case R.id.peers:
                 // TODO PEERS provide the UI for viewing list of peers
                 // Send the list of peers to the subactivity as a parcelable list
-                
 
                 break;
 

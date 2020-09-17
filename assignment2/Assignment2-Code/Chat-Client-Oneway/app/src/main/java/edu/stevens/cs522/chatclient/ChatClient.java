@@ -67,7 +67,6 @@ public class ChatClient extends Activity implements OnClickListener {
 		StrictMode.setThreadPolicy(policy);
 
 		// TODO initialize the UI.
-
 		destinationHost = (EditText)findViewById(R.id.message_text);
 		destinationHost.setOnClickListener(this);
 
@@ -79,7 +78,6 @@ public class ChatClient extends Activity implements OnClickListener {
 
 		sendButton = (Button)findViewById(R.id.send_button);
 		sendButton.setOnClickListener(this);
-
 		// End todo
 
 		try {
@@ -113,12 +111,20 @@ public class ChatClient extends Activity implements OnClickListener {
 
 			String clientName;
 
+			/*  I added messageContent */
+			String line = messageText.getText().toString();
+
 			byte[] sendData;  // Combine sender and message text; default encoding is UTF-8
 
 			// TODO get data from UI (no-op if chat name is blank)
-
-
-
+			if (!chatName.toString().isEmpty()) {
+				clientName = chatName.getText().toString();
+				sendData = (clientName + line).getBytes();
+				destAddr = InetAddress.getByAddress(destinationHost.getText().toString().getBytes());
+			} else {
+				destAddr = InetAddress.getLocalHost();
+				sendData = new byte[0];
+			}
 			// End todo
 
 			Log.d(TAG, String.format("Sending data from address %s:%d", clientSocket.getInetAddress(), clientSocket.getPort()));
@@ -129,7 +135,6 @@ public class ChatClient extends Activity implements OnClickListener {
 			clientSocket.send(sendPacket);
 
 			Log.d(TAG, "Sent packet: " + line);
-
 
 		} catch (UnknownHostException e) {
 			throw new IllegalStateException("Unknown host exception: " + e.getMessage());
