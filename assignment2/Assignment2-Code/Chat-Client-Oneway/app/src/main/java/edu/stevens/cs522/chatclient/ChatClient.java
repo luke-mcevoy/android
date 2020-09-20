@@ -71,7 +71,6 @@ public class ChatClient extends Activity implements OnClickListener {
 		destinationHost = (EditText)findViewById(R.id.destination_host);
 		chatName = (EditText)findViewById(R.id.chat_name);
 		messageText = (EditText)findViewById(R.id.message_text);
-
 		sendButton = (Button)findViewById(R.id.send_button);
 		sendButton.setOnClickListener(this);
 		// End todo
@@ -115,6 +114,8 @@ public class ChatClient extends Activity implements OnClickListener {
 
 			// TODO get data from UI (no-op if chat name is blank)
 			destAddr = InetAddress.getByName(destinationHost.getText().toString());
+			Log.i("DEBUG", "*** destAddr = " + destAddr);
+
 			if (!chatName.toString().isEmpty()) {
 				clientName = chatName.getText().toString();
 				Log.i("DEBUG", "*** clientName: " + clientName);

@@ -34,9 +34,7 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
         ListView peersListView = (ListView)findViewById(R.id.peer_list);
         ArrayAdapter<Peer> peersAdapter = new ArrayAdapter<Peer>(this, android.R.layout.simple_list_item_1, peers);
         peersListView.setAdapter(peersAdapter);
-        Log.i("DEBUG", "setOnItemClickListener to be initialized");
         peersListView.setOnItemClickListener(this);
-        Log.i("DEBUG", "setOnItemClickListener is initialized");
     }
 
 

@@ -24,6 +24,7 @@ public class Peer implements Parcelable {
     // Where we heard from them
     public InetAddress address;
 
+    public int port;
 
 
     @Override
@@ -61,6 +62,9 @@ public class Peer implements Parcelable {
     }
 
     public Peer(int port, String name, Timestamp timestamp) {
+        this.port = port;
+        this.name = name;
+        this.timestamp = timestamp;
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {

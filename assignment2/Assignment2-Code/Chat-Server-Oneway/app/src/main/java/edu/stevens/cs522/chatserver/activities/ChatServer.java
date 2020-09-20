@@ -107,6 +107,7 @@ public class ChatServer extends Activity implements OnClickListener {
         messageAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, messages);
 
         messageListView = (ListView)findViewById(R.id.message_list);
+        messages.add("tests");
         messageListView.setAdapter(messageAdapter);
 
         next = (Button)findViewById(R.id.next);
@@ -126,8 +127,11 @@ public class ChatServer extends Activity implements OnClickListener {
         Log.i("DEBUG", "*** About to enter the try");
 
         try {
+            Log.i("DEBUG", "*** receivePacket = " + receivePacket.getSocketAddress());
 
-            Log.i("DEBUG", "*** Entered the try");
+//            Log.i("DEBUG", "*** receivePacket = " + receivePacket.getSocketAddress());
+
+//            Log.i("DEBUG", "*** Entered the try");
 
             serverSocket.receive(receivePacket);
             Log.d(TAG, "Received a packet");
