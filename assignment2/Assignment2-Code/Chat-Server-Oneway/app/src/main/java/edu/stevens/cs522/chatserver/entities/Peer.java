@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.net.InetAddress;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -23,6 +24,8 @@ public class Peer implements Parcelable {
     // Where we heard from them
     public InetAddress address;
 
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -33,9 +36,16 @@ public class Peer implements Parcelable {
         // TODO
         out.writeLong(id);
         out.writeString(name);
-        out.writeSerializable(timestamp);
+        out.writeLong(timestamp.getTime());
         out.writeSerializable(address);
 
+        byte[] addressBytes = address.getAddress();
+        int addressBytesLength = addressBytes.length;
+
+
+//        out.writeSerializable(timestamp);
+//        out.writeLong(address.getAddress());
+//        new byte[] address
 //        out.writeLong(timestamp.getTime());
     }
 
@@ -43,10 +53,14 @@ public class Peer implements Parcelable {
         // TODO
         id = in.readLong();
         name = in.readString();
-        timestamp = (Date) in.readSerializable();
+        timestamp = new Date(in.readLong());
         address = (InetAddress) in.readSerializable();
 
-//        timestamp = new Date(in.readLong());
+//        timestamp = (Date) in.readSerializable();
+//        address = InetAddress.getByAddress();
+    }
+
+    public Peer(int port, String name, Timestamp timestamp) {
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {
@@ -65,3 +79,4 @@ public class Peer implements Parcelable {
 
     };
 }
+

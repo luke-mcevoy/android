@@ -38,9 +38,9 @@ public class ViewPeerActivity extends Activity {
         TextView port = findViewById(R.id.view_port);
 
         username.setText(peer.name);
-        lastSeen.setText((CharSequence) peer.timestamp);
-        address.setText((CharSequence) peer.address);
-        port.setText((int) peer.id);
+        lastSeen.setText(peer.timestamp.toString());
+        address.setText(peer.address.toString());
+//        port.setText(peer.port);
 
     }
 

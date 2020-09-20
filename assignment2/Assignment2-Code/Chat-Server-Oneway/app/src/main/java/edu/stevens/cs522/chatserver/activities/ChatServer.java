@@ -23,11 +23,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import edu.stevens.cs522.base.DatagramSendReceive;
 import edu.stevens.cs522.chatserver.R;
@@ -55,6 +59,7 @@ public class ChatServer extends Activity implements OnClickListener {
      */
     ListView messageListView;
     ArrayAdapter<String> messageAdapter;
+    ArrayList<String> messages;
     /*
      * End Todo
      */
@@ -98,6 +103,9 @@ public class ChatServer extends Activity implements OnClickListener {
         /*
          * TODO: Initialize the UI.
          */
+        messages = new ArrayList<String>();
+        messageAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, messages);
+
         messageListView = (ListView)findViewById(R.id.message_list);
         messageListView.setAdapter(messageAdapter);
 
@@ -115,7 +123,6 @@ public class ChatServer extends Activity implements OnClickListener {
 
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 
-//        Log.i("DEBUG", "*** receiveData: " + Base64.encodeToString(receiveData, receiveData.length));
         Log.i("DEBUG", "*** About to enter the try");
 
         try {
@@ -138,9 +145,13 @@ public class ChatServer extends Activity implements OnClickListener {
              * TODO: Add message with sender to the display.
              */
 
-            ArrayList<String> messages = new ArrayList<>();
-            messages.add(name + ":" + message);
-            messageAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messages);
+            Date date = new Date();
+            long time = date.getTime();
+            Timestamp timestamp = new Timestamp(time);
+
+            messages.add(name + ": " + message);
+            addPeer(new Peer(6666, name, timestamp));
+
             /*
              * End Todo
              */
