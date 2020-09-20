@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Assignment2-Code-Chat-Server-Oneway.iml" filepath="$PROJECT_DIR$/.idea/modules/Assignment2-Code-Chat-Server-Oneway.iml" group="Chat-Server-Oneway" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Chat-Server-Oneway.iml" filepath="$PROJECT_DIR$/.idea/Chat-Server-Oneway.iml" group="Chat-Server-Oneway" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Chat-Server-Oneway-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Chat-Server-Oneway-app.iml" group="Chat-Server-Oneway/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cs522-library/Chat-Server-Oneway-cs522-library.iml" filepath="$PROJECT_DIR$/.idea/modules/cs522-library/Chat-Server-Oneway-cs522-library.iml" group="Chat-Server-Oneway/cs522-library" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Chat-Server-Oneway/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/code-Chat-Server-Oneway.iml" filepath="$PROJECT_DIR$/.idea/modules/code-Chat-Server-Oneway.iml" group="Chat-Server-Oneway" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cs522-library/cs522-library.iml" filepath="$PROJECT_DIR$/.idea/modules/cs522-library/cs522-library.iml" group="Chat-Server-Oneway/cs522-library" />
+    </modules>
+  </component>
+</project>
