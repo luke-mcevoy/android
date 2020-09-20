@@ -29,8 +29,9 @@ import android.widget.PopupMenu;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
-import java.sql.Timestamp;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import edu.stevens.cs522.base.DatagramSendReceive;
@@ -107,7 +108,7 @@ public class ChatServer extends Activity implements OnClickListener {
         messageAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, messages);
 
         messageListView = (ListView)findViewById(R.id.message_list);
-        messages.add("tests");
+//        messages.add("tests");
         messageListView.setAdapter(messageAdapter);
 
         next = (Button)findViewById(R.id.next);
@@ -127,11 +128,11 @@ public class ChatServer extends Activity implements OnClickListener {
         Log.i("DEBUG", "*** About to enter the try");
 
         try {
-            Log.i("DEBUG", "*** receivePacket = " + receivePacket.getSocketAddress());
-
-//            Log.i("DEBUG", "*** receivePacket = " + receivePacket.getSocketAddress());
-
-//            Log.i("DEBUG", "*** Entered the try");
+            Log.i("DEBUG", "*** receivePacket = " + receivePacket.getLength());
+            Log.i("DEBUG", "*** receivePacket = " + receivePacket.getPort());
+//            Log.i("DEBUG", "*** receivePacket = " + receivePacket.getAddress().toString());
+            Log.i("DEBUG", "*** receivePacket = " + receivePacket.getOffset());
+            Log.i("DEBUG", "*** Entered the try");
 
             serverSocket.receive(receivePacket);
             Log.d(TAG, "Received a packet");
@@ -150,11 +151,10 @@ public class ChatServer extends Activity implements OnClickListener {
              */
 
             Date date = new Date();
-            long time = date.getTime();
-            Timestamp timestamp = new Timestamp(time);
 
             messages.add(name + ": " + message);
-            addPeer(new Peer(6666, name, timestamp));
+            messageAdapter.notifyDataSetChanged();
+            addPeer(new Peer(6666, name, date, sourceIPAddress));
 
             /*
              * End Todo

@@ -40,7 +40,7 @@ public class ViewPeerActivity extends Activity {
         username.setText(peer.name);
         lastSeen.setText(peer.timestamp.toString());
         address.setText(peer.address.toString());
-        port.setText(peer.port);
+        port.setText(peer.port+"");
 
     }
 

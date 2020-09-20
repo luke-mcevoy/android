@@ -116,12 +116,14 @@ public class ChatClient extends Activity implements OnClickListener {
 			destAddr = InetAddress.getByName(destinationHost.getText().toString());
 			Log.i("DEBUG", "*** destAddr = " + destAddr);
 
-			if (!chatName.toString().isEmpty()) {
+
+
+			if (!chatName.getText().toString().isEmpty()) {
 				clientName = chatName.getText().toString();
 				Log.i("DEBUG", "*** clientName: " + clientName);
 				Log.i("DEBUG", "*** line: " + line);
 				Log.i("DEBUG", "*** sendData-> " + clientName + ": " + line);
-				sendData = (clientName + ": " + line).getBytes();
+				sendData = (clientName + ":" + line).getBytes();
 			} else {
 				messageText.setText("");
 				return;

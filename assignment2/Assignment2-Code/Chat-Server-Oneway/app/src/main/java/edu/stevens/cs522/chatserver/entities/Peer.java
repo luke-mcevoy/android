@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.net.InetAddress;
-import java.sql.Timestamp;
+import java.net.UnknownHostException;
 import java.util.Date;
 
 /**
@@ -35,36 +35,28 @@ public class Peer implements Parcelable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         // TODO
-        out.writeLong(id);
         out.writeString(name);
         out.writeLong(timestamp.getTime());
-        out.writeSerializable(address);
-
-        byte[] addressBytes = address.getAddress();
-        int addressBytesLength = addressBytes.length;
-
-
-//        out.writeSerializable(timestamp);
-//        out.writeLong(address.getAddress());
-//        new byte[] address
-//        out.writeLong(timestamp.getTime());
+        out.writeInt(address.getAddress().length);
+        out.writeByteArray(address.getAddress());
+        out.writeInt(port);
     }
 
-    public Peer(Parcel in) {
+    public Peer(Parcel in) throws UnknownHostException {
         // TODO
-        id = in.readLong();
         name = in.readString();
         timestamp = new Date(in.readLong());
-        address = (InetAddress) in.readSerializable();
-
-//        timestamp = (Date) in.readSerializable();
-//        address = InetAddress.getByAddress();
+        byte[] addy = new byte[in.readInt()];
+        in.readByteArray(addy);
+        address = InetAddress.getByAddress(addy);
+        port = in.readInt();
     }
 
-    public Peer(int port, String name, Timestamp timestamp) {
+    public Peer(int port, String name, Date timestamp, InetAddress address) {
         this.port = port;
         this.name = name;
         this.timestamp = timestamp;
+        this.address = address;
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {
@@ -72,7 +64,12 @@ public class Peer implements Parcelable {
         @Override
         public Peer createFromParcel(Parcel source) {
             // TODO
-            return new Peer(source);
+            try {
+                return new Peer(source);
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
 
         @Override
@@ -80,7 +77,6 @@ public class Peer implements Parcelable {
             // TODO
             return new Peer[size];
         }
-
     };
 }
 
