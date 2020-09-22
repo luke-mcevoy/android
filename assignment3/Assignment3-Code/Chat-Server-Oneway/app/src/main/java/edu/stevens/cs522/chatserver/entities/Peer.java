@@ -59,7 +59,7 @@ public class Peer implements Parcelable, Persistable {
         out.writeLong(id);
         out.writeString(name);
         out.writeLong(timestamp.getTime());
-//        out.writeInt(address.getAddress().length);
+        out.writeInt(address.getAddress().length);
         out.writeByteArray(address.getAddress());
     }
 

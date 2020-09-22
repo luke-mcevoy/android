@@ -98,7 +98,6 @@ public class ChatServer extends Activity implements OnClickListener {
 
 
         // TODO query the database using the database adapter, and manage the cursor on the messages thread
-        
 
 
         // TODO use SimpleCursorAdapter to display the messages received.
@@ -177,8 +176,8 @@ public class ChatServer extends Activity implements OnClickListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         // TODO inflate a menu with PEERS option
-
-
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chatserver_menu, menu);
         return true;
     }
 
