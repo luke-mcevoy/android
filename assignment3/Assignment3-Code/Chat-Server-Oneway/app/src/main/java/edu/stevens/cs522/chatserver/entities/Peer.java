@@ -6,6 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Date;
 
 /**
@@ -32,8 +33,14 @@ public class Peer implements Parcelable, Persistable {
         // TODO
     }
 
-    public Peer(Parcel in) {
+    public Peer(Parcel in) throws UnknownHostException {
         // TODO
+        id = in.readLong();
+        name = in.readString();
+        timestamp = new Date(in.readLong());
+        byte[] addressByteArray = new byte[in.readInt()];
+        in.readByteArray(addressByteArray);
+        address = InetAddress.getByAddress(addressByteArray);
     }
 
     @Override
@@ -49,6 +56,11 @@ public class Peer implements Parcelable, Persistable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         // TODO
+        out.writeLong(id);
+        out.writeString(name);
+        out.writeLong(timestamp.getTime());
+//        out.writeInt(address.getAddress().length);
+        out.writeByteArray(address.getAddress());
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {
@@ -56,13 +68,18 @@ public class Peer implements Parcelable, Persistable {
         @Override
         public Peer createFromParcel(Parcel source) {
             // TODO
+            try {
+                return new Peer(source);
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
             return null;
         }
 
         @Override
         public Peer[] newArray(int size) {
             // TODO
-            return null;
+            return new Peer[size];
         }
 
     };
