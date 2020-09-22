@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import edu.stevens.cs522.chatserver.entities.Message;
 import edu.stevens.cs522.chatserver.entities.Peer;
@@ -39,11 +40,16 @@ public class ChatDbAdapter {
         @Override
         public void onCreate(SQLiteDatabase db) {
             // TODO
+            db.execSQL(DATABASE_CREATE);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // TODO
+            Log.w("TaskDBAdapter", "Upgrading from version " +
+                    oldVersion + " to " + newVersion);
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_NAME);
+            onCreate(db);
         }
     }
 
@@ -58,22 +64,52 @@ public class ChatDbAdapter {
 
     public Cursor fetchAllMessages() {
         // TODO
-        return null;
+        // Data goes inside {}
+        String[] messageProjection = {};
+        return db.query(MESSAGE_TABLE,
+                messageProjection,
+                null,
+                null,
+                null,
+                null,
+                null);
     }
 
     public Cursor fetchAllPeers() {
         // TODO
-        return null;
+        // Data goes inside {}
+        String[] peerProjection = {};
+        return db.query(PEER_TABLE,
+                peerProjection,
+                null,
+                null,
+                null,
+                null,
+                null);
     }
 
     public Peer fetchPeer(long peerId) {
         // TODO
-        return null;
+        Peer peer = new Peer();
+        // Return cursor to row and populate instance of Peer
+        return peer;
     }
 
     public Cursor fetchMessagesFromPeer(Peer peer) {
         // TODO
-        return null;
+        // Data goes inside {}
+        String[] messageFromPeerProjection = {};
+        String messageFromPeerSelection = "";
+//        messageFromPeerSelection = TITLE + "=" + title;
+        String[] messageFromPeerSelectionArgs = {};
+//        messageFromPeerSelectionArgs = { title };
+        return db.query(DATABASE_NAME,
+                messageFromPeerProjection,
+                messageFromPeerSelection,
+                messageFromPeerSelectionArgs,
+                null,
+                null,
+                null);
     }
 
     public long persist(Message message) throws SQLException {
@@ -91,5 +127,6 @@ public class ChatDbAdapter {
 
     public void close() {
         // TODO
+        db.close();
     }
 }
