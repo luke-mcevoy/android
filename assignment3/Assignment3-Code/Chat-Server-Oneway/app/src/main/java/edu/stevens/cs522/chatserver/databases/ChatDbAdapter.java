@@ -35,10 +35,18 @@ public class ChatDbAdapter {
 
         private static final String DATABASE_CREATE =
                 "CREATE TABLE " + PEER_TABLE + " (" +
-                        PeerContract._ID + "INTEGER PRIMARY KEY," +
-                        PeerContract.NAME + "TEXT," +
-                        PeerContract.TIMESTAMP + "TEXT," +
-                        PeerContract.ADDRESS + "TEXT)";
+                        PeerContract._ID + "long primary key," +
+                        PeerContract.NAME + "text not null," +
+                        PeerContract.TIMESTAMP + "text not null," +
+                        PeerContract.ADDRESS + "text not null),"  +
+
+                "CREATE TABLE " + MESSAGE_TABLE + " (" +
+                        MessageContract._ID + "long primary key," +
+                        MessageContract.MESSAGE_TEXT + "text not null," +
+                        MessageContract.TIMESTAMP + "text not null," +
+                        MessageContract.SENDER + "text not null," +
+                        MessageContract.SENDER_ID + "text not null)";
+
                  // TODO
 
         public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -99,25 +107,34 @@ public class ChatDbAdapter {
 
     public Peer fetchPeer(long peerId) {
         // TODO
-        Peer peer = new Peer();
+
+        String[] peerProjection = new String[]{PeerContract._ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
+        String selection = PeerContract._ID + " = " + peerId;
+        return new Peer(db.query(PEER_TABLE,
+                peerProjection,
+                selection,
+                null,
+                null,
+                null,
+                null
+                ));
+
         // Return cursor to row and populate instance of Peer
-        return peer;
     }
 
     public Cursor fetchMessagesFromPeer(Peer peer) {
         // TODO
-        String[] messageFromPeerProjection = {};
-        String messageFromPeerSelection = "";
-//        messageFromPeerSelection = TITLE + "=" + title;
-        String[] messageFromPeerSelectionArgs = {};
-//        messageFromPeerSelectionArgs = { title };
-        return db.query(DATABASE_NAME,
-                messageFromPeerProjection,
-                messageFromPeerSelection,
-                messageFromPeerSelectionArgs,
+        String[] messageProjection = new String[]{MessageContract._ID, MessageContract.MESSAGE_TEXT, MessageContract.TIMESTAMP, MessageContract.SENDER, MessageContract.SENDER_ID};
+        String selection = MessageContract._ID + " = " + peer.id;
+        return db.query(MESSAGE_TABLE,
+                messageProjection,
+                selection,
                 null,
                 null,
-                null);
+                null,
+                null
+        );
+
     }
 
     public long persist(Message message) throws SQLException {

@@ -11,6 +11,7 @@
 package edu.stevens.cs522.chatserver.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -95,20 +96,24 @@ public class ChatServer extends Activity implements OnClickListener {
         setContentView(R.layout.messages);
 
         // TODO open the database using the database adapter
-        chatDbAdapter.open();
+//        chatDbAdapter.open();
 
 
         // TODO query the database using the database adapter, and manage the cursor on the messages thread
-        chatDbAdapter.fetchAllMessages();
+//        chatDbAdapter.fetchAllMessages();
 //        messagesAdapter.getCursor();
 //        SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(context, )
+
+//        if (cursor.getCount() < 0) {
+//            // add
+//        }
 
 
         // TODO use SimpleCursorAdapter to display the messages received.
 
 
         // TODO bind the button for "next" to this activity as listener
-        next.setOnClickListener(this);
+//        next.setOnClickListener(this);
 
 	}
 
@@ -138,6 +143,8 @@ public class ChatServer extends Activity implements OnClickListener {
 			/*
 			 * TODO upsert peer and insert message into the database
 			 */
+			chatDbAdapter.fetchAllPeers();
+//			chatDbAdapter.persist(Peer);
 
             /*
              * End TODO
@@ -192,6 +199,8 @@ public class ChatServer extends Activity implements OnClickListener {
 
             case R.id.peers:
                 // TODO PEERS provide the UI for viewing list of peers
+                Intent intent = new Intent(this, ViewPeersActivity.class);
+                startActivity(intent);
                 break;
 
             default:
