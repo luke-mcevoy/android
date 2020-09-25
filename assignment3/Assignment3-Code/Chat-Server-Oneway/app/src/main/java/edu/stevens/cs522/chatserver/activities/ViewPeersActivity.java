@@ -1,13 +1,17 @@
 package edu.stevens.cs522.chatserver.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AndroidException;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import edu.stevens.cs522.chatserver.R;
+import edu.stevens.cs522.chatserver.contracts.PeerContract;
 import edu.stevens.cs522.chatserver.databases.ChatDbAdapter;
 
 
@@ -27,6 +31,14 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
         setContentView(R.layout.view_peers);
 
         // TODO initialize peerAdapter with result of DB query
+        Context context = getApplicationContext();
+        String[] peerProjection = new String[]{PeerContract._ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
+        peerAdapter = new SimpleCursorAdapter(context, android.R.layout.simple_list_item_1, chatDbAdapter.fetchAllPeers(),
+                peerProjection, new int[]{android.R.id.text1},0);
+
+        ListView listview = (ListView) findViewById(R.id.peer_list);
+        peerAdapter = (SimpleCursorAdapter) listview.getAdapter();
+        peerAdapter.changeCursor(chatDbAdapter.fetchAllPeers());
     }
 
 

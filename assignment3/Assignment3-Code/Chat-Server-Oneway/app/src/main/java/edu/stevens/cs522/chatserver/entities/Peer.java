@@ -9,6 +9,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Date;
 
+import edu.stevens.cs522.chatserver.contracts.PeerContract;
+
 /**
  * Created by dduggan.
  */
@@ -31,6 +33,10 @@ public class Peer implements Parcelable, Persistable {
 
     public Peer(Cursor cursor) {
         // TODO
+        PeerContract.getPeerID(cursor);
+        PeerContract.getPeerName(cursor);
+        PeerContract.getPeerTimestamp(cursor);
+        PeerContract.getPeerAddress(cursor);
     }
 
     public Peer(Parcel in) throws UnknownHostException {

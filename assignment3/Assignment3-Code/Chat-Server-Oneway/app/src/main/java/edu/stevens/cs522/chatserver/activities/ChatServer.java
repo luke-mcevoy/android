@@ -95,16 +95,20 @@ public class ChatServer extends Activity implements OnClickListener {
         setContentView(R.layout.messages);
 
         // TODO open the database using the database adapter
+        chatDbAdapter.open();
 
 
         // TODO query the database using the database adapter, and manage the cursor on the messages thread
+        chatDbAdapter.fetchAllMessages();
+//        messagesAdapter.getCursor();
+//        SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(context, )
 
 
         // TODO use SimpleCursorAdapter to display the messages received.
 
 
         // TODO bind the button for "next" to this activity as listener
-
+        next.setOnClickListener(this);
 
 	}
 

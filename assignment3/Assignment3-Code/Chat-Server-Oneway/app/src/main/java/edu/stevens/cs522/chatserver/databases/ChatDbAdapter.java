@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import edu.stevens.cs522.chatserver.contracts.MessageContract;
+import edu.stevens.cs522.chatserver.contracts.PeerContract;
 import edu.stevens.cs522.chatserver.entities.Message;
 import edu.stevens.cs522.chatserver.entities.Peer;
 
@@ -31,7 +33,7 @@ public class ChatDbAdapter {
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
 
-        private static final String DATABASE_CREATE = null; // TODO
+        private static final String DATABASE_CREATE = "CREATE TABLE " + DATABASE_NAME; // TODO
 
         public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
@@ -60,12 +62,13 @@ public class ChatDbAdapter {
 
     public void open() throws SQLException {
         // TODO
+        db = dbHelper.getWritableDatabase();
     }
 
     public Cursor fetchAllMessages() {
         // TODO
-        // Data goes inside {}
-        String[] messageProjection = {};
+        String[] messageProjection;
+        messageProjection = new String[]{MessageContract.MESSAGE_TEXT, MessageContract.TIMESTAMP, MessageContract.SENDER};
         return db.query(MESSAGE_TABLE,
                 messageProjection,
                 null,
@@ -77,8 +80,9 @@ public class ChatDbAdapter {
 
     public Cursor fetchAllPeers() {
         // TODO
-        // Data goes inside {}
-        String[] peerProjection = {};
+        String[] peerProjection;
+//        peerProjection = new String[]{PeerContract._ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
+        peerProjection = new String[]{PeerContract.NAME};
         return db.query(PEER_TABLE,
                 peerProjection,
                 null,
@@ -97,7 +101,6 @@ public class ChatDbAdapter {
 
     public Cursor fetchMessagesFromPeer(Peer peer) {
         // TODO
-        // Data goes inside {}
         String[] messageFromPeerProjection = {};
         String messageFromPeerSelection = "";
 //        messageFromPeerSelection = TITLE + "=" + title;

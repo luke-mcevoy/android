@@ -2,9 +2,11 @@ package edu.stevens.cs522.chatserver.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import edu.stevens.cs522.chatserver.R;
 import edu.stevens.cs522.chatserver.databases.ChatDbAdapter;
+import edu.stevens.cs522.chatserver.entities.Peer;
 
 /**
  * Created by dduggan.
@@ -27,6 +29,20 @@ public class ViewPeerActivity extends Activity {
         }
 
         // TODO init the UI
+        Peer fetchedPeer = chatDbAdapter.fetchPeer(peerId);
+
+        TextView username = findViewById(R.id.view_user_name);
+        TextView lastSeen = findViewById(R.id.view_timestamp);
+        TextView address = findViewById(R.id.view_address);
+//        TextView messages = findViewById(R.id.view_messages);
+
+        username.setText(fetchedPeer.name);
+        lastSeen.setText(fetchedPeer.timestamp.toString());
+        address.setText(fetchedPeer.address.toString());
+
+
+
+
 
     }
 
