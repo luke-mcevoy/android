@@ -33,7 +33,13 @@ public class ChatDbAdapter {
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
 
-        private static final String DATABASE_CREATE = "CREATE TABLE " + DATABASE_NAME; // TODO
+        private static final String DATABASE_CREATE =
+                "CREATE TABLE " + PEER_TABLE + " (" +
+                        PeerContract._ID + "INTEGER PRIMARY KEY," +
+                        PeerContract.NAME + "TEXT," +
+                        PeerContract.TIMESTAMP + "TEXT," +
+                        PeerContract.ADDRESS + "TEXT)";
+                 // TODO
 
         public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
@@ -81,7 +87,6 @@ public class ChatDbAdapter {
     public Cursor fetchAllPeers() {
         // TODO
         String[] peerProjection;
-//        peerProjection = new String[]{PeerContract._ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
         peerProjection = new String[]{PeerContract.NAME};
         return db.query(PEER_TABLE,
                 peerProjection,

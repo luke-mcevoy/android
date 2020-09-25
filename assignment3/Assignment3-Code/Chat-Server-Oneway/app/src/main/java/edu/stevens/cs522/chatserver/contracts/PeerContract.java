@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
+import java.net.InetAddress;
+import java.util.Date;
+
 /**
  * Created by dduggan.
  */
@@ -27,35 +30,38 @@ public class PeerContract implements BaseColumns {
         int peerIDColumn = cursor.getColumnIndexOrThrow(_ID);
         return cursor.getString(peerIDColumn);
     }
-
-    public static void putPeerID(ContentValues out, String peerID) {
+    public static void putPeerID(ContentValues out, long peerID) {
         out.put(_ID, peerID);
     }
+
+
 
     public static String getPeerName(Cursor cursor) {
         int peerNameColumn = cursor.getColumnIndexOrThrow(NAME);
         return cursor.getString(peerNameColumn);
     }
-
     public static void putPeerName(ContentValues out, String peerName) {
         out.put(NAME, peerName);
     }
+
+
 
     public static String getPeerTimestamp(Cursor cursor) {
         int peerTimestampColumn = cursor.getColumnIndexOrThrow(TIMESTAMP);
         return cursor.getString(peerTimestampColumn);
     }
-
-    public static void putPeerTimestamp(ContentValues out, String peerTimestamp) {
-        out.put(TIMESTAMP, peerTimestamp);
+    public static void putPeerTimestamp(ContentValues out, Date peerTimestamp) {
+        out.put(TIMESTAMP, String.valueOf(peerTimestamp));
     }
+
+
 
     public static String getPeerAddress(Cursor cursor) {
         int peerAddressColumn = cursor.getColumnIndexOrThrow(ADDRESS);
         return cursor.getString(peerAddressColumn);
     }
 
-    public static void putPeerAddress(ContentValues out, String peerAddress) {
-        out.put(ADDRESS, peerAddress);
+    public static void putPeerAddress(ContentValues out, InetAddress peerAddress) {
+        out.put(ADDRESS, String.valueOf(peerAddress));
     }
 }

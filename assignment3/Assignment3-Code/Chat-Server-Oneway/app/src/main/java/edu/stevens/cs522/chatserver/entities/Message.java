@@ -7,6 +7,8 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
+import edu.stevens.cs522.chatserver.contracts.MessageContract;
+
 /**
  * Created by dduggan.
  */
@@ -28,6 +30,11 @@ public class Message implements Parcelable, Persistable {
 
     public Message(Cursor cursor) {
         // TODO
+        MessageContract.getMessageID(cursor);
+        MessageContract.getMessageText(cursor);
+        MessageContract.getMessageTimeStamp(cursor);
+        MessageContract.getMessageSender(cursor);
+        MessageContract.getMessageSenderID(cursor);
     }
 
     public Message(Parcel in) {
@@ -42,6 +49,11 @@ public class Message implements Parcelable, Persistable {
     @Override
     public void writeToProvider(ContentValues out) {
         // TODO
+        MessageContract.putMessageID(out, id);
+        MessageContract.putMessageText(out, messageText);
+        MessageContract.putMessageTimestamp(out, timestamp.toString());
+        MessageContract.putMessageSender(out, sender);
+        MessageContract.putMessageSenderID(out, senderId);
     }
 
     @Override

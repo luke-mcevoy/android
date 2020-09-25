@@ -52,6 +52,11 @@ public class Peer implements Parcelable, Persistable {
     @Override
     public void writeToProvider(ContentValues out) {
         // TODO
+        PeerContract.putPeerID(out, id);
+        PeerContract.putPeerName(out, name);
+        PeerContract.putPeerTimestamp(out, timestamp);
+        PeerContract.putPeerAddress(out, address);
+
     }
 
     @Override
