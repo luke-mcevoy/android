@@ -1,0 +1,82 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:2:1-24:12
+MERGED from [:cs522-library] /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/cs522-library/build/.transforms/83db0f5f99f13c6aaaa70d87f74caf5b/cs522-library/AndroidManifest.xml:2:1-19:12
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:2:1-24:12
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:2:1-24:12
+	package
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:3:5-43
+		INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:2:1-24:12
+		INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:2:1-24:12
+		INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:5:5-67
+	android:name
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:5:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:6:22-76
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:7:22-77
+application
+ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:9:5-22:19
+MERGED from [:cs522-library] /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/cs522-library/build/.transforms/83db0f5f99f13c6aaaa70d87f74caf5b/cs522-library/AndroidManifest.xml:11:5-17:43
+MERGED from [:cs522-library] /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/cs522-library/build/.transforms/83db0f5f99f13c6aaaa70d87f74caf5b/cs522-library/AndroidManifest.xml:11:5-17:43
+	android:supportsRtl
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:13:9-35
+	android:label
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:12:9-41
+	android:roundIcon
+		ADDED from [:cs522-library] /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/cs522-library/build/.transforms/83db0f5f99f13c6aaaa70d87f74caf5b/cs522-library/AndroidManifest.xml:15:9-54
+	android:icon
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:11:9-43
+	android:allowBackup
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:10:9-35
+	android:theme
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:14:9-40
+activity#edu.stevens.cs522.chatclient.ChatClient
+ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:15:9-21:20
+	android:name
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:15:19-45
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:16:13-20:29
+action#android.intent.action.MAIN
+ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:17:17-69
+	android:name
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:17:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:19:17-77
+	android:name
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml:19:27-74
+uses-sdk
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+MERGED from [:cs522-library] /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/cs522-library/build/.transforms/83db0f5f99f13c6aaaa70d87f74caf5b/cs522-library/AndroidManifest.xml:7:5-9:41
+MERGED from [:cs522-library] /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/cs522-library/build/.transforms/83db0f5f99f13c6aaaa70d87f74caf5b/cs522-library/AndroidManifest.xml:7:5-9:41
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+		ADDED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/AndroidManifest.xml

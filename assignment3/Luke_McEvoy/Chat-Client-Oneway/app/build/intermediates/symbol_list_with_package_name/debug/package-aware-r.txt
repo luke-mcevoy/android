@@ -1,0 +1,26 @@
+edu.stevens.cs522.chatclient
+color colorAccent
+color colorPrimary
+color colorPrimaryDark
+dimen activity_horizontal_margin
+dimen activity_vertical_margin
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id chat_name
+id destination_host
+id message_text
+id send_button
+integer app_port
+layout chat_client
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+string chat_name
+string destination_host
+string destination_host_default
+string latitude
+string localhost
+string longitude
+string message_edit_text
+string send_label
+style AppTheme

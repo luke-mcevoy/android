@@ -1,0 +1,101 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/build/intermediates/res/merged/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "7,6,14,12,13,8,4,9,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "234,177,542,418,480,278,129,325,591,661",
+                        "endColumns": "43,56,48,61,61,46,46,48,69,43",
+                        "endOffsets": "273,229,586,475,537,320,171,369,656,700"
+                    },
+                    "to": {
+                        "startLines": "7,8,9,10,11,12,13,14,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "313,357,414,463,525,587,634,681,730,800",
+                        "endColumns": "43,56,48,61,61,46,46,48,69,43",
+                        "endOffsets": "352,409,458,520,582,629,676,725,795,839"
+                    }
+                },
+                {
+                    "source": "/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "54",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "186"
+                    },
+                    "to": {
+                        "startLines": "17",
+                        "startColumns": "4",
+                        "startOffsets": "844",
+                        "endLines": "19",
+                        "endColumns": "12",
+                        "endOffsets": "976"
+                    }
+                },
+                {
+                    "source": "/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/res/values/colors.xml",
+                    "from": {
+                        "startLines": "4,2,3",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "153,55,102",
+                        "endColumns": "45,46,50",
+                        "endOffsets": "194,97,148"
+                    },
+                    "to": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,101,148",
+                        "endColumns": "45,46,50",
+                        "endOffsets": "96,143,194"
+                    }
+                },
+                {
+                    "source": "/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/res/values/dimens.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "88,146",
+                        "endColumns": "57,55",
+                        "endOffsets": "141,197"
+                    },
+                    "to": {
+                        "startLines": "5,6",
+                        "startColumns": "4,4",
+                        "startOffsets": "199,257",
+                        "endColumns": "57,55",
+                        "endOffsets": "252,308"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/build/intermediates/res/merged/debug/values-w820dp-v13_values-w820dp-v13.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Client-Oneway/app/src/main/res/values-w820dp/dimens.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "291",
+                        "endColumns": "57",
+                        "endOffsets": "344"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "57",
+                        "endOffsets": "108"
+                    }
+                }
+            ]
+        }
+    ]
+}

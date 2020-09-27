@@ -1,0 +1,66 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="edu.stevens.cs522.chatserver"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="22"
+8-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+11-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:5:5-81
+11-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:5:22-78
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:7:5-67
+12-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:7:22-64
+13
+14    <application
+14-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:9:5-28:19
+15        android:allowBackup="true"
+15-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:10:9-35
+16        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+16-->[com.android.support:support-compat:28.0.0] /Users/lukemcevoy/.gradle/caches/transforms-2/files-2.1/00567bd0de14b33d1bf8a440dc72bff8/support-compat-28.0.0/AndroidManifest.xml:22:18-91
+17        android:debuggable="true"
+18        android:icon="@mipmap/ic_launcher"
+18-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:11:9-43
+19        android:label="@string/app_name"
+19-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:12:9-41
+20        android:roundIcon="@mipmap/ic_launcher_round"
+20-->[:cs522-library] /Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/cs522-library/build/.transforms/59c830f442652d69144b2498a526f3f3/cs522-library/AndroidManifest.xml:15:9-54
+21        android:supportsRtl="true"
+21-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:13:9-35
+22        android:testOnly="true"
+23        android:theme="@style/AppTheme" >
+23-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:14:9-40
+24        <activity android:name="edu.stevens.cs522.chatserver.activities.ChatServer" >
+24-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:15:9-21:20
+24-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:15:19-56
+25            <intent-filter>
+25-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:16:13-20:29
+26                <action android:name="android.intent.action.MAIN" />
+26-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:17:17-69
+26-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:17:25-66
+27
+28                <category android:name="android.intent.category.LAUNCHER" />
+28-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:19:17-77
+28-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:19:27-74
+29            </intent-filter>
+30        </activity>
+31        <activity
+31-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:22:9-24:74
+32            android:name="edu.stevens.cs522.chatserver.activities.ViewPeersActivity"
+32-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:23:13-57
+33            android:label="@string/title_activity_view_peers" />
+33-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:24:13-62
+34        <activity
+34-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:25:9-27:73
+35            android:name="edu.stevens.cs522.chatserver.activities.ViewPeerActivity"
+35-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:26:13-56
+36            android:label="@string/title_activity_view_peer" />
+36-->/Users/lukemcevoy/Develop/stevens/android/assignment3/Assignment3-Code/Chat-Server-Oneway/app/src/main/AndroidManifest.xml:27:13-61
+37    </application>
+38
+39</manifest>
