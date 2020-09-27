@@ -30,11 +30,9 @@ public class Message implements Parcelable, Persistable {
 
     public Message(Cursor cursor) {
         // TODO
-        MessageContract.getMessageID(cursor);
-        MessageContract.getMessageText(cursor);
-        MessageContract.getMessageTimeStamp(cursor);
-        MessageContract.getMessageSender(cursor);
-        MessageContract.getMessageSenderID(cursor);
+        this.messageText = MessageContract.getMessageText(cursor);
+        this.timestamp = new Date(MessageContract.getMessageTimeStamp(cursor));
+        this.sender = MessageContract.getMessageSender(cursor);
     }
 
     public Message(Parcel in) {
@@ -49,11 +47,9 @@ public class Message implements Parcelable, Persistable {
     @Override
     public void writeToProvider(ContentValues out) {
         // TODO
-        MessageContract.putMessageID(out, id);
         MessageContract.putMessageText(out, messageText);
-//        MessageContract.putMessageTimestamp(out, timestamp.toString());
+        MessageContract.putMessageTimestamp(out, timestamp.getTime());
         MessageContract.putMessageSender(out, sender);
-        MessageContract.putMessageSenderID(out, senderId);
     }
 
     @Override

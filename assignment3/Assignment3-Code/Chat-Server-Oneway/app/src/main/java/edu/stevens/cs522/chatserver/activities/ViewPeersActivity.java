@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import edu.stevens.cs522.chatserver.R;
+import edu.stevens.cs522.chatserver.contracts.MessageContract;
 import edu.stevens.cs522.chatserver.contracts.PeerContract;
 import edu.stevens.cs522.chatserver.databases.ChatDbAdapter;
 
@@ -38,11 +39,14 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
         chatDbAdapter.open();
 
         dqQuery = chatDbAdapter.fetchAllPeers();
-//        startManagingCursor(dqQuery);
+        startManagingCursor(dqQuery);
+
+//        String[] from = new String[]{PeerContract.NAME};
+//        int[] to = new int[]{R.id.text};
 
         String[] from = new String[]{PeerContract.NAME};
-        int[] to = new int[]{R.id.text};
-        peerAdapter = new SimpleCursorAdapter(this, R.layout.view_peers, dqQuery, from, to);
+        int[] to = new int[]{android.R.id.text1};
+        peerAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, dqQuery, from, to);
 
         ListView listview = (ListView) findViewById(R.id.peer_list);
         listview.setOnItemClickListener(this);

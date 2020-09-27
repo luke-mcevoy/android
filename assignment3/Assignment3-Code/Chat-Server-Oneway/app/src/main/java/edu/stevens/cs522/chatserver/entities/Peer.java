@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -31,31 +32,38 @@ public class Peer implements Parcelable, Persistable {
     public Peer() {
     }
 
-    public Peer(Cursor cursor) {
+    public Peer(Cursor cursor) throws UnknownHostException {
         // TODO
-        PeerContract.getPeerID(cursor);
-        PeerContract.getPeerName(cursor);
-        PeerContract.getPeerTimestamp(cursor);
-        PeerContract.getPeerAddress(cursor);
+        id = PeerContract.getPeerID(cursor);
+        name = PeerContract.getPeerName(cursor);
+        timestamp = new Date(PeerContract.getPeerTimestamp(cursor));
+        Log.i("TEST", "Peer(cursor) timestamp is : " + timestamp);
+        try {
+            address = InetAddress.getByAddress(PeerContract.getPeerAddress(cursor));
+        } catch (Exception exception) {
+            address = null;
+        }
     }
 
-    public Peer(Parcel in) throws UnknownHostException {
+    public Peer(Parcel in) {
         // TODO
         id = in.readLong();
         name = in.readString();
         timestamp = new Date(in.readLong());
-        byte[] addressByteArray = new byte[in.readInt()];
-        in.readByteArray(addressByteArray);
-        address = InetAddress.getByAddress(addressByteArray);
+//        byte[] addressByteArray = new byte[in.readInt()];
+//        in.readByteArray(addressByteArray);
+//        address = InetAddress.getByAddress(addressByteArray);
+        address = (InetAddress)in.readValue(InetAddress.class.getClassLoader());
     }
 
     @Override
     public void writeToProvider(ContentValues out) {
         // TODO
-        PeerContract.putPeerID(out, id);
+//        PeerContract.putPeerID(out, id);
         PeerContract.putPeerName(out, name);
         PeerContract.putPeerTimestamp(out, timestamp);
-        PeerContract.putPeerAddress(out, address);
+        Log.i("TEST", "writeToProvider peer timestamp is : " + timestamp);
+        PeerContract.putPeerAddress(out, address.getAddress());
     }
 
     @Override
@@ -78,12 +86,8 @@ public class Peer implements Parcelable, Persistable {
         @Override
         public Peer createFromParcel(Parcel source) {
             // TODO
-            try {
-                return new Peer(source);
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-            }
-            return null;
+            return new Peer(source);
+
         }
 
         @Override

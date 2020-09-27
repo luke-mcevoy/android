@@ -3,6 +3,7 @@ package edu.stevens.cs522.chatserver.contracts;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import java.net.InetAddress;
 import java.util.Date;
@@ -30,10 +31,10 @@ public class PeerContract implements BaseColumns {
             peerIDColumn = cursor.getColumnIndexOrThrow(_ID);
         }
         return cursor.getLong(peerIDColumn);
+//        return Long.parseLong(cursor.getString(peerIDColumn));
+
     }
-    public static void putPeerID(ContentValues out, long peerID) {
-        out.put(_ID, peerID);
-    }
+
 
 
     private static int peerNameColumn = -1;
@@ -49,25 +50,26 @@ public class PeerContract implements BaseColumns {
 
 
     private static int peerTimestampColumn = -1;
-    public static String getPeerTimestamp(Cursor cursor) {
+    public static long getPeerTimestamp(Cursor cursor) {
         if (peerTimestampColumn < 0) {
             peerTimestampColumn = cursor.getColumnIndexOrThrow(TIMESTAMP);
         }
-        return cursor.getString(peerTimestampColumn);
+        return cursor.getLong(peerTimestampColumn);
     }
     public static void putPeerTimestamp(ContentValues out, Date peerTimestamp) {
+        Log.i("TEST", "putPeerTimestamp timestamp is : " + peerTimestamp);
         out.put(TIMESTAMP, String.valueOf(peerTimestamp));
     }
 
 
     private static int peerAddressColumn = -1;
-    public static String getPeerAddress(Cursor cursor) {
+    public static byte[] getPeerAddress(Cursor cursor) {
         if (peerAddressColumn < 0) {
             peerAddressColumn = cursor.getColumnIndexOrThrow(ADDRESS);
         }
-        return cursor.getString(peerAddressColumn);
+        return cursor.getBlob(peerAddressColumn);
     }
-    public static void putPeerAddress(ContentValues out, InetAddress peerAddress) {
-        out.put(ADDRESS, String.valueOf(peerAddress));
+    public static void putPeerAddress(ContentValues out, byte[] peerAddress) {
+        out.put(ADDRESS, peerAddress);
     }
 }

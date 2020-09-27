@@ -10,7 +10,7 @@ import android.provider.BaseColumns;
 
 public class MessageContract implements BaseColumns {
 
-    public static final String _ID = "_id";
+//    public static final String _ID = "_id";
 
     public static final String MESSAGE_TEXT = "message_text";
 
@@ -18,22 +18,22 @@ public class MessageContract implements BaseColumns {
 
     public static final String SENDER = "sender";
 
-    public static final String SENDER_ID = "sender_id";
+//    public static final String SENDER_ID = "sender_id";
 
 
     // TODO remaining columns in Messages table
 
 
-    private static int messageIDColumn = -1;
-    public static long getMessageID(Cursor cursor) {
-        if (messageIDColumn < 0) {
-            messageIDColumn = cursor.getColumnIndexOrThrow(_ID);
-        }
-        return cursor.getLong(messageIDColumn);
-    }
-    public static void putMessageID(ContentValues out, long messageID) {
-        out.put(MESSAGE_TEXT, messageID);
-    }
+//    private static int messageIDColumn = -1;
+//    public static long getMessageID(Cursor cursor) {
+//        if (messageIDColumn < 0) {
+//            messageIDColumn = cursor.getColumnIndexOrThrow(_ID);
+//        }
+//        return cursor.getLong(messageIDColumn);
+//    }
+//    public static void putMessageID(ContentValues out, long messageID) {
+//        out.put(MESSAGE_TEXT, messageID);
+//    }
 
 
     private static int messageTextColumn = -1;
@@ -49,13 +49,13 @@ public class MessageContract implements BaseColumns {
 
 
     private static int messageTimestampColumn = -1;
-    public static String getMessageTimeStamp(Cursor cursor) {
+    public static long getMessageTimeStamp(Cursor cursor) {
         if (messageTimestampColumn < 0) {
             messageTimestampColumn = cursor.getColumnIndexOrThrow(TIMESTAMP);
         }
-        return cursor.getString(messageTimestampColumn);
+        return cursor.getLong(messageTimestampColumn);
     }
-    public static void putMessageTimestamp(ContentValues out, String messageTimestamp) {
+    public static void putMessageTimestamp(ContentValues out, long messageTimestamp) {
         out.put(TIMESTAMP, messageTimestamp);
     }
 
@@ -72,15 +72,14 @@ public class MessageContract implements BaseColumns {
     }
 
 
-    private static int messageSenderIDColumn = -1;
-    public static String getMessageSenderID(Cursor cursor) {
-        if (messageSenderIDColumn < 0) {
-            messageSenderIDColumn = cursor.getColumnIndexOrThrow(SENDER_ID);
-        }
-        return cursor.getString(messageSenderIDColumn);
-    }
-    public static void putMessageSenderID(ContentValues out, long messageSenderID) {
-        out.put(SENDER_ID, messageSenderID);
-    }
-    // TODO remaining getter and putter operations for other columns
+//    private static int messageSenderIDColumn = -1;
+//    public static String getMessageSenderID(Cursor cursor) {
+//        if (messageSenderIDColumn < 0) {
+//            messageSenderIDColumn = cursor.getColumnIndexOrThrow(SENDER_ID);
+//        }
+//        return cursor.getString(messageSenderIDColumn);
+//    }
+//    public static void putMessageSenderID(ContentValues out, long messageSenderID) {
+//        out.put(SENDER_ID, messageSenderID);
+//    }
 }

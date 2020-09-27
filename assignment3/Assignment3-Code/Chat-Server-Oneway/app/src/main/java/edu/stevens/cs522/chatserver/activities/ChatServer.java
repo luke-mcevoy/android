@@ -29,6 +29,8 @@ import android.widget.SimpleCursorAdapter;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import edu.stevens.cs522.base.DatagramSendReceive;
@@ -104,13 +106,15 @@ public class ChatServer extends Activity implements OnClickListener {
         chatDbAdapter.open();
 
         // TODO query the database using the database adapter, and manage the cursor on the messages thread
-//        dpQuery = chatDbAdapter.fetchAllMessages();
+        dpQuery = chatDbAdapter.fetchAllMessages();
+//        startManagingCursor(dpQuery);
 
         // TODO use SimpleCursorAdapter to display the messages received.
         messageList = (ListView)findViewById(R.id.message_list);
-        String[] from = new String[]{MessageContract.MESSAGE_TEXT};
-        int[] to = new int[]{R.id.message};
-        messagesAdapter = new SimpleCursorAdapter(this, R.layout.message, dpQuery, from, to, 0);
+
+        String[] from = new String[]{MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
+        int[] to = new int[]{android.R.id.text1, android.R.id.text2};
+        messagesAdapter = new SimpleCursorAdapter(getApplicationContext(), android.R.layout.simple_list_item_2, dpQuery, from, to);
         messageList.setAdapter(messagesAdapter);
 
 
@@ -142,29 +146,29 @@ public class ChatServer extends Activity implements OnClickListener {
 
             Message message = new Message();
             message.sender = msgContents[0];
+            message.timestamp = new Date();
+            Log.i(TAG, "Message timestamp is : " + message.timestamp);
             message.messageText = msgContents[1];
 
 			Log.d(TAG, "Received from " + message.sender + ": " + message.messageText);
 
 			/*
-			 * TODO upsert peer and insert message into the database
+			 * TODO insert peer and insert message into the database
 			 */
 			Peer peer = new Peer();
-			peer.id = message.id;
 			peer.name = message.sender;
 			peer.timestamp = message.timestamp;
+            Log.i(TAG, "Peer timestamp is : " + peer.timestamp);
 			peer.address = receivePacket.getAddress();
-            chatDbAdapter.persist(peer);
 
 
             message.senderId = chatDbAdapter.persist(peer);
-//			chatDbAdapter.persist(message);
+			chatDbAdapter.persist(message);
 
-			messagesAdapter.changeCursor(dpQuery);
+			messagesAdapter.changeCursor(chatDbAdapter.fetchAllMessages());
             /*
              * End TODO
              */
-
             messagesAdapter.notifyDataSetChanged();
 
 		} catch (Exception e) {

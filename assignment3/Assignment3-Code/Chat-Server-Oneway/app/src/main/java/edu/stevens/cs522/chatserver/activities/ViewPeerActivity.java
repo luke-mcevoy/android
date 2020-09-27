@@ -2,6 +2,7 @@ package edu.stevens.cs522.chatserver.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import edu.stevens.cs522.chatserver.R;
@@ -31,6 +32,7 @@ public class ViewPeerActivity extends Activity {
         // TODO init the UI
         chatDbAdapter = new ChatDbAdapter(this);
         chatDbAdapter.open();
+
         Peer fetchedPeer = chatDbAdapter.fetchPeer(peerId);
 
         TextView username = (TextView)findViewById(R.id.view_user_name);
@@ -38,13 +40,12 @@ public class ViewPeerActivity extends Activity {
         TextView address = (TextView)findViewById(R.id.view_address);
 
         username.setText(fetchedPeer.name);
+        Log.i("Test", "fetchedPeer ViewPeerActivity timestamp" + fetchedPeer.timestamp +
+                " " + fetchedPeer.name + " " + fetchedPeer.address);
         lastSeen.setText(fetchedPeer.timestamp.toString());
-        address.setText(fetchedPeer.address.toString());
+        address.setText(fetchedPeer.address.getHostAddress());
 
-
-
-
-
+        chatDbAdapter.close();
     }
 
 }
