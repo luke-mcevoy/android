@@ -145,12 +145,13 @@ public class ChatServer extends Activity implements OnClickListener {
 			/*
 			 * TODO upsert peer and insert message into the database
 			 */
-			Peer sender = new Peer();
-			sender.name = message.sender;
-			sender.timestamp = message.timestamp;
-			sender.address = receivePacket.getAddress();
+			Peer peer = new Peer();
+			chatDbAdapter.persist(peer);    // Checks if peer exists or not
+			peer.name = message.sender;
+			peer.timestamp = message.timestamp;
+			peer.address = receivePacket.getAddress();
 
-			message.senderId = chatDbAdapter.persist(sender);
+			message.senderId = chatDbAdapter.persist(peer);
 			chatDbAdapter.persist(message);
 
 			dpQuery = chatDbAdapter.fetchAllMessages();

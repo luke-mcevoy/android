@@ -33,11 +33,18 @@ public class ChatDbAdapter {
 
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
+        /*
+        private static final String CREATE_TABLE_MESSAGE =
+                "CREATE TABLE " + MESSAGE_TABLE + " (" +
+                        MessageContract._ID + "long primary key autoincrement," +
+                        MessageContract.MESSAGE_TEXT + "text not null" +
+         */
 
         private static final String DATABASE_CREATE;
 
         static {
-            DATABASE_CREATE = "CREATE TABLE " + PEER_TABLE + " (" +
+            DATABASE_CREATE =
+                    "CREATE TABLE " + PEER_TABLE + " (" +
                     PeerContract._ID + "long primary key," +
                     PeerContract.NAME + "text not null," +
                     PeerContract.TIMESTAMP + "text not null," +
@@ -86,6 +93,8 @@ public class ChatDbAdapter {
 
     public Cursor fetchAllMessages() {
         // TODO
+        return null;
+        /*
         String[] messageProjection;
         messageProjection = new String[]{MessageContract.MESSAGE_TEXT, MessageContract.TIMESTAMP, MessageContract.SENDER};
         return db.query(MESSAGE_TABLE,
@@ -95,6 +104,7 @@ public class ChatDbAdapter {
                 null,
                 null,
                 null);
+         */
     }
 
     public Cursor fetchAllPeers() {
@@ -143,13 +153,17 @@ public class ChatDbAdapter {
 
     public long persist(Message message) throws SQLException {
         // TODO
-        open();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(MessageContract.MESSAGE_TEXT, message.messageText);
-        contentValues.put(MessageContract.SENDER, message.sender);
-        contentValues.put(MessageContract.SENDER_ID, message.senderId);
-        contentValues.put(MessageContract.TIMESTAMP, message.timestamp.toString());
-        db.insertOrThrow(MESSAGE_TABLE, null, contentValues);
+        if (fetchPeer(message.senderId) == null) {
+            open();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(MessageContract.MESSAGE_TEXT, message.messageText);
+            contentValues.put(MessageContract.SENDER, message.sender);
+            contentValues.put(MessageContract.SENDER_ID, message.senderId);
+            contentValues.put(MessageContract.TIMESTAMP, message.timestamp.toString());
+            db.insertOrThrow(MESSAGE_TABLE, null, contentValues);
+        } else {
+            // update information since Message already exists
+        }
         throw new IllegalStateException("Unimplemented: persist message");
     }
 
@@ -158,12 +172,17 @@ public class ChatDbAdapter {
      */
     public long persist(Peer peer) throws SQLException {
         // TODO
-        open();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(PeerContract.NAME, peer.name);
-        contentValues.put(PeerContract.ADDRESS, peer.address.toString());
-        contentValues.put(PeerContract.TIMESTAMP, peer.timestamp.toString());
-        db.insertOrThrow(PEER_TABLE, null, contentValues);
+        if (fetchPeer(peer.id) == null) {
+            open();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(PeerContract.NAME, peer.name);
+            contentValues.put(PeerContract.ADDRESS, peer.address.toString());
+            contentValues.put(PeerContract.TIMESTAMP, peer.timestamp.toString());
+            db.insertOrThrow(PEER_TABLE, null, contentValues);
+
+        } else {
+            // update information since Peer already exists
+        }
         throw new IllegalStateException("Unimplemented: persist peer");
     }
 
