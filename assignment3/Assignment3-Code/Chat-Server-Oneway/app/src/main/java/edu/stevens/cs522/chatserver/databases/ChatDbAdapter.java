@@ -174,11 +174,7 @@ public class ChatDbAdapter {
         db.execSQL(FK_ON);
         Cursor result = db.query(PEER_TABLE, projection, selection, selectionArgs, null, null, null);
         result.moveToFirst();
-        try {
-            return new Peer(result);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        return new Peer(result);
 
 //        String[] peerProjection = new String[]{_ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
 //        String selection = _ID + " = ?";
@@ -195,7 +191,6 @@ public class ChatDbAdapter {
 //                );
 //        result.moveToFirst();
 //        return new Peer(result);
-        return null;
     }
 
     public Cursor fetchMessagesFromPeer(Peer peer) {

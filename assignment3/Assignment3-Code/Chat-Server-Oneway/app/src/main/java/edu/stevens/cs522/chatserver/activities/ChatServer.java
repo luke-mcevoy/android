@@ -146,7 +146,7 @@ public class ChatServer extends Activity implements OnClickListener {
 
             Message message = new Message();
             message.sender = msgContents[0];
-            message.timestamp = new Date();
+//            message.timestamp = new Date();
             Log.i(TAG, "Message timestamp is : " + message.timestamp);
             message.messageText = msgContents[1];
 

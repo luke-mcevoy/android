@@ -26,6 +26,7 @@ public class Message implements Parcelable, Persistable {
     public long senderId;
 
     public Message() {
+        this.timestamp = new Date();
     }
 
     public Message(Cursor cursor) {

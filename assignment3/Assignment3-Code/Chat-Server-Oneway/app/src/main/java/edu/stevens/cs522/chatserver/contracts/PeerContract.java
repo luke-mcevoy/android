@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-import java.net.InetAddress;
 import java.util.Date;
 
 /**
@@ -56,9 +55,9 @@ public class PeerContract implements BaseColumns {
         }
         return cursor.getLong(peerTimestampColumn);
     }
-    public static void putPeerTimestamp(ContentValues out, Date peerTimestamp) {
+    public static void putPeerTimestamp(ContentValues out, long peerTimestamp) {
         Log.i("TEST", "putPeerTimestamp timestamp is : " + peerTimestamp);
-        out.put(TIMESTAMP, String.valueOf(peerTimestamp));
+        out.put(TIMESTAMP, peerTimestamp);
     }
 
 

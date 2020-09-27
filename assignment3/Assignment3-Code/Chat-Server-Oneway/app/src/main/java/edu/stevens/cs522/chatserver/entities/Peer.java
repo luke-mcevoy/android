@@ -30,13 +30,16 @@ public class Peer implements Parcelable, Persistable {
     public InetAddress address;
 
     public Peer() {
+        this.timestamp = new Date();
     }
 
-    public Peer(Cursor cursor) throws UnknownHostException {
+    public Peer(Cursor cursor) {
         // TODO
         id = PeerContract.getPeerID(cursor);
         name = PeerContract.getPeerName(cursor);
+//        timestamp = new Date(PeerContract.getPeerTimestamp(cursor));
         timestamp = new Date(PeerContract.getPeerTimestamp(cursor));
+//        timestamp = new Date();
         Log.i("TEST", "Peer(cursor) timestamp is : " + timestamp);
         try {
             address = InetAddress.getByAddress(PeerContract.getPeerAddress(cursor));
@@ -61,7 +64,7 @@ public class Peer implements Parcelable, Persistable {
         // TODO
 //        PeerContract.putPeerID(out, id);
         PeerContract.putPeerName(out, name);
-        PeerContract.putPeerTimestamp(out, timestamp);
+        PeerContract.putPeerTimestamp(out, timestamp.getTime());
         Log.i("TEST", "writeToProvider peer timestamp is : " + timestamp);
         PeerContract.putPeerAddress(out, address.getAddress());
     }
