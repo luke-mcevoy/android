@@ -104,13 +104,13 @@ public class ChatServer extends Activity implements OnClickListener {
         chatDbAdapter.open();
 
         // TODO query the database using the database adapter, and manage the cursor on the messages thread
-        dpQuery = chatDbAdapter.fetchAllMessages();
+//        dpQuery = chatDbAdapter.fetchAllMessages();
 
         // TODO use SimpleCursorAdapter to display the messages received.
         messageList = (ListView)findViewById(R.id.message_list);
         String[] from = new String[]{MessageContract.MESSAGE_TEXT};
         int[] to = new int[]{R.id.message};
-        messagesAdapter = new SimpleCursorAdapter(this, R.layout.message, dpQuery, from, to);
+        messagesAdapter = new SimpleCursorAdapter(this, R.layout.message, dpQuery, from, to, 0);
         messageList.setAdapter(messagesAdapter);
 
 
@@ -135,10 +135,14 @@ public class ChatServer extends Activity implements OnClickListener {
 			
 			String msgContents[] = new String(receivePacket.getData(), 0, receivePacket.getLength()).split(":");
 
+//            Message message = new Message();
+//            message.sender = msgContents[0];
+//            message.timestamp = new Date(Long.parseLong(msgContents[1]));
+//            message.messageText = msgContents[2];
+
             Message message = new Message();
             message.sender = msgContents[0];
-            message.timestamp = new Date(Long.parseLong(msgContents[1]));
-            message.messageText = msgContents[2];
+            message.messageText = msgContents[1];
 
 			Log.d(TAG, "Received from " + message.sender + ": " + message.messageText);
 
@@ -146,15 +150,16 @@ public class ChatServer extends Activity implements OnClickListener {
 			 * TODO upsert peer and insert message into the database
 			 */
 			Peer peer = new Peer();
-			chatDbAdapter.persist(peer);    // Checks if peer exists or not
+			peer.id = message.id;
 			peer.name = message.sender;
 			peer.timestamp = message.timestamp;
 			peer.address = receivePacket.getAddress();
+            chatDbAdapter.persist(peer);
 
-			message.senderId = chatDbAdapter.persist(peer);
-			chatDbAdapter.persist(message);
 
-			dpQuery = chatDbAdapter.fetchAllMessages();
+            message.senderId = chatDbAdapter.persist(peer);
+//			chatDbAdapter.persist(message);
+
 			messagesAdapter.changeCursor(dpQuery);
             /*
              * End TODO

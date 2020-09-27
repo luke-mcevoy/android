@@ -29,12 +29,13 @@ public class ViewPeerActivity extends Activity {
         }
 
         // TODO init the UI
+        chatDbAdapter = new ChatDbAdapter(this);
+        chatDbAdapter.open();
         Peer fetchedPeer = chatDbAdapter.fetchPeer(peerId);
 
-        TextView username = findViewById(R.id.view_user_name);
-        TextView lastSeen = findViewById(R.id.view_timestamp);
-        TextView address = findViewById(R.id.view_address);
-//        TextView messages = findViewById(R.id.view_messages);
+        TextView username = (TextView)findViewById(R.id.view_user_name);
+        TextView lastSeen = (TextView)findViewById(R.id.view_timestamp);
+        TextView address = (TextView)findViewById(R.id.view_address);
 
         username.setText(fetchedPeer.name);
         lastSeen.setText(fetchedPeer.timestamp.toString());

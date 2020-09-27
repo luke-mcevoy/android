@@ -51,7 +51,7 @@ public class Message implements Parcelable, Persistable {
         // TODO
         MessageContract.putMessageID(out, id);
         MessageContract.putMessageText(out, messageText);
-        MessageContract.putMessageTimestamp(out, timestamp.toString());
+//        MessageContract.putMessageTimestamp(out, timestamp.toString());
         MessageContract.putMessageSender(out, sender);
         MessageContract.putMessageSenderID(out, senderId);
     }

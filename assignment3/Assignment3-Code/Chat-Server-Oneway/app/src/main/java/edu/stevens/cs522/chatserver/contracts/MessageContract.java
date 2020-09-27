@@ -25,11 +25,11 @@ public class MessageContract implements BaseColumns {
 
 
     private static int messageIDColumn = -1;
-    public static String getMessageID(Cursor cursor) {
+    public static long getMessageID(Cursor cursor) {
         if (messageIDColumn < 0) {
             messageIDColumn = cursor.getColumnIndexOrThrow(_ID);
         }
-        return cursor.getString(messageIDColumn);
+        return cursor.getLong(messageIDColumn);
     }
     public static void putMessageID(ContentValues out, long messageID) {
         out.put(MESSAGE_TEXT, messageID);

@@ -33,31 +33,36 @@ public class ChatDbAdapter {
 
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
-        /*
-        private static final String CREATE_TABLE_MESSAGE =
-                "CREATE TABLE " + MESSAGE_TABLE + " (" +
-                        MessageContract._ID + "long primary key autoincrement," +
-                        MessageContract.MESSAGE_TEXT + "text not null" +
-         */
 
-        private static final String DATABASE_CREATE;
+        private static final String DATABASE_CREATE_MESSAGE_TABLE =
+                "CREATE TABLE IF NOT EXISTS " + MESSAGE_TABLE + " (" +
+                MessageContract._ID + " long primary key autoincrement," +
+                MessageContract.MESSAGE_TEXT + " text not null," +
+                MessageContract.TIMESTAMP + " text not null," +
+                MessageContract.SENDER + " text not null," +
+                MessageContract.SENDER_ID + " long not null);";
 
-        static {
-            DATABASE_CREATE =
-                    "CREATE TABLE " + PEER_TABLE + " (" +
-                    PeerContract._ID + "long primary key," +
-                    PeerContract.NAME + "text not null," +
-                    PeerContract.TIMESTAMP + "text not null," +
-                    PeerContract.ADDRESS + "text not null);" +
 
-                    "CREATE TABLE " + MESSAGE_TABLE + " (" +
-                    MessageContract._ID + "long primary key," +
-                    MessageContract.MESSAGE_TEXT + "text not null," +
-                    MessageContract.TIMESTAMP + "text not null," +
-                    MessageContract.SENDER + "text not null," +
-                    MessageContract.SENDER_ID + "text not null);";
-        }
+        private static final String DATABASE_CREATE_PEER_TABLE =
+                "CREATE TABLE IF NOT EXISTS " + PEER_TABLE + " (" +
+                PeerContract._ID + " long primary key autoincrement," +
+                PeerContract.NAME + " text not null," +
+                PeerContract.TIMESTAMP + " text not null," +
+                PeerContract.ADDRESS + " text not null);";
 
+//        private static final String DATABASE_CREATE =
+//                "CREATE TABLE IF NOT EXISTS " + PEER_TABLE + " (" +
+//                PeerContract._ID + " long primary key," +
+//                PeerContract.NAME + " text not null," +
+//                PeerContract.TIMESTAMP + " text not null," +
+//                PeerContract.ADDRESS + " text not null);" +
+//
+//                "CREATE TABLE IF NOT EXISTS " + MESSAGE_TABLE + " (" +
+//                MessageContract._ID + " long primary key," +
+//                MessageContract.MESSAGE_TEXT + " text not null," +
+//                MessageContract.TIMESTAMP + " text not null," +
+//                MessageContract.SENDER + " text not null," +
+//                MessageContract.SENDER_ID + " text not null);";
         // TODO
 
         public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -67,7 +72,9 @@ public class ChatDbAdapter {
         @Override
         public void onCreate(SQLiteDatabase db) {
             // TODO
-            db.execSQL(DATABASE_CREATE);
+//            db.execSQL(DATABASE_CREATE);
+            db.execSQL(DATABASE_CREATE_MESSAGE_TABLE);
+            db.execSQL(DATABASE_CREATE_PEER_TABLE);
         }
 
         @Override
@@ -93,10 +100,8 @@ public class ChatDbAdapter {
 
     public Cursor fetchAllMessages() {
         // TODO
-        return null;
-        /*
         String[] messageProjection;
-        messageProjection = new String[]{MessageContract.MESSAGE_TEXT, MessageContract.TIMESTAMP, MessageContract.SENDER};
+        messageProjection = new String[]{MessageContract._ID, MessageContract.MESSAGE_TEXT, MessageContract.TIMESTAMP, MessageContract.SENDER};
         return db.query(MESSAGE_TABLE,
                 messageProjection,
                 null,
@@ -104,13 +109,12 @@ public class ChatDbAdapter {
                 null,
                 null,
                 null);
-         */
     }
 
     public Cursor fetchAllPeers() {
         // TODO
         String[] peerProjection;
-        peerProjection = new String[]{PeerContract.NAME};
+        peerProjection = new String[]{PeerContract._ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
         return db.query(PEER_TABLE,
                 peerProjection,
                 null,
@@ -123,11 +127,12 @@ public class ChatDbAdapter {
     public Peer fetchPeer(long peerId) {
         // TODO
         String[] peerProjection = new String[]{PeerContract._ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
-        String selection = PeerContract._ID + " = " + peerId;
+        String selection = PeerContract._ID + " = ?";
+        String[] selectionArgs = {Long.toString(peerId)};
         return new Peer(db.query(PEER_TABLE,
                 peerProjection,
                 selection,
-                null,
+                selectionArgs,
                 null,
                 null,
                 null
@@ -140,10 +145,11 @@ public class ChatDbAdapter {
         // TODO
         String[] messageProjection = new String[]{MessageContract._ID, MessageContract.MESSAGE_TEXT, MessageContract.TIMESTAMP, MessageContract.SENDER, MessageContract.SENDER_ID};
         String selection = MessageContract._ID + " = " + peer.id;
+        String[] selectionArgs = {peer.name};
         return db.query(MESSAGE_TABLE,
                 messageProjection,
                 selection,
-                null,
+                selectionArgs,
                 null,
                 null,
                 null
@@ -153,18 +159,31 @@ public class ChatDbAdapter {
 
     public long persist(Message message) throws SQLException {
         // TODO
-        if (fetchPeer(message.senderId) == null) {
-            open();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(MessageContract.MESSAGE_TEXT, message.messageText);
-            contentValues.put(MessageContract.SENDER, message.sender);
-            contentValues.put(MessageContract.SENDER_ID, message.senderId);
-            contentValues.put(MessageContract.TIMESTAMP, message.timestamp.toString());
-            db.insertOrThrow(MESSAGE_TABLE, null, contentValues);
+        ContentValues contentValues = new ContentValues();
+        message.writeToProvider(contentValues);
+
+        String[] projection = {MessageContract._ID, MessageContract.MESSAGE_TEXT};
+        String selection = MessageContract.MESSAGE_TEXT + " = ?";
+        String[] selectionArgs = {message.messageText};
+
+        Cursor cursor = db.query(MESSAGE_TABLE,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+
+        if (cursor.getCount() == 0) {
+            return db.insert(MESSAGE_TABLE, null, contentValues);
         } else {
-            // update information since Message already exists
+            cursor.moveToFirst();
+            selection = MessageContract._ID + " = ?";
+            selectionArgs = new String[]{String.valueOf(MessageContract.getMessageID(cursor))};
+            db.update(MESSAGE_TABLE, contentValues, selection, selectionArgs);
+            return MessageContract.getMessageID(cursor);
         }
-        throw new IllegalStateException("Unimplemented: persist message");
+//        throw new IllegalStateException("Unimplemented: persist message");
     }
 
     /**
@@ -172,18 +191,33 @@ public class ChatDbAdapter {
      */
     public long persist(Peer peer) throws SQLException {
         // TODO
-        if (fetchPeer(peer.id) == null) {
-            open();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(PeerContract.NAME, peer.name);
-            contentValues.put(PeerContract.ADDRESS, peer.address.toString());
-            contentValues.put(PeerContract.TIMESTAMP, peer.timestamp.toString());
-            db.insertOrThrow(PEER_TABLE, null, contentValues);
+        ContentValues contentValues = new ContentValues();
+        peer.writeToProvider(contentValues);
 
+        String[] projection = {PeerContract._ID, PeerContract.NAME};
+        String selection = PeerContract.NAME + " = ?";
+        String[] selectionArgs = {peer.name};
+
+        Cursor cursor = db.query(PEER_TABLE,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+
+        if (cursor.getCount() == 0) {
+            return db.insertOrThrow(PEER_TABLE, null, contentValues);
         } else {
-            // update information since Peer already exists
+            cursor.moveToFirst();
+            selection = PeerContract._ID + " = ?";
+            selectionArgs = new String[]{String.valueOf(PeerContract.getPeerID(cursor))};
+            db.update(PEER_TABLE, contentValues, selection, selectionArgs);
+            return PeerContract.getPeerID(cursor);
         }
-        throw new IllegalStateException("Unimplemented: persist peer");
+//        return PeerContract.getPeerID(cursor);
+
+//        throw new IllegalStateException("Unimplemented: persist peer");
     }
 
     public void close() {

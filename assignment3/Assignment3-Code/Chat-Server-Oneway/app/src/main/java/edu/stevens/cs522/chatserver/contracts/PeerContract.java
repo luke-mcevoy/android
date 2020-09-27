@@ -25,11 +25,11 @@ public class PeerContract implements BaseColumns {
 
 
     private static int peerIDColumn = -1;
-    public static String getPeerID(Cursor cursor) {
+    public static long getPeerID(Cursor cursor) {
         if (peerIDColumn < 0) {
             peerIDColumn = cursor.getColumnIndexOrThrow(_ID);
         }
-        return cursor.getString(peerIDColumn);
+        return cursor.getLong(peerIDColumn);
     }
     public static void putPeerID(ContentValues out, long peerID) {
         out.put(_ID, peerID);

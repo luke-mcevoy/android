@@ -35,15 +35,18 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
 
         // TODO initialize peerAdapter with result of DB query
         chatDbAdapter = new ChatDbAdapter(this);
-        dqQuery = chatDbAdapter.fetchAllPeers();
+        chatDbAdapter.open();
 
-        String[] from = new String[]{PeerContract._ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
-        int[] to = new int[]{R.id.peers};
+        dqQuery = chatDbAdapter.fetchAllPeers();
+//        startManagingCursor(dqQuery);
+
+        String[] from = new String[]{PeerContract.NAME};
+        int[] to = new int[]{R.id.text};
         peerAdapter = new SimpleCursorAdapter(this, R.layout.view_peers, dqQuery, from, to);
 
         ListView listview = (ListView) findViewById(R.id.peer_list);
-        listview.setAdapter(peerAdapter);
         listview.setOnItemClickListener(this);
+        listview.setAdapter(peerAdapter);
     }
 
 
