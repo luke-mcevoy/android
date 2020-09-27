@@ -11,9 +11,7 @@
 package edu.stevens.cs522.chatserver.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -29,9 +27,6 @@ import android.widget.SimpleCursorAdapter;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import edu.stevens.cs522.base.DatagramSendReceive;
 import edu.stevens.cs522.chatserver.R;
@@ -107,7 +102,6 @@ public class ChatServer extends Activity implements OnClickListener {
 
         // TODO query the database using the database adapter, and manage the cursor on the messages thread
         dpQuery = chatDbAdapter.fetchAllMessages();
-//        startManagingCursor(dpQuery);
 
         // TODO use SimpleCursorAdapter to display the messages received.
         messageList = (ListView)findViewById(R.id.message_list);
@@ -116,7 +110,6 @@ public class ChatServer extends Activity implements OnClickListener {
         int[] to = new int[]{android.R.id.text1, android.R.id.text2};
         messagesAdapter = new SimpleCursorAdapter(getApplicationContext(), android.R.layout.simple_list_item_2, dpQuery, from, to);
         messageList.setAdapter(messagesAdapter);
-
 
         // TODO bind the button for "next" to this activity as listener
         next = (Button)findViewById(R.id.next);
@@ -139,15 +132,8 @@ public class ChatServer extends Activity implements OnClickListener {
 			
 			String msgContents[] = new String(receivePacket.getData(), 0, receivePacket.getLength()).split(":");
 
-//            Message message = new Message();
-//            message.sender = msgContents[0];
-//            message.timestamp = new Date(Long.parseLong(msgContents[1]));
-//            message.messageText = msgContents[2];
-
             Message message = new Message();
             message.sender = msgContents[0];
-//            message.timestamp = new Date();
-            Log.i(TAG, "Message timestamp is : " + message.timestamp);
             message.messageText = msgContents[1];
 
 			Log.d(TAG, "Received from " + message.sender + ": " + message.messageText);
@@ -158,13 +144,10 @@ public class ChatServer extends Activity implements OnClickListener {
 			Peer peer = new Peer();
 			peer.name = message.sender;
 			peer.timestamp = message.timestamp;
-            Log.i(TAG, "Peer timestamp is : " + peer.timestamp);
 			peer.address = receivePacket.getAddress();
-
 
             message.senderId = chatDbAdapter.persist(peer);
 			chatDbAdapter.persist(message);
-
 			messagesAdapter.changeCursor(chatDbAdapter.fetchAllMessages());
             /*
              * End TODO
@@ -172,7 +155,6 @@ public class ChatServer extends Activity implements OnClickListener {
             messagesAdapter.notifyDataSetChanged();
 
 		} catch (Exception e) {
-			
 			Log.e(TAG, "Problems receiving packet: " + e.getMessage(), e);
 			socketOK = false;
 		} 

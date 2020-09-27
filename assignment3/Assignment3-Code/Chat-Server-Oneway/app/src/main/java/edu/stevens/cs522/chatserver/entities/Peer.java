@@ -4,10 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Date;
 
 import edu.stevens.cs522.chatserver.contracts.PeerContract;
@@ -37,10 +35,7 @@ public class Peer implements Parcelable, Persistable {
         // TODO
         id = PeerContract.getPeerID(cursor);
         name = PeerContract.getPeerName(cursor);
-//        timestamp = new Date(PeerContract.getPeerTimestamp(cursor));
         timestamp = new Date(PeerContract.getPeerTimestamp(cursor));
-//        timestamp = new Date();
-        Log.i("TEST", "Peer(cursor) timestamp is : " + timestamp);
         try {
             address = InetAddress.getByAddress(PeerContract.getPeerAddress(cursor));
         } catch (Exception exception) {
@@ -53,9 +48,6 @@ public class Peer implements Parcelable, Persistable {
         id = in.readLong();
         name = in.readString();
         timestamp = new Date(in.readLong());
-//        byte[] addressByteArray = new byte[in.readInt()];
-//        in.readByteArray(addressByteArray);
-//        address = InetAddress.getByAddress(addressByteArray);
         address = (InetAddress)in.readValue(InetAddress.class.getClassLoader());
     }
 
@@ -65,7 +57,6 @@ public class Peer implements Parcelable, Persistable {
 //        PeerContract.putPeerID(out, id);
         PeerContract.putPeerName(out, name);
         PeerContract.putPeerTimestamp(out, timestamp.getTime());
-        Log.i("TEST", "writeToProvider peer timestamp is : " + timestamp);
         PeerContract.putPeerAddress(out, address.getAddress());
     }
 

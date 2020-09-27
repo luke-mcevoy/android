@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-import java.util.Date;
 
 /**
  * Created by dduggan.
@@ -30,10 +29,7 @@ public class PeerContract implements BaseColumns {
             peerIDColumn = cursor.getColumnIndexOrThrow(_ID);
         }
         return cursor.getLong(peerIDColumn);
-//        return Long.parseLong(cursor.getString(peerIDColumn));
-
     }
-
 
 
     private static int peerNameColumn = -1;

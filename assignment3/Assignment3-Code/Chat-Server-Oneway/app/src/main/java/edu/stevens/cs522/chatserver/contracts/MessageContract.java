@@ -10,31 +10,13 @@ import android.provider.BaseColumns;
 
 public class MessageContract implements BaseColumns {
 
-//    public static final String _ID = "_id";
-
     public static final String MESSAGE_TEXT = "message_text";
 
     public static final String TIMESTAMP = "timestamp";
 
     public static final String SENDER = "sender";
 
-//    public static final String SENDER_ID = "sender_id";
-
-
     // TODO remaining columns in Messages table
-
-
-//    private static int messageIDColumn = -1;
-//    public static long getMessageID(Cursor cursor) {
-//        if (messageIDColumn < 0) {
-//            messageIDColumn = cursor.getColumnIndexOrThrow(_ID);
-//        }
-//        return cursor.getLong(messageIDColumn);
-//    }
-//    public static void putMessageID(ContentValues out, long messageID) {
-//        out.put(MESSAGE_TEXT, messageID);
-//    }
-
 
     private static int messageTextColumn = -1;
     public static String getMessageText(Cursor cursor) {
@@ -70,16 +52,4 @@ public class MessageContract implements BaseColumns {
     public static void putMessageSender(ContentValues out, String messageSender) {
         out.put(SENDER, messageSender);
     }
-
-
-//    private static int messageSenderIDColumn = -1;
-//    public static String getMessageSenderID(Cursor cursor) {
-//        if (messageSenderIDColumn < 0) {
-//            messageSenderIDColumn = cursor.getColumnIndexOrThrow(SENDER_ID);
-//        }
-//        return cursor.getString(messageSenderIDColumn);
-//    }
-//    public static void putMessageSenderID(ContentValues out, long messageSenderID) {
-//        out.put(SENDER_ID, messageSenderID);
-//    }
 }

@@ -1,18 +1,15 @@
 package edu.stevens.cs522.chatserver.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.AndroidException;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import edu.stevens.cs522.chatserver.R;
-import edu.stevens.cs522.chatserver.contracts.MessageContract;
 import edu.stevens.cs522.chatserver.contracts.PeerContract;
 import edu.stevens.cs522.chatserver.databases.ChatDbAdapter;
 
@@ -40,9 +37,6 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
 
         dqQuery = chatDbAdapter.fetchAllPeers();
         startManagingCursor(dqQuery);
-
-//        String[] from = new String[]{PeerContract.NAME};
-//        int[] to = new int[]{R.id.text};
 
         String[] from = new String[]{PeerContract.NAME};
         int[] to = new int[]{android.R.id.text1};

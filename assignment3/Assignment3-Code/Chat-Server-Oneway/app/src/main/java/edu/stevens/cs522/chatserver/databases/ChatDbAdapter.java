@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.net.UnknownHostException;
 
 import edu.stevens.cs522.chatserver.contracts.MessageContract;
 import edu.stevens.cs522.chatserver.contracts.PeerContract;
@@ -46,7 +45,6 @@ public class ChatDbAdapter {
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
 
-
         private static final String PEER_CREATE =
                 "CREATE TABLE " + PEER_TABLE + " (" +
                         _ID + " integer primary key," +
@@ -70,36 +68,6 @@ public class ChatDbAdapter {
         private static final String CREATE_PEER_NAME_INDEX =
                 "CREATE INDEX " + PEER_NAME_INDEX + " ON " + PEER_TABLE + "(" + PeerContract.NAME + ");";
 
-        /*
-        private static final String PEER_CREATE =
-                "CREATE TABLE IF NOT EXISTS " + PEER_TABLE + " (" +
-                PeerContract._ID + " long primary key autoincrement," +
-                PeerContract.NAME + " text not null," +
-                PeerContract.TIMESTAMP + " text not null," +
-                PeerContract.ADDRESS + " text not null);";
-
-        private static final String MESSAGE_CREATE =
-                "CREATE TABLE IF NOT EXISTS " + MESSAGE_TABLE + " (" +
-                        MessageContract._ID + " long primary key autoincrement," +
-                        MessageContract.MESSAGE_TEXT + " text not null," +
-                        MessageContract.TIMESTAMP + " text not null," +
-                        MessageContract.SENDER + " text not null," +
-                        MessageContract.SENDER_ID + " long not null);";
-         */
-
-//        private static final String DATABASE_CREATE =
-//                "CREATE TABLE IF NOT EXISTS " + PEER_TABLE + " (" +
-//                PeerContract._ID + " long primary key," +
-//                PeerContract.NAME + " text not null," +
-//                PeerContract.TIMESTAMP + " text not null," +
-//                PeerContract.ADDRESS + " text not null);" +
-//
-//                "CREATE TABLE IF NOT EXISTS " + MESSAGE_TABLE + " (" +
-//                MessageContract._ID + " long primary key," +
-//                MessageContract.MESSAGE_TEXT + " text not null," +
-//                MessageContract.TIMESTAMP + " text not null," +
-//                MessageContract.SENDER + " text not null," +
-//                MessageContract.SENDER_ID + " text not null);";
         // TODO
 
         public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -176,30 +144,15 @@ public class ChatDbAdapter {
         result.moveToFirst();
         return new Peer(result);
 
-//        String[] peerProjection = new String[]{_ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
-//        String selection = _ID + " = ?";
-//        String[] selectionArgs = {Long.toString(peerId)};
-//        db.execSQL(FK_ON);
-//
-//        Cursor result = db.query(PEER_TABLE,
-//                peerProjection,
-//                selection,
-//                selectionArgs,
-//                null,
-//                null,
-//                null
-//                );
-//        result.moveToFirst();
-//        return new Peer(result);
     }
 
     public Cursor fetchMessagesFromPeer(Peer peer) {
         // TODO
-        String[] messageProjection = new String[]{_ID, MessageContract.MESSAGE_TEXT, MessageContract.TIMESTAMP, MessageContract.SENDER};
+        String[] projection = new String[]{_ID, MessageContract.MESSAGE_TEXT, MessageContract.TIMESTAMP, MessageContract.SENDER};
         String selection = MessageContract._ID + " = ?";
         String[] selectionArgs = {peer.name};
         return db.query(MESSAGE_TABLE,
-                messageProjection,
+                projection,
                 selection,
                 selectionArgs,
                 null,
@@ -215,30 +168,6 @@ public class ChatDbAdapter {
         message.writeToProvider(contentValues);
         contentValues.put(PEER_FK, message.senderId);
         return db.insert(MESSAGE_TABLE, null, contentValues);
-
-        /*
-        String[] projection = {_ID, MessageContract.MESSAGE_TEXT};
-        String selection = MessageContract.MESSAGE_TEXT + " = ?";
-        String[] selectionArgs = {message.messageText};
-
-        Cursor cursor = db.query(MESSAGE_TABLE,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null);
-
-        if (cursor.getCount() == 0) {
-            return db.insert(MESSAGE_TABLE, null, contentValues);
-        } else {
-            cursor.moveToFirst();
-            selection = MessageContract._ID + " = ?";
-            selectionArgs = new String[]{String.valueOf(MessageContract.getMessageID(cursor))};
-            db.update(MESSAGE_TABLE, contentValues, selection, selectionArgs);
-            return MessageContract.getMessageID(cursor);
-        }
-         */
     }
 
     /**
@@ -248,7 +177,6 @@ public class ChatDbAdapter {
         // TODO
         ContentValues contentValues = new ContentValues();
         peer.writeToProvider(contentValues);
-
         String[] projection = {_ID, PeerContract.NAME};
         String selection = PeerContract.NAME + " = ?";
         String[] selectionArgs = {peer.name};
