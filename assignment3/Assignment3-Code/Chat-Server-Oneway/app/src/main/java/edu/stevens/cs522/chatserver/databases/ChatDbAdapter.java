@@ -27,6 +27,8 @@ public class ChatDbAdapter {
 
     private static final int DATABASE_VERSION = 1;
 
+    
+
     private DatabaseHelper dbHelper;
 
     private SQLiteDatabase db;
@@ -34,7 +36,7 @@ public class ChatDbAdapter {
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
 
-        private static final String DATABASE_CREATE_MESSAGE_TABLE =
+        private static final String MESSAGE_CREATE =
                 "CREATE TABLE IF NOT EXISTS " + MESSAGE_TABLE + " (" +
                 MessageContract._ID + " long primary key autoincrement," +
                 MessageContract.MESSAGE_TEXT + " text not null," +
@@ -43,7 +45,7 @@ public class ChatDbAdapter {
                 MessageContract.SENDER_ID + " long not null);";
 
 
-        private static final String DATABASE_CREATE_PEER_TABLE =
+        private static final String PEER_CREATE =
                 "CREATE TABLE IF NOT EXISTS " + PEER_TABLE + " (" +
                 PeerContract._ID + " long primary key autoincrement," +
                 PeerContract.NAME + " text not null," +
@@ -72,9 +74,8 @@ public class ChatDbAdapter {
         @Override
         public void onCreate(SQLiteDatabase db) {
             // TODO
-//            db.execSQL(DATABASE_CREATE);
-            db.execSQL(DATABASE_CREATE_MESSAGE_TABLE);
-            db.execSQL(DATABASE_CREATE_PEER_TABLE);
+            db.execSQL(MESSAGE_CREATE);
+            db.execSQL(PEER_CREATE);
         }
 
         @Override
@@ -82,7 +83,8 @@ public class ChatDbAdapter {
             // TODO
             Log.w("TaskDBAdapter", "Upgrading from version " +
                     oldVersion + " to " + newVersion);
-            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_NAME);
+            db.execSQL("DROP TABLE IF EXISTS " + MESSAGE_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + PEER_TABLE);
             onCreate(db);
         }
     }
@@ -183,7 +185,6 @@ public class ChatDbAdapter {
             db.update(MESSAGE_TABLE, contentValues, selection, selectionArgs);
             return MessageContract.getMessageID(cursor);
         }
-//        throw new IllegalStateException("Unimplemented: persist message");
     }
 
     /**
@@ -215,9 +216,6 @@ public class ChatDbAdapter {
             db.update(PEER_TABLE, contentValues, selection, selectionArgs);
             return PeerContract.getPeerID(cursor);
         }
-//        return PeerContract.getPeerID(cursor);
-
-//        throw new IllegalStateException("Unimplemented: persist peer");
     }
 
     public void close() {
