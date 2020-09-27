@@ -3,6 +3,7 @@ package edu.stevens.cs522.chatserver.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.AndroidException;
 import android.view.View;
@@ -25,20 +26,24 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
 
     private SimpleCursorAdapter peerAdapter;
 
+    private Cursor dqQuery;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_peers);
 
         // TODO initialize peerAdapter with result of DB query
-        Context context = getApplicationContext();
-        String[] peerProjection = new String[]{PeerContract._ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
-        peerAdapter = new SimpleCursorAdapter(context, android.R.layout.simple_list_item_1, chatDbAdapter.fetchAllPeers(),
-                peerProjection, new int[]{android.R.id.text1},0);
+        chatDbAdapter = new ChatDbAdapter(this);
+        dqQuery = chatDbAdapter.fetchAllPeers();
+
+        String[] from = new String[]{PeerContract._ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
+        int[] to = new int[]{R.id.peers};
+        peerAdapter = new SimpleCursorAdapter(this, R.layout.view_peers, dqQuery, from, to);
 
         ListView listview = (ListView) findViewById(R.id.peer_list);
-        peerAdapter = (SimpleCursorAdapter) listview.getAdapter();
-        peerAdapter.changeCursor(chatDbAdapter.fetchAllPeers());
+        listview.setAdapter(peerAdapter);
+        listview.setOnItemClickListener(this);
     }
 
 

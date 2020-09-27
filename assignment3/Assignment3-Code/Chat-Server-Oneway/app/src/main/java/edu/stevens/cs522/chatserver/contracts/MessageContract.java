@@ -23,7 +23,6 @@ public class MessageContract implements BaseColumns {
 
     // TODO remaining columns in Messages table
 
-//    private static int messageTextColumn = -1;
 
     public static String getMessageID(Cursor cursor) {
         int messageIDColumn = cursor.getColumnIndexOrThrow(_ID);
@@ -34,8 +33,11 @@ public class MessageContract implements BaseColumns {
     }
 
 
+    private static int messageTextColumn = -1;
     public static String getMessageText(Cursor cursor) {
-        int messageTextColumn = cursor.getColumnIndexOrThrow(MESSAGE_TEXT);
+        if (messageTextColumn < 0) {
+            messageTextColumn = cursor.getColumnIndexOrThrow(MESSAGE_TEXT);
+        }
         return cursor.getString(messageTextColumn);
     }
     public static void putMessageText(ContentValues out, String messageText) {
@@ -43,30 +45,36 @@ public class MessageContract implements BaseColumns {
     }
 
 
-
+    private static int messageTimestampColumn = -1;
     public static String getMessageTimeStamp(Cursor cursor) {
-        int messageTimeStamp = cursor.getColumnIndexOrThrow(TIMESTAMP);
-        return cursor.getString(messageTimeStamp);
+        if (messageTimestampColumn < 0) {
+            messageTimestampColumn = cursor.getColumnIndexOrThrow(TIMESTAMP);
+        }
+        return cursor.getString(messageTimestampColumn);
     }
     public static void putMessageTimestamp(ContentValues out, String messageTimestamp) {
         out.put(TIMESTAMP, messageTimestamp);
     }
 
 
-
+    private static int messageSenderColumn = -1;
     public static String getMessageSender(Cursor cursor) {
-        int messageSender = cursor.getColumnIndexOrThrow(SENDER);
-        return cursor.getString(messageSender);
+        if (messageSenderColumn < 0) {
+            messageSenderColumn = cursor.getColumnIndexOrThrow(SENDER);
+        }
+        return cursor.getString(messageSenderColumn);
     }
     public static void putMessageSender(ContentValues out, String messageSender) {
         out.put(SENDER, messageSender);
     }
 
 
-
+    private static int messageSenderIDColumn = -1;
     public static String getMessageSenderID(Cursor cursor) {
-        int messageSenderID = cursor.getColumnIndexOrThrow(SENDER_ID);
-        return cursor.getString(messageSenderID);
+        if (messageSenderIDColumn < 0) {
+            messageSenderIDColumn = cursor.getColumnIndexOrThrow(SENDER_ID);
+        }
+        return cursor.getString(messageSenderIDColumn);
     }
     public static void putMessageSenderID(ContentValues out, long messageSenderID) {
         out.put(SENDER_ID, messageSenderID);

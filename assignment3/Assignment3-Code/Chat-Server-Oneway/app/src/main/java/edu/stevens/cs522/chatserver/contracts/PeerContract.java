@@ -13,8 +13,6 @@ import java.util.Date;
 
 public class PeerContract implements BaseColumns {
 
-    //    private static int peerTextColumn = -1;
-
     // TODO define column names, getters for cursors, setters for contentvalues
 
     public static final String _ID = "_id";
@@ -26,8 +24,11 @@ public class PeerContract implements BaseColumns {
     public static final String ADDRESS = "address";
 
 
+    private static int peerIDColumn = -1;
     public static String getPeerID(Cursor cursor) {
-        int peerIDColumn = cursor.getColumnIndexOrThrow(_ID);
+        if (peerIDColumn < 0) {
+            peerIDColumn = cursor.getColumnIndexOrThrow(_ID);
+        }
         return cursor.getString(peerIDColumn);
     }
     public static void putPeerID(ContentValues out, long peerID) {
@@ -35,9 +36,11 @@ public class PeerContract implements BaseColumns {
     }
 
 
-
+    private static int peerNameColumn = -1;
     public static String getPeerName(Cursor cursor) {
-        int peerNameColumn = cursor.getColumnIndexOrThrow(NAME);
+        if (peerNameColumn < 0) {
+            peerNameColumn = cursor.getColumnIndexOrThrow(NAME);
+        }
         return cursor.getString(peerNameColumn);
     }
     public static void putPeerName(ContentValues out, String peerName) {
@@ -45,9 +48,11 @@ public class PeerContract implements BaseColumns {
     }
 
 
-
+    private static int peerTimestampColumn = -1;
     public static String getPeerTimestamp(Cursor cursor) {
-        int peerTimestampColumn = cursor.getColumnIndexOrThrow(TIMESTAMP);
+        if (peerTimestampColumn < 0) {
+            peerTimestampColumn = cursor.getColumnIndexOrThrow(TIMESTAMP);
+        }
         return cursor.getString(peerTimestampColumn);
     }
     public static void putPeerTimestamp(ContentValues out, Date peerTimestamp) {
@@ -55,12 +60,13 @@ public class PeerContract implements BaseColumns {
     }
 
 
-
+    private static int peerAddressColumn = -1;
     public static String getPeerAddress(Cursor cursor) {
-        int peerAddressColumn = cursor.getColumnIndexOrThrow(ADDRESS);
+        if (peerAddressColumn < 0) {
+            peerAddressColumn = cursor.getColumnIndexOrThrow(ADDRESS);
+        }
         return cursor.getString(peerAddressColumn);
     }
-
     public static void putPeerAddress(ContentValues out, InetAddress peerAddress) {
         out.put(ADDRESS, String.valueOf(peerAddress));
     }

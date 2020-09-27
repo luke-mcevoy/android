@@ -11,6 +11,7 @@
 package edu.stevens.cs522.chatserver.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -62,6 +63,9 @@ public class ChatServer extends Activity implements OnClickListener {
 
     private ChatDbAdapter chatDbAdapter;
 
+    // Created cursor
+    private Cursor dpQuery;
+
     private Button next;
 	
 	/*
@@ -96,25 +100,22 @@ public class ChatServer extends Activity implements OnClickListener {
         setContentView(R.layout.messages);
 
         // TODO open the database using the database adapter
-//        chatDbAdapter.open();
-
+        chatDbAdapter = new ChatDbAdapter(this);
 
         // TODO query the database using the database adapter, and manage the cursor on the messages thread
-//        chatDbAdapter.fetchAllMessages();
-//        messagesAdapter.getCursor();
-//        SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(context, )
-
-//        if (cursor.getCount() < 0) {
-//            // add
-//        }
-
+        dpQuery = chatDbAdapter.fetchAllMessages();
 
         // TODO use SimpleCursorAdapter to display the messages received.
+        messageList = (ListView)findViewById(R.id.message_list);
+        String[] from = new String[]{MessageContract.MESSAGE_TEXT};
+        int[] to = new int[]{R.id.message};
+        messagesAdapter = new SimpleCursorAdapter(this, R.layout.message, dpQuery, from, to);
+        messageList.setAdapter(messagesAdapter);
 
 
         // TODO bind the button for "next" to this activity as listener
-//        next.setOnClickListener(this);
-
+        next = (Button)findViewById(R.id.next);
+        next.setOnClickListener(this);
 	}
 
     public void onClick(View v) {
@@ -143,9 +144,16 @@ public class ChatServer extends Activity implements OnClickListener {
 			/*
 			 * TODO upsert peer and insert message into the database
 			 */
-			chatDbAdapter.fetchAllPeers();
-//			chatDbAdapter.persist(Peer);
+			Peer sender = new Peer();
+			sender.name = message.sender;
+			sender.timestamp = message.timestamp;
+			sender.address = receivePacket.getAddress();
 
+			message.senderId = chatDbAdapter.persist(sender);
+			chatDbAdapter.persist(message);
+
+			dpQuery = chatDbAdapter.fetchAllMessages();
+			messagesAdapter.changeCursor(dpQuery);
             /*
              * End TODO
              */
