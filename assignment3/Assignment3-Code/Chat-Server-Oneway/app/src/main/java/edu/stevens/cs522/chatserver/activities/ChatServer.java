@@ -101,6 +101,7 @@ public class ChatServer extends Activity implements OnClickListener {
 
         // TODO open the database using the database adapter
         chatDbAdapter = new ChatDbAdapter(this);
+        chatDbAdapter.open();
 
         // TODO query the database using the database adapter, and manage the cursor on the messages thread
         dpQuery = chatDbAdapter.fetchAllMessages();

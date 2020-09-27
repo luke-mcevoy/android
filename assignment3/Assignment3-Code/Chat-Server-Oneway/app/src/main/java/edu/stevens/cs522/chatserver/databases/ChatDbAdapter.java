@@ -34,21 +34,24 @@ public class ChatDbAdapter {
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
 
-        private static final String DATABASE_CREATE =
-                "CREATE TABLE " + PEER_TABLE + " (" +
-                        PeerContract._ID + "long primary key," +
-                        PeerContract.NAME + "text not null," +
-                        PeerContract.TIMESTAMP + "text not null," +
-                        PeerContract.ADDRESS + "text not null);"  +
+        private static final String DATABASE_CREATE;
 
-                "CREATE TABLE " + MESSAGE_TABLE + " (" +
-                        MessageContract._ID + "long primary key," +
-                        MessageContract.MESSAGE_TEXT + "text not null," +
-                        MessageContract.TIMESTAMP + "text not null," +
-                        MessageContract.SENDER + "text not null," +
-                        MessageContract.SENDER_ID + "text not null);";
+        static {
+            DATABASE_CREATE = "CREATE TABLE " + PEER_TABLE + " (" +
+                    PeerContract._ID + "long primary key," +
+                    PeerContract.NAME + "text not null," +
+                    PeerContract.TIMESTAMP + "text not null," +
+                    PeerContract.ADDRESS + "text not null);" +
 
-                 // TODO
+                    "CREATE TABLE " + MESSAGE_TABLE + " (" +
+                    MessageContract._ID + "long primary key," +
+                    MessageContract.MESSAGE_TEXT + "text not null," +
+                    MessageContract.TIMESTAMP + "text not null," +
+                    MessageContract.SENDER + "text not null," +
+                    MessageContract.SENDER_ID + "text not null);";
+        }
+
+        // TODO
 
         public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
