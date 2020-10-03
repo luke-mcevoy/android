@@ -43,56 +43,56 @@ public class PeerContract extends BaseContract {
 
     private static int peerIDColumn = -1;
 
-    public long getID(Cursor cursor) {
+    public static long getID(Cursor cursor) {
         if (peerIDColumn < 0) {
             peerIDColumn = cursor.getColumnIndexOrThrow(_ID);
         }
         return cursor.getLong(peerIDColumn);
     }
 
-    public void putID(ContentValues out, String peerID) {
+    public static void putID(ContentValues out, String peerID) {
         out.put(_ID, peerID);
     }
 
 
     public static int peerNameColumn = -1;
 
-    public String getName(Cursor cursor) {
+    public static String getName(Cursor cursor) {
         if (peerNameColumn < 0) {
             peerNameColumn = cursor.getColumnIndexOrThrow(NAME);
         }
         return cursor.getString(peerNameColumn);
     }
 
-    public void putName(ContentValues out, String peerName) {
+    public static void putName(ContentValues out, String peerName) {
         out.put(NAME, peerName);
     }
 
 
     public static int peerTimestampColumn = -1;
 
-    public long getTimestamp(Cursor cursor) {
+    public static long getTimestamp(Cursor cursor) {
         if (peerTimestampColumn < 0) {
             peerTimestampColumn = cursor.getColumnIndexOrThrow(TIMESTAMP);
         }
         return cursor.getLong(peerTimestampColumn);
     }
 
-    public void putTimestamp(ContentValues out, long peerTimestamp) {
+    public static void putTimestamp(ContentValues out, long peerTimestamp) {
         out.put(TIMESTAMP, peerTimestamp);
     }
 
 
     public static int peerAddressColumn = -1;
 
-    public byte[] getAddress(Cursor cursor) {
+    public static byte[] getAddress(Cursor cursor) {
         if (peerAddressColumn < 0) {
             peerAddressColumn = cursor.getColumnIndexOrThrow(ADDRESS);
         }
         return cursor.getBlob(peerAddressColumn);
     }
 
-    public void putAddress(ContentValues out, byte[] peerAddress) {
+    public static void putAddress(ContentValues out, byte[] peerAddress) {
         out.put(ADDRESS, peerAddress);
     }
 
