@@ -50,4 +50,15 @@ public class MessageContract extends BaseContract {
     }
 
     // TODO remaining getter and putter operations for other columns
+
+    private int messaggeIDColumn = -1;
+
+    public long getID(Cursor cursor) {
+        if (messaggeIDColumn < 0) {
+            messaggeIDColumn = cursor.getColumnIndexOrThrow(_ID);
+        }
+        return cursor.getLong(messaggeIDColumn);
+    }
+
+    public void
 }
