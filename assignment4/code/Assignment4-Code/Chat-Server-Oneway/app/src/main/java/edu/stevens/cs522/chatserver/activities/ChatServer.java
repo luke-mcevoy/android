@@ -41,6 +41,7 @@ import edu.stevens.cs522.chatserver.contracts.MessageContract;
 import edu.stevens.cs522.chatserver.contracts.PeerContract;
 import edu.stevens.cs522.chatserver.entities.Message;
 import edu.stevens.cs522.chatserver.entities.Peer;
+import edu.stevens.cs522.chatserver.providers.ChatProvider;
 
 public class ChatServer extends Activity implements OnClickListener, LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -102,7 +103,8 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
         // TODO use SimpleCursorAdapter (with flags=0) to display the messages received.
         String[] from = new String[]{MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
         int[] to = new int[]{android.R.id.text1, android.R.id.text2};
-        messagesAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor goes here, from, to, 0);
+        Cursor cursor = null;
+        messagesAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor, from, to, 0);
 
         // TODO bind the button for "next" to this activity as listener
         next = (Button)findViewById(R.id.next);

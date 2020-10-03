@@ -1,6 +1,7 @@
 package edu.stevens.cs522.chatserver.providers;
 
 import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
@@ -38,6 +39,11 @@ public class ChatProvider extends ContentProvider {
 
     private static final String PEERS_TABLE = "peers";
 
+    // I added these
+    private static final String PEER_FK = "peer_fk";
+    private static final String MESSAGES_PEER_INDEX = "MessagesPeerIndex";
+    private static final String PEER_NAME_INDEX = "PeerNameIndex";
+
     // Create the constants used to differentiate between the different URI requests.
     private static final int MESSAGES_ALL_ROWS = 1;
     private static final int MESSAGES_SINGLE_ROW = 2;
@@ -46,6 +52,30 @@ public class ChatProvider extends ContentProvider {
 
     public static class DbHelper extends SQLiteOpenHelper {
 
+        private static final String PEER_CREATE =
+                "CREATE TABLE " + PEERS_TABLE + " (" +
+                        PeerContract._ID + " integer primary key," +
+                        PeerContract.NAME + " text not null," +
+                        PeerContract.TIMESTAMP + " long not null," +
+                        PeerContract.ADDRESS + " text not null);";
+
+        private static final String MESSAGE_CREATE =
+                "CREATE TABLE " + MESSAGES_TABLE + " (" +
+                        PeerContract._ID + " integer primary key," +
+                        MessageContract.MESSAGE_TEXT + " text not null," +
+                        MessageContract.TIMESTAMP + " long not null," +
+                        MessageContract.SENDER + " text not null," +
+                        PEER_FK + " integer not null," +
+                        "FOREIGN KEY (" + PEER_FK + ") REFERENCES " +
+                        PEERS_TABLE + "(" + PeerContract._ID + ") ON DELETE CASCADE );";
+
+        private static final String CREATE_MESSAGES_PEER_INDEX =
+                "CREATE INDEX " + MESSAGES_PEER_INDEX + " ON " + MESSAGES_TABLE + "(" + PEER_FK + ");";
+
+        private static final String CREATE_PEER_NAME_INDEX =
+                "CREATE INDEX " + PEER_NAME_INDEX + " ON " + PEERS_TABLE + "(" + PeerContract.NAME + ");";
+
+
         public DbHelper(Context context, String name, CursorFactory factory, int version) {
             super(context, name, factory, version);
         }
@@ -53,11 +83,21 @@ public class ChatProvider extends ContentProvider {
         @Override
         public void onCreate(SQLiteDatabase db) {
             // TODO initialize database tables
+            db.execSQL(MESSAGE_CREATE);
+            db.execSQL(CREATE_MESSAGES_PEER_INDEX);
+            db.execSQL(PEER_CREATE);
+            db.execSQL(CREATE_PEER_NAME_INDEX);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // TODO upgrade database if necessary
+            if (oldVersion < newVersion) {
+                db.execSQL("PRAGMA foreign_key = ON");
+                db.execSQL("DROP TABLE IF EXISTS " + MESSAGES_TABLE);
+                db.execSQL("DROP TABLE IF EXISTS " + PEERS_TABLE);
+                onCreate(db);
+            }
         }
 
     }
@@ -87,7 +127,19 @@ public class ChatProvider extends ContentProvider {
     public String getType(Uri uri) {
         // TODO: Implement this to handle requests for the MIME type of the data
         // at the given URI.
-        throw new UnsupportedOperationException("Not yet implemented");
+        switch (uriMatcher.match(uri)) {
+            case MESSAGES_ALL_ROWS:
+//                return contentType("messages");
+            case MESSAGES_SINGLE_ROW:
+//                return contentItemType("message");
+            case PEERS_ALL_ROWS:
+//                return contentType("peers");
+            case PEERS_SINGLE_ROW:
+//                return contentItemType("peer");
+            default:
+//                throw new IllegalArgumentException("Unsupported URI: " + uri);
+        }
+        throw new IllegalArgumentException("Unsupported URI: " + uri);
     }
 
     @Override
@@ -97,11 +149,23 @@ public class ChatProvider extends ContentProvider {
             case MESSAGES_ALL_ROWS:
                 // TODO: Implement this to handle requests to insert a new message.
                 // Make sure to notify any observers
-                throw new UnsupportedOperationException("Not yet implemented");
+                long messagesRow = db.insert(MESSAGES_TABLE, null, values);
+                if (messagesRow > 0) {
+                    Uri instanceUri = MessageContract.CONTENT_URI(messagesRow);
+                    ContentResolver contentResolver = getContext().getContentResolver();
+                    contentResolver.notifyChange(instanceUri, null);
+                    return instanceUri;
+                }
             case PEERS_ALL_ROWS:
                 // TODO: Implement this to handle requests to insert a new peer.
                 // Make sure to notify any observers
-                throw new UnsupportedOperationException("Not yet implemented");
+                long peersRow = db.insert(PEERS_TABLE, null, values);
+                if (peersRow > 0) {
+                    Uri instanceUri = PeerContract.CONTENT_URI(peersRow);
+                    ContentResolver contentResolver = getContext().getContentResolver();
+                    contentResolver.notifyChange(instanceUri, null);
+                    return instanceUri;
+                }
             default:
                 throw new IllegalStateException("insert: bad case");
         }
@@ -114,16 +178,44 @@ public class ChatProvider extends ContentProvider {
         switch (uriMatcher.match(uri)) {
             case MESSAGES_ALL_ROWS:
                 // TODO: Implement this to handle query of all messages.
-                return db.query(MESSAGES_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+                return db.query(MESSAGES_TABLE,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
             case PEERS_ALL_ROWS:
                 // TODO: Implement this to handle query of all peers.
-                return db.query(PEERS_TABLE, projection, selection, selectionArgs, null, null, sortOrder);
+                return db.query(PEERS_TABLE,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
             case MESSAGES_SINGLE_ROW:
                 // TODO: Implement this to handle query of a specific message.
-                throw new UnsupportedOperationException("Not yet implemented");
+                selection = MessageContract._ID + "=?";
+//                selectionArgs = { getId(uri) };
+                return db.query(PEERS_TABLE,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
             case PEERS_SINGLE_ROW:
                 // TODO: Implement this to handle query of a specific peer.
-                throw new UnsupportedOperationException("Not yet implemented");
+                selection = PeerContract._ID + "=?";
+//                selectionArgs = { getId(uri) };
+                return db.query(PEERS_TABLE,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
             default:
                 throw new IllegalStateException("insert: bad case");
         }
@@ -133,13 +225,27 @@ public class ChatProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
         // TODO Implement this to handle requests to update one or more rows.
-        throw new UnsupportedOperationException("Not yet implemented");
+        switch (uriMatcher.match(uri)) {
+            case MESSAGES_ALL_ROWS:
+            case PEERS_ALL_ROWS:
+            case MESSAGES_SINGLE_ROW:
+            case PEERS_SINGLE_ROW:
+            default:
+                throw new IllegalArgumentException("Unsupported URI: " + uri);
+        }
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         // TODO Implement this to handle requests to delete one or more rows.
-        throw new UnsupportedOperationException("Not yet implemented");
+        switch (uriMatcher.match(uri)) {
+            case MESSAGES_ALL_ROWS:
+            case PEERS_ALL_ROWS:
+            case MESSAGES_SINGLE_ROW:
+            case PEERS_SINGLE_ROW:
+            default:
+                throw new IllegalArgumentException("Unsupported URI: " + uri);
+        }
     }
 
 }
