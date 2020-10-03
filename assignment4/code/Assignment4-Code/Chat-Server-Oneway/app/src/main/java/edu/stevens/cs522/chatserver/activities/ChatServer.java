@@ -14,6 +14,8 @@ import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -99,12 +101,19 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
 
         // TODO use SimpleCursorAdapter (with flags=0) to display the messages received.
 
+        String[] from = new String[]{MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
+        int[] to = new int[]{android.R.id.text1, android.R.id.text2};
+//        messagesAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor goes here, from, to, 0);
+
 
         // TODO bind the button for "next" to this activity as listener
+        next = (Button)findViewById(R.id.next);
+        next.setOnClickListener(this);
 
 
         // TODO use loader manager to initiate a query of the database
-
+        LoaderManager loaderManager = getLoaderManager();
+        loaderManager.initLoader(LOADER_ID, null, this);
 	}
 
 
@@ -171,17 +180,30 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
         // TODO use a CursorLoader to initiate a query on the database
-        return null;
+        switch (id) {
+            case LOADER_ID:
+                String[] projection = new String[]{};   // TODO
+                return new CursorLoader(this,
+                        MessageContract.CONTENT_URI,
+                        projection,
+                        null,
+                        null,
+                        null);
+            default:
+                return null;
+        }
     }
 
     @Override
     public void onLoadFinished(Loader loader, Cursor data) {
         // TODO populate the UI with the result of querying the provider
+        this.messagesAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader loader) {
         // TODO reset the UI when the cursor is empty
+        this.messagesAdapter.swapCursor(null);
     }
 
     public void onDestroy() {
@@ -193,7 +215,8 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         // TODO inflate a menu with PEERS and SETTINGS options
-
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chatserver_menu, menu);
         return true;
     }
 
@@ -204,6 +227,8 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
 
             case R.id.peers:
                 // TODO PEERS provide the UI for viewing list of peers
+                Intent intent = new Intent(this, ViewPeersActivity.class);
+                startActivity(intent);
                 break;
 
             default:
