@@ -47,8 +47,7 @@ public class ChatProvider extends ContentProvider {
             MessageContract.ID,
             MessageContract.MESSAGE_TEXT,
             MessageContract.TIMESTAMP,
-            MessageContract.SENDER,
-            MessageContract.SENDER_ID
+            MessageContract.SENDER
     };
 
     private static final String[] PEER_PROJECTION = new String[]{
@@ -187,48 +186,61 @@ public class ChatProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor;
+        ContentResolver cr;
         switch (uriMatcher.match(uri)) {
             case MESSAGES_ALL_ROWS:
                 // TODO: Implement this to handle query of all messages.
-                return db.query(MESSAGES_TABLE,
+                cursor = db.query(MESSAGES_TABLE,
                         MESSAGE_PROJECTION,
                         selection,
                         selectionArgs,
                         null,
                         null,
                         sortOrder);
-
+                cr = getContext().getContentResolver();
+                cursor.setNotificationUri(cr, uri);
+                return cursor;
             case PEERS_ALL_ROWS:
                 // TODO: Implement this to handle query of all peers.
-                return db.query(PEERS_TABLE,
+                cursor = db.query(PEERS_TABLE,
                         PEER_PROJECTION,
                         selection,
                         selectionArgs,
                         null,
                         null,
                         sortOrder);
+                cr = getContext().getContentResolver();
+                cursor.setNotificationUri(cr, uri);
+                return cursor;
             case MESSAGES_SINGLE_ROW:
                 // TODO: Implement this to handle query of a specific message.
                 selection = MessageContract._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(MessageContract.getId(uri))};
-                return db.query(PEERS_TABLE,
+                cursor = db.query(PEERS_TABLE,
                         MESSAGE_PROJECTION,
                         selection,
                         selectionArgs,
                         null,
                         null,
                         sortOrder);
+                cr = getContext().getContentResolver();
+                cursor.setNotificationUri(cr, uri);
+                return cursor;
             case PEERS_SINGLE_ROW:
                 // TODO: Implement this to handle query of a specific peer.
                 selection = PeerContract.ID + "=?";
                 selectionArgs = new String[]{String.valueOf(PeerContract.getId(uri))};
-                return db.query(PEERS_TABLE,
+                cursor = db.query(PEERS_TABLE,
                         PEER_PROJECTION,
                         selection,
                         selectionArgs,
                         null,
                         null,
                         sortOrder);
+                cr = getContext().getContentResolver();
+                cursor.setNotificationUri(cr, uri);
+                return cursor;
             default:
                 throw new IllegalStateException("insert: bad case");
         }
