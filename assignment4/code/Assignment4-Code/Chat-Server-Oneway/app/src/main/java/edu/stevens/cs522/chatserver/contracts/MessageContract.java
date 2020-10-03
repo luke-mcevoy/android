@@ -34,6 +34,9 @@ public class MessageContract extends BaseContract {
 
     public static final String SENDER = "sender";
 
+    // I added this
+    public static final String SENDER_ID = "senderID";
+
     // TODO remaining columns in Messages table
 
     private static int messageTextColumn = -1;

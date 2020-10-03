@@ -34,6 +34,7 @@ import android.widget.SimpleCursorAdapter;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.util.Date;
+import java.util.List;
 
 import edu.stevens.cs522.base.DatagramSendReceive;
 import edu.stevens.cs522.chatserver.R;
@@ -101,10 +102,16 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
         setContentView(R.layout.messages);
 
         // TODO use SimpleCursorAdapter (with flags=0) to display the messages received.
-        String[] from = new String[]{MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
-        int[] to = new int[]{android.R.id.text1, android.R.id.text2};
-        Cursor cursor = null;
-        messagesAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor, from, to, 0);
+
+
+//        String[] from = new String[]{MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
+//        int[] to = new int[]{android.R.id.text1, android.R.id.text2};
+        String[] from = {MessageContract.MESSAGE_TEXT};
+        int[] to = {android.R.id.text1};
+        messagesAdapter = new SimpleCursorAdapter(this, R.layout.message, null, from, to, 0);
+
+        messageList = (ListView)findViewById(R.id.message_list);
+        messageList.setAdapter(messagesAdapter);
 
         // TODO bind the button for "next" to this activity as listener
         next = (Button)findViewById(R.id.next);
@@ -184,7 +191,11 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
         // TODO use a CursorLoader to initiate a query on the database
         switch (id) {
             case LOADER_ID:
-                String[] projection = new String[]{};   // TODO
+                String[] projection = new String[]{
+                        MessageContract._ID,
+                        MessageContract.MESSAGE_TEXT,
+                        MessageContract.TIMESTAMP,
+                        MessageContract.SENDER};
                 return new CursorLoader(this,
                         MessageContract.CONTENT_URI,
                         projection,

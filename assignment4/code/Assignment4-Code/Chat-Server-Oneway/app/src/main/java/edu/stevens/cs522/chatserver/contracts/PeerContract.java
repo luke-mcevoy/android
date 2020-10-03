@@ -3,11 +3,6 @@ package edu.stevens.cs522.chatserver.contracts;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.BaseColumns;
-
-import java.net.InetAddress;
-
-import static edu.stevens.cs522.chatserver.contracts.BaseContract.withExtendedPath;
 
 /**
  * Created by dduggan.
@@ -32,7 +27,7 @@ public class PeerContract extends BaseContract {
 
     // TODO define column names, getters for cursors, setters for contentvalues
 
-    public static final String _ID = "_id";
+    public static final String ID = _ID;
 
     public static final String NAME = "name";
 
@@ -45,13 +40,13 @@ public class PeerContract extends BaseContract {
 
     public static long getID(Cursor cursor) {
         if (peerIDColumn < 0) {
-            peerIDColumn = cursor.getColumnIndexOrThrow(_ID);
+            peerIDColumn = cursor.getColumnIndexOrThrow(ID);
         }
         return cursor.getLong(peerIDColumn);
     }
 
     public static void putID(ContentValues out, long peerID) {
-        out.put(_ID, peerID);
+        out.put(ID, peerID);
     }
 
 

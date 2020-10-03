@@ -40,9 +40,23 @@ public class ChatProvider extends ContentProvider {
     private static final String PEERS_TABLE = "peers";
 
     // I added these
-    private static final String PEER_FK = "peer_fk";
     private static final String MESSAGES_PEER_INDEX = "MessagesPeerIndex";
     private static final String PEER_NAME_INDEX = "PeerNameIndex";
+
+    private static final String[] MESSAGE_PROJECTION = new String[]{
+            MessageContract.ID,
+            MessageContract.MESSAGE_TEXT,
+            MessageContract.TIMESTAMP,
+            MessageContract.SENDER,
+            MessageContract.SENDER_ID
+    };
+
+    private static final String[] PEER_PROJECTION = new String[]{
+            PeerContract.ID,
+            PeerContract.NAME,
+            PeerContract.TIMESTAMP,
+            PeerContract.ADDRESS
+    };
 
     // Create the constants used to differentiate between the different URI requests.
     private static final int MESSAGES_ALL_ROWS = 1;
@@ -54,23 +68,23 @@ public class ChatProvider extends ContentProvider {
 
         private static final String PEER_CREATE =
                 "CREATE TABLE " + PEERS_TABLE + " (" +
-                        PeerContract._ID + " integer primary key," +
+                        PeerContract.ID + " integer primary key," +
                         PeerContract.NAME + " text not null," +
                         PeerContract.TIMESTAMP + " long not null," +
                         PeerContract.ADDRESS + " text not null);";
 
         private static final String MESSAGE_CREATE =
                 "CREATE TABLE " + MESSAGES_TABLE + " (" +
-                        PeerContract._ID + " integer primary key," +
+                        PeerContract.ID + " integer primary key," +
                         MessageContract.MESSAGE_TEXT + " text not null," +
                         MessageContract.TIMESTAMP + " long not null," +
                         MessageContract.SENDER + " text not null," +
-                        PEER_FK + " integer not null," +
-                        "FOREIGN KEY (" + PEER_FK + ") REFERENCES " +
-                        PEERS_TABLE + "(" + PeerContract._ID + ") ON DELETE CASCADE );";
+                        MessageContract.SENDER_ID + " integer not null," +
+                        "FOREIGN KEY (" + MessageContract.SENDER_ID + ") REFERENCES " +
+                        PEERS_TABLE + "(" + PeerContract.ID + ") ON DELETE CASCADE );";
 
         private static final String CREATE_MESSAGES_PEER_INDEX =
-                "CREATE INDEX " + MESSAGES_PEER_INDEX + " ON " + MESSAGES_TABLE + "(" + PEER_FK + ");";
+                "CREATE INDEX " + MESSAGES_PEER_INDEX + " ON " + MESSAGES_TABLE + "(" + MessageContract.SENDER_ID + ");";
 
         private static final String CREATE_PEER_NAME_INDEX =
                 "CREATE INDEX " + PEER_NAME_INDEX + " ON " + PEERS_TABLE + "(" + PeerContract.NAME + ");";
@@ -99,7 +113,6 @@ public class ChatProvider extends ContentProvider {
                 onCreate(db);
             }
         }
-
     }
 
     private DbHelper dbHelper;
@@ -129,17 +142,16 @@ public class ChatProvider extends ContentProvider {
         // at the given URI.
         switch (uriMatcher.match(uri)) {
             case MESSAGES_ALL_ROWS:
-//                return contentType("messages");
+                return MessageContract.CONTENT_PATH;
             case MESSAGES_SINGLE_ROW:
-//                return contentItemType("message");
+                return MessageContract.CONTENT_PATH_ITEM;
             case PEERS_ALL_ROWS:
-//                return contentType("peers");
+                return PeerContract.CONTENT_PATH;
             case PEERS_SINGLE_ROW:
-//                return contentItemType("peer");
+                return PeerContract.CONTENT_PATH_ITEM;
             default:
-//                throw new IllegalArgumentException("Unsupported URI: " + uri);
+                throw new IllegalArgumentException("Unsupported URI: " + uri);
         }
-        throw new IllegalArgumentException("Unsupported URI: " + uri);
     }
 
     @Override
@@ -179,16 +191,17 @@ public class ChatProvider extends ContentProvider {
             case MESSAGES_ALL_ROWS:
                 // TODO: Implement this to handle query of all messages.
                 return db.query(MESSAGES_TABLE,
-                        projection,
+                        MESSAGE_PROJECTION,
                         selection,
                         selectionArgs,
                         null,
                         null,
                         sortOrder);
+
             case PEERS_ALL_ROWS:
                 // TODO: Implement this to handle query of all peers.
                 return db.query(PEERS_TABLE,
-                        projection,
+                        PEER_PROJECTION,
                         selection,
                         selectionArgs,
                         null,
@@ -197,9 +210,9 @@ public class ChatProvider extends ContentProvider {
             case MESSAGES_SINGLE_ROW:
                 // TODO: Implement this to handle query of a specific message.
                 selection = MessageContract._ID + "=?";
-//                selectionArgs = { getId(uri) };
+                selectionArgs = new String[]{String.valueOf(MessageContract.getId(uri))};
                 return db.query(PEERS_TABLE,
-                        projection,
+                        MESSAGE_PROJECTION,
                         selection,
                         selectionArgs,
                         null,
@@ -207,10 +220,10 @@ public class ChatProvider extends ContentProvider {
                         sortOrder);
             case PEERS_SINGLE_ROW:
                 // TODO: Implement this to handle query of a specific peer.
-                selection = PeerContract._ID + "=?";
-//                selectionArgs = { getId(uri) };
+                selection = PeerContract.ID + "=?";
+                selectionArgs = new String[]{String.valueOf(PeerContract.getId(uri))};
                 return db.query(PEERS_TABLE,
-                        projection,
+                        PEER_PROJECTION,
                         selection,
                         selectionArgs,
                         null,
@@ -225,11 +238,20 @@ public class ChatProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
         // TODO Implement this to handle requests to update one or more rows.
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         switch (uriMatcher.match(uri)) {
             case MESSAGES_ALL_ROWS:
+                return db.update(MESSAGES_TABLE, values, selection, selectionArgs);
             case PEERS_ALL_ROWS:
+                return db.update(PEERS_TABLE, values, selection, selectionArgs);
             case MESSAGES_SINGLE_ROW:
+                selection = MessageContract._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(MessageContract.getId(uri))};
+                return db.update(MESSAGES_TABLE, values, selection, selectionArgs);
             case PEERS_SINGLE_ROW:
+                selection = PeerContract._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(PeerContract.getId(uri))};
+                return db.update(PEERS_TABLE, values, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Unsupported URI: " + uri);
         }
@@ -238,11 +260,20 @@ public class ChatProvider extends ContentProvider {
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         // TODO Implement this to handle requests to delete one or more rows.
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         switch (uriMatcher.match(uri)) {
             case MESSAGES_ALL_ROWS:
+                return db.delete(MESSAGES_TABLE, selection, selectionArgs);
             case PEERS_ALL_ROWS:
+                return db.delete(PEERS_TABLE, selection, selectionArgs);
             case MESSAGES_SINGLE_ROW:
+                selection = MessageContract._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(MessageContract.getId(uri))};
+                return db.delete(MESSAGES_TABLE, selection, selectionArgs);
             case PEERS_SINGLE_ROW:
+                selection = PeerContract._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(PeerContract.getId(uri))};
+                return db.delete(PEERS_TABLE, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Unsupported URI: " + uri);
         }
