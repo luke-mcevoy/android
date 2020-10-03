@@ -50,7 +50,7 @@ public class PeerContract extends BaseContract {
         return cursor.getLong(peerIDColumn);
     }
 
-    public static void putID(ContentValues out, String peerID) {
+    public static void putID(ContentValues out, long peerID) {
         out.put(_ID, peerID);
     }
 

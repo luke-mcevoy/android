@@ -8,6 +8,8 @@ import android.os.Parcelable;
 import java.net.InetAddress;
 import java.util.Date;
 
+import edu.stevens.cs522.chatserver.contracts.PeerContract;
+
 /**
  * Created by dduggan.
  */
@@ -30,15 +32,31 @@ public class Peer implements Parcelable, Persistable {
 
     public Peer(Cursor cursor) {
         // TODO
+        id = PeerContract.getID(cursor);
+        name = PeerContract.getName(cursor);
+        timestamp = new Date(PeerContract.getTimestamp(cursor));
+        try {
+            address = InetAddress.getByAddress(PeerContract.getAddress(cursor));
+        } catch (Exception exception) {
+            address = null;
+        }
     }
 
     public Peer(Parcel in) {
         // TODO
+        id = in.readLong();
+        name = in.readString();
+        timestamp = new Date(in.readLong());
+        address = (InetAddress)in.readValue(InetAddress.class.getClassLoader());
     }
 
     @Override
     public void writeToProvider(ContentValues out) {
         // TODO
+        PeerContract.putID(out, id);
+        PeerContract.putName(out, name);
+        PeerContract.putTimestamp(out, timestamp.getTime());
+        PeerContract.putAddress(out, address.getAddress());
     }
 
     @Override
@@ -49,6 +67,11 @@ public class Peer implements Parcelable, Persistable {
     @Override
     public void writeToParcel(Parcel out, int flags) {
         // TODO
+        out.writeLong(id);
+        out.writeString(name);
+        out.writeLong(timestamp.getTime());
+//        out.writeInt(address.getAddress().length);
+        out.writeByteArray(address.getAddress());
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {
@@ -56,13 +79,13 @@ public class Peer implements Parcelable, Persistable {
         @Override
         public Peer createFromParcel(Parcel source) {
             // TODO
-            return null;
+            return new Peer(source);
         }
 
         @Override
         public Peer[] newArray(int size) {
             // TODO
-            return null;
+            return new Peer[size];
         }
 
     };
