@@ -51,14 +51,44 @@ public class MessageContract extends BaseContract {
 
     // TODO remaining getter and putter operations for other columns
 
-    private int messaggeIDColumn = -1;
+    private int messageIDColumn = -1;
 
     public long getID(Cursor cursor) {
-        if (messaggeIDColumn < 0) {
-            messaggeIDColumn = cursor.getColumnIndexOrThrow(_ID);
+        if (messageIDColumn < 0) {
+            messageIDColumn = cursor.getColumnIndexOrThrow(_ID);
         }
-        return cursor.getLong(messaggeIDColumn);
+        return cursor.getLong(messageIDColumn);
     }
 
-    public void
+    public void putID(ContentValues out, long messageID) {
+        out.put(_ID, messageID);
+    }
+
+
+    private int messageTimestampColumn = -1;
+
+    private long getTimestamp(Cursor cursor) {
+        if (messageTimestampColumn < 0) {
+            messageTimestampColumn = cursor.getColumnIndexOrThrow(TIMESTAMP);
+        }
+        return cursor.getLong(messageTimestampColumn);
+    }
+
+    private void putTimestamp(ContentValues out, long messageTimestamp) {
+        out.put(TIMESTAMP, messageTimestamp);
+    }
+
+
+    private int messageSenderColumn = -1;
+
+    private String getSender(Cursor cursor) {
+        if (messageSenderColumn < 0) {
+            messageSenderColumn = cursor.getColumnIndexOrThrow(SENDER);
+        }
+        return cursor.getString(messageSenderColumn);
+    }
+
+    public void putSender(ContentValues out, String messageSender) {
+        out.put(SENDER, messageSender);
+    }
 }
