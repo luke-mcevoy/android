@@ -100,20 +100,16 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
         setContentView(R.layout.messages);
 
         // TODO use SimpleCursorAdapter (with flags=0) to display the messages received.
-
         String[] from = new String[]{MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
         int[] to = new int[]{android.R.id.text1, android.R.id.text2};
-//        messagesAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor goes here, from, to, 0);
-
+        messagesAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor goes here, from, to, 0);
 
         // TODO bind the button for "next" to this activity as listener
         next = (Button)findViewById(R.id.next);
         next.setOnClickListener(this);
 
-
         // TODO use loader manager to initiate a query of the database
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(LOADER_ID, null, this);
+        getLoaderManager().initLoader(LOADER_ID, null, this);
 	}
 
 
@@ -147,17 +143,21 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
              */
             // For this assignment, OK to do CP insertion on the main thread.
 
+            ContentValues messageData = new ContentValues();
+            Message msg = new Message();
+            // TODO Fill msg data
+            msg.writeToProvider(messageData);
+            getContentResolver().insert(MessageContract.CONTENT_URI, messageData);
+
             /*
              * End TODO
              */
-
 
         } catch (Exception e) {
 			
 			Log.e(TAG, "Problems receiving packet: " + e.getMessage(), e);
 			socketOK = false;
-		} 
-
+		}
 	}
 
 	/*
@@ -198,12 +198,14 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
     public void onLoadFinished(Loader loader, Cursor data) {
         // TODO populate the UI with the result of querying the provider
         this.messagesAdapter.swapCursor(data);
+        messagesAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoaderReset(Loader loader) {
         // TODO reset the UI when the cursor is empty
         this.messagesAdapter.swapCursor(null);
+        messagesAdapter.notifyDataSetChanged();
     }
 
     public void onDestroy() {
