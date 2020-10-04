@@ -78,9 +78,18 @@ public class ChatProvider extends ContentProvider {
                         MessageContract.MESSAGE_TEXT + " text not null," +
                         MessageContract.TIMESTAMP + " long not null," +
                         MessageContract.SENDER + " text not null," +
-                        MessageContract.SENDER_ID + " integer not null," +
-                        "FOREIGN KEY (" + MessageContract.SENDER_ID + ") REFERENCES " +
-                        PEERS_TABLE + "(" + PeerContract.ID + ") ON DELETE CASCADE );";
+                        MessageContract.SENDER_ID + " integer);";
+
+
+//        private static final String MESSAGE_CREATE =
+//                "CREATE TABLE " + MESSAGES_TABLE + " (" +
+//                        PeerContract.ID + " integer primary key," +
+//                        MessageContract.MESSAGE_TEXT + " text not null," +
+//                        MessageContract.TIMESTAMP + " long not null," +
+//                        MessageContract.SENDER + " text not null," +
+//                        MessageContract.SENDER_ID + " integer not null," +
+//                        "FOREIGN KEY (" + MessageContract.SENDER_ID + ") REFERENCES " +
+//                        PEERS_TABLE + "(" + PeerContract.ID + ") ON DELETE CASCADE );";
 
         private static final String CREATE_MESSAGES_PEER_INDEX =
                 "CREATE INDEX " + MESSAGES_PEER_INDEX + " ON " + MESSAGES_TABLE + "(" + MessageContract.SENDER_ID + ");";
@@ -106,7 +115,7 @@ public class ChatProvider extends ContentProvider {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // TODO upgrade database if necessary
             if (oldVersion < newVersion) {
-                db.execSQL("PRAGMA foreign_key = ON");
+//                db.execSQL("PRAGMA foreign_key = ON");
                 db.execSQL("DROP TABLE IF EXISTS " + MESSAGES_TABLE);
                 db.execSQL("DROP TABLE IF EXISTS " + PEERS_TABLE);
                 onCreate(db);
@@ -192,7 +201,7 @@ public class ChatProvider extends ContentProvider {
             case MESSAGES_ALL_ROWS:
                 // TODO: Implement this to handle query of all messages.
                 cursor = db.query(MESSAGES_TABLE,
-                        MESSAGE_PROJECTION,
+                        projection,
                         selection,
                         selectionArgs,
                         null,
@@ -204,7 +213,7 @@ public class ChatProvider extends ContentProvider {
             case PEERS_ALL_ROWS:
                 // TODO: Implement this to handle query of all peers.
                 cursor = db.query(PEERS_TABLE,
-                        PEER_PROJECTION,
+                        projection,
                         selection,
                         selectionArgs,
                         null,
@@ -218,7 +227,7 @@ public class ChatProvider extends ContentProvider {
                 selection = MessageContract._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(MessageContract.getId(uri))};
                 cursor = db.query(PEERS_TABLE,
-                        MESSAGE_PROJECTION,
+                        projection,
                         selection,
                         selectionArgs,
                         null,
@@ -232,7 +241,7 @@ public class ChatProvider extends ContentProvider {
                 selection = PeerContract.ID + "=?";
                 selectionArgs = new String[]{String.valueOf(PeerContract.getId(uri))};
                 cursor = db.query(PEERS_TABLE,
-                        PEER_PROJECTION,
+                        projection,
                         selection,
                         selectionArgs,
                         null,

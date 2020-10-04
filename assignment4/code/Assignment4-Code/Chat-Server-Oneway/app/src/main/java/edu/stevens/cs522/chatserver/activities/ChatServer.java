@@ -102,13 +102,9 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
         setContentView(R.layout.messages);
 
         // TODO use SimpleCursorAdapter (with flags=0) to display the messages received.
-
-
-//        String[] from = new String[]{MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
-//        int[] to = new int[]{android.R.id.text1, android.R.id.text2};
-        String[] from = {MessageContract.MESSAGE_TEXT};
-        int[] to = {android.R.id.text1};
-        messagesAdapter = new SimpleCursorAdapter(this, R.layout.message, null, from, to, 0);
+        String[] from = {MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
+        int[] to = {android.R.id.text1, android.R.id.text2};
+        messagesAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, null, from, to, 0);
 
         messageList = (ListView)findViewById(R.id.message_list);
         messageList.setAdapter(messagesAdapter);
@@ -141,23 +137,49 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
 
             final Message message = new Message();
             message.sender = msgContents[0];
-            message.timestamp = new Date(Long.parseLong(msgContents[1]));
-            message.messageText = msgContents[2];
+            message.timestamp = new Date();
+            message.messageText = msgContents[1];
 
 			Log.i(TAG, "Received from " + message.sender + ": " + message.messageText);
-
 
             /*
              * TODO upsert the peer and message into the content provider.
              */
             // For this assignment, OK to do CP insertion on the main thread.
+            Peer sender = new Peer();
+            sender.name = message.sender;
+            sender.timestamp = message.timestamp;
+            sender.address = sourceIPAddress;
+            Log.i("DEBUG", "*** sender.address: " + sender.address);
 
+            Cursor cursor = getContentResolver().query(PeerContract.CONTENT_URI,
+                    null,
+                    PeerContract.NAME + "=?",
+                    new String[]{sender.name},
+                    null,
+                    null);
+
+            ContentValues contentValues = new ContentValues();
+            if (cursor != null) {
+                if (cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    sender.id = new Peer(cursor).id;
+                    Log.i("DEBUG", "*** sender.address.getAddress(): " + sender.address);
+                    sender.writeToProvider(contentValues);
+                    message.senderId = sender.id;
+                    getContentResolver().update(PeerContract.CONTENT_URI(sender.id),
+                            contentValues,
+                            null,
+                            null);
+                } else {
+                    sender.writeToProvider(contentValues);
+                    Uri peerUri = getContentResolver().insert(PeerContract.CONTENT_URI, contentValues);
+                    message.senderId = PeerContract.getId(peerUri);
+                }
+            }
             ContentValues messageData = new ContentValues();
-            Message msg = new Message();
-            // TODO Fill msg data
-            msg.writeToProvider(messageData);
+            message.writeToProvider(messageData);
             getContentResolver().insert(MessageContract.CONTENT_URI, messageData);
-
             /*
              * End TODO
              */
@@ -189,36 +211,24 @@ public class ChatServer extends Activity implements OnClickListener, LoaderManag
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
         // TODO use a CursorLoader to initiate a query on the database
-        switch (id) {
-            case LOADER_ID:
-                String[] projection = new String[]{
-                        MessageContract._ID,
-                        MessageContract.MESSAGE_TEXT,
-                        MessageContract.TIMESTAMP,
-                        MessageContract.SENDER};
-                return new CursorLoader(this,
-                        MessageContract.CONTENT_URI,
-                        projection,
-                        null,
-                        null,
-                        null);
-            default:
-                return null;
-        }
+        return new CursorLoader(this,
+                MessageContract.CONTENT_URI,
+                null,
+                null,
+                null,
+                null);
     }
 
     @Override
     public void onLoadFinished(Loader loader, Cursor data) {
         // TODO populate the UI with the result of querying the provider
         this.messagesAdapter.swapCursor(data);
-        messagesAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoaderReset(Loader loader) {
         // TODO reset the UI when the cursor is empty
         this.messagesAdapter.swapCursor(null);
-        messagesAdapter.notifyDataSetChanged();
     }
 
     public void onDestroy() {

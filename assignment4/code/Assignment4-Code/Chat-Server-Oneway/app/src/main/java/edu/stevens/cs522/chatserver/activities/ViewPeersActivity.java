@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -39,9 +40,10 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
 
         String[] from = {PeerContract.NAME};
         int[] to = {android.R.id.text1};
-        peerAdapter = new SimpleCursorAdapter(this, R.layout.message, null, from, to, 0);
+        peerAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, null, from, to, 0);
 
         ListView peerList = (ListView)findViewById(R.id.peer_list);
+        peerList.setOnItemClickListener(this);
         peerList.setAdapter(peerAdapter);
     }
 
@@ -55,42 +57,37 @@ public class ViewPeersActivity extends Activity implements AdapterView.OnItemCli
         if (cursor.moveToPosition(position)) {
             Intent intent = new Intent(this, ViewPeerActivity.class);
             Peer peer = new Peer(cursor);
+            Log.i("DEBUG", "*** BEFORE in ViewPeersActivity peer address is: " + peer.address);
             intent.putExtra(ViewPeerActivity.PEER_KEY, peer);
+            Log.i("DEBUG", "Opening View Peer Activity of this peer: " + peer.name);
+            Log.i("DEBUG", "*** In ViewPeersActivity peer address is: " + peer.address);
             startActivity(intent);
         } else {
-            throw new IllegalStateException("Unable to move to position in cursor: "+position);
+            throw new IllegalStateException("Unable to move to position in cursor: "+ position);
         }
     }
 
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
         // TODO use a CursorLoader to initiate a query on the database
-        switch (id) {
-            case LOADER_ID:
-                String[] projection = new String[]{};
-                return new CursorLoader(this,
-                        PeerContract.CONTENT_URI,
-                        projection,
-                        null,
-                        null,
-                        null);
-            default:
-                return null;
-        }
+        return new CursorLoader(this,
+                PeerContract.CONTENT_URI,
+                null,
+                null,
+                null,
+                null);
     }
 
     @Override
     public void onLoadFinished(Loader loader, Cursor data) {
         // TODO populate the UI with the result of querying the provider
         this.peerAdapter.swapCursor(data);
-        peerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoaderReset(Loader loader) {
         // TODO reset the UI when the cursor is empty
         this.peerAdapter.swapCursor(null);
-        peerAdapter.notifyDataSetChanged();
     }
 
 }

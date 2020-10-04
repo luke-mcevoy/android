@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.net.InetAddress;
 import java.util.Date;
@@ -48,15 +49,16 @@ public class Peer implements Parcelable, Persistable {
         name = in.readString();
         timestamp = new Date(in.readLong());
         address = (InetAddress)in.readValue(InetAddress.class.getClassLoader());
+        Log.i("DEBUG", "*** Peer parcel in adddrees " + address);
     }
 
     @Override
     public void writeToProvider(ContentValues out) {
         // TODO
-        PeerContract.putID(out, id);
         PeerContract.putName(out, name);
         PeerContract.putTimestamp(out, timestamp.getTime());
         PeerContract.putAddress(out, address.getAddress());
+        Log.i("DEBUG", "*** address in Peer writeToProvider: " + address);
     }
 
     @Override
@@ -70,8 +72,8 @@ public class Peer implements Parcelable, Persistable {
         out.writeLong(id);
         out.writeString(name);
         out.writeLong(timestamp.getTime());
-//        out.writeInt(address.getAddress().length);
         out.writeByteArray(address.getAddress());
+        Log.i("DEBUG", "*** writeToParcel address: " + address);
     }
 
     public static final Creator<Peer> CREATOR = new Creator<Peer>() {

@@ -26,6 +26,7 @@ public class Message implements Parcelable, Persistable {
     public long senderId;
 
     public Message() {
+//        timestamp = new Date();
     }
 
     public Message(Cursor cursor) {
@@ -48,7 +49,7 @@ public class Message implements Parcelable, Persistable {
     @Override
     public void writeToProvider(ContentValues out) {
         // TODO
-        MessageContract.putID(out, id);
+//        MessageContract.putID(out, id);
         MessageContract.putMessageText(out, messageText);
         MessageContract.putTimestamp(out, timestamp.getTime());
         MessageContract.putSender(out, sender);
