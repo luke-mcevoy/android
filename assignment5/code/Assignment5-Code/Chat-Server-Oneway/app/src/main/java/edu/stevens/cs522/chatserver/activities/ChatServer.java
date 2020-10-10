@@ -11,6 +11,7 @@
 package edu.stevens.cs522.chatserver.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -94,9 +95,15 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
         setContentView(R.layout.messages);
 
         // TODO use SimpleCursorAdapter to display the messages received.
+        String[] from = {MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
+        int[] to = {android.R.id.text1, android.R.id.text2};
+        messagesAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, null, from, to, 0);
+        messageList = (ListView)findViewById(R.id.message_list);
+        messageList.setAdapter(messagesAdapter);
 
         // TODO bind the button for "next" to this activity as listener
-
+        next = (Button)findViewById(R.id.next);
+        next.setOnClickListener(this);
 
         // TODO create the message and peer managers, and initiate a query for all messages
 
@@ -183,8 +190,8 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         // TODO inflate a menu with PEERS and SETTINGS options
-
-
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chatserver_menu, menu);
         return true;
     }
 
@@ -195,6 +202,8 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
 
             // TODO PEERS provide the UI for viewing list of peers
             case R.id.peers:
+                Intent intent = new Intent(this, ViewPeerActivity.class);
+                startActivity(intent);
                 break;
 
             default:
