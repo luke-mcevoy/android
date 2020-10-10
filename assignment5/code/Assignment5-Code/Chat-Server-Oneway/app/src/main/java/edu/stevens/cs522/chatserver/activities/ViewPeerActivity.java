@@ -3,6 +3,7 @@ package edu.stevens.cs522.chatserver.activities;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import edu.stevens.cs522.chatserver.R;
 import edu.stevens.cs522.chatserver.async.IQueryListener;
@@ -34,7 +35,13 @@ public class ViewPeerActivity extends Activity implements IQueryListener<Message
         }
 
         // TODO init the UI and initiate query of message database
+        TextView username = (TextView)findViewById(R.id.view_user_name);
+        TextView lastSeen = (TextView)findViewById(R.id.view_timestamp);
+        TextView address = (TextView)findViewById(R.id.view_address);
 
+        username.setText(peer.name);
+        lastSeen.setText(peer.timestamp.toString());
+        address.setText(peer.address.toString());
     }
 
     @Override
