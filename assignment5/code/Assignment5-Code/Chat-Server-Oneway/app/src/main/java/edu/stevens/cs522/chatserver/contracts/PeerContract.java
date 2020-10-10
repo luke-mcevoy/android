@@ -1,5 +1,7 @@
 package edu.stevens.cs522.chatserver.contracts;
 
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -29,5 +31,70 @@ public class PeerContract extends BaseContract {
 
 
     // TODO define column names, getters for cursors, setters for contentvalues
+
+    public static final String ID = _ID;
+
+    public static final String NAME = "name";
+
+    public static final String TIMESTAMP = "timestamp";
+
+    public static final String ADDRESS = "address";
+
+
+    private static int peerIDColumn = -1;
+
+    public static long getID(Cursor cursor) {
+        if (peerIDColumn < 0) {
+            peerIDColumn = cursor.getColumnIndexOrThrow(ID);
+        }
+        return cursor.getLong(peerIDColumn);
+    }
+
+    public static void putID(ContentValues out, long peerID) {
+        out.put(ID, peerID);
+    }
+
+
+    public static int peerNameColumn = -1;
+
+    public static String getName(Cursor cursor) {
+        if (peerNameColumn < 0) {
+            peerNameColumn = cursor.getColumnIndexOrThrow(NAME);
+        }
+        return cursor.getString(peerNameColumn);
+    }
+
+    public static void putName(ContentValues out, String peerName) {
+        out.put(NAME, peerName);
+    }
+
+
+    public static int peerTimestampColumn = -1;
+
+    public static long getTimestamp(Cursor cursor) {
+        if (peerTimestampColumn < 0) {
+            peerTimestampColumn = cursor.getColumnIndexOrThrow(TIMESTAMP);
+        }
+        return cursor.getLong(peerTimestampColumn);
+    }
+
+    public static void putTimestamp(ContentValues out, long peerTimestamp) {
+        out.put(TIMESTAMP, peerTimestamp);
+    }
+
+
+    public static int peerAddressColumn = -1;
+
+    public static byte[] getAddress(Cursor cursor) {
+        if (peerAddressColumn < 0) {
+            peerAddressColumn = cursor.getColumnIndexOrThrow(ADDRESS);
+        }
+        return cursor.getBlob(peerAddressColumn);
+    }
+
+    public static void putAddress(ContentValues out, byte[] peerAddress) {
+        out.put(ADDRESS, peerAddress);
+    }
+
 
 }
