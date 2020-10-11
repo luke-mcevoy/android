@@ -38,15 +38,20 @@ public class ViewPeerActivity extends Activity implements IQueryListener<Message
         }
 
         // TODO init the UI and initiate query of message database
-        messageManager = new MessageManager(this);
-        messageManager.getMessagesByPeerAsync(peer, this);
+//        String[] from = {MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
+//        int[] to = {android.R.id.text1, android.R.id.text2};
+//        messageAdapter = new SimpleCursorAdapter(this, android.R.layout.s)
+//        messageManager = new MessageManager(this);
+//        messageManager.getMessagesByPeerAsync(peer, this);
 
-//        TextView username = (TextView)findViewById(R.id.view_user_name);
-//        TextView lastSeen = (TextView)findViewById(R.id.view_timestamp);
-//        TextView address = (TextView)findViewById(R.id.view_address);
-//
-//        username.setText(peer.name);
-//        lastSeen.setText(peer.timestamp.toString());
+        TextView username = (TextView)findViewById(R.id.view_user_name);
+        TextView lastSeen = (TextView)findViewById(R.id.view_timestamp);
+        TextView address = (TextView)findViewById(R.id.view_address);
+
+        username.setText(peer.name);
+        lastSeen.setText(peer.timestamp.toString());
+        String add = "/127.0.0.1";
+        address.setText(add);
 //        address.setText(peer.address.toString());
     }
 
