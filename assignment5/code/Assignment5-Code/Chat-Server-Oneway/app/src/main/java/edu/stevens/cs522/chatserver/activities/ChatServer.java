@@ -141,6 +141,13 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
 
             // TODO upsert the peer and message into the content provider.
             // For this assignment, must use managers to do this asynchronously
+            peerManager.persistAsync(sender, new IContinue<Long>() {
+                @Override
+                public void kontinue(Long id) {
+                    message.senderId = id;
+                    messageManager.persistAsync(message);
+                }
+            });
 
 
         } catch (Exception e) {

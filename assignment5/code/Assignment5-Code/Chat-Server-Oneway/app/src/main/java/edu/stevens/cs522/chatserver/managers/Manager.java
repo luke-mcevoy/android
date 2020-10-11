@@ -88,6 +88,7 @@ public abstract class Manager<T> {
     protected void reexecuteQuery(Uri uri,
                                   IQueryListener<T> listener) {
         // TODO
+        QueryBuilder.executeQuery(tag, (Activity) context, uri, loaderID, creator, listener);
     }
 
     protected void reexecuteQuery(Uri uri,
