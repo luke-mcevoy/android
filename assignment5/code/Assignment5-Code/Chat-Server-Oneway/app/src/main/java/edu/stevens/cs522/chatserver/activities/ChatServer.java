@@ -129,8 +129,9 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
 
             final Message message = new Message();
             message.sender = msgContents[0];
-            message.timestamp = new Date(Long.parseLong(msgContents[1]));
-            message.messageText = msgContents[2];
+//            message.timestamp = new Date(Long.parseLong(msgContents[1]));
+            message.timestamp = new Date();
+            message.messageText = msgContents[1];
 
             Log.i(TAG, "Received from " + message.sender + ": " + message.messageText);
 
@@ -144,8 +145,8 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
             peerManager.persistAsync(sender, new IContinue<Long>() {
                 @Override
                 public void kontinue(Long id) {
-                    message.senderId = id;
-                    messageManager.persistAsync(message);
+//                    message.senderId = id;
+//                    messageManager.persistAsync(message);
                 }
             });
 

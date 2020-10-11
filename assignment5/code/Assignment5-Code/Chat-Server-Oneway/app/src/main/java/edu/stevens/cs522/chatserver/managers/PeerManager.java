@@ -37,7 +37,6 @@ public class PeerManager extends Manager<Peer> {
         // TODO get a list of all peers in the database
         // use QueryBuilder to complete this
         executeQuery(PeerContract.CONTENT_URI, listener);
-
     }
 
     public void persistAsync(Peer peer, final IContinue<Long> callback) {
