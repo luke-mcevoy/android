@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import edu.stevens.cs522.chatserver.R;
 import edu.stevens.cs522.chatserver.async.IQueryListener;
+import edu.stevens.cs522.chatserver.contracts.MessageContract;
+import edu.stevens.cs522.chatserver.contracts.PeerContract;
 import edu.stevens.cs522.chatserver.entities.Message;
 import edu.stevens.cs522.chatserver.entities.Peer;
 import edu.stevens.cs522.chatserver.managers.MessageManager;
@@ -47,12 +49,12 @@ public class ViewPeerActivity extends Activity implements IQueryListener<Message
     @Override
     public void handleResults(TypedCursor<Message> results) {
         // TODO
+        this.messageAdapter.swapCursor(results.getCursor());
     }
 
     @Override
     public void closeResults() {
         // TODO
+        this.messageAdapter.swapCursor(null);
     }
-
-
 }

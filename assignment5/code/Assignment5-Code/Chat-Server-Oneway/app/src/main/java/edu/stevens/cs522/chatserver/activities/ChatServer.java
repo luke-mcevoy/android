@@ -145,8 +145,8 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
             peerManager.persistAsync(sender, new IContinue<Long>() {
                 @Override
                 public void kontinue(Long id) {
-//                    message.senderId = id;
-//                    messageManager.persistAsync(message);
+                    message.senderId = id;
+                    messageManager.persistAsync(message);
                 }
             });
 
@@ -213,7 +213,7 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
 
             // TODO PEERS provide the UI for viewing list of peers
             case R.id.peers:
-                Intent intent = new Intent(this, ViewPeerActivity.class);
+                Intent intent = new Intent(this, ViewPeersActivity.class);
                 startActivity(intent);
                 break;
 
