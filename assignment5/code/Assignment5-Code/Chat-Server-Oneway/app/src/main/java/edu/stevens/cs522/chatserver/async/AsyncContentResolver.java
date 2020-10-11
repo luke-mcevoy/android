@@ -40,26 +40,55 @@ public class AsyncContentResolver extends AsyncQueryHandler {
     protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
         super.onQueryComplete(token, cookie, cursor);
         // TODO
+        if (cookie != null) {
+            @SuppressWarnings("unchecked")
+            IContinue<Cursor> callback = (IContinue<Cursor>) cookie;
+            callback.kontinue(cursor);
+        }
     }
 
     public void deleteAsync(Uri uri, String select, String[] selectArgs) {
         // TODO
+        IContinue<Integer> callback = new IContinue<Integer>() {
+            @Override
+            public void kontinue(Integer value) {
+                // Something should go here ... TODO
+            }
+        };
+        this.startDelete(0, callback, uri, select, selectArgs);
     }
 
     @Override
     protected void onDeleteComplete(int token, Object cookie, int result) {
         super.onDeleteComplete(token, cookie, result);
         // TODO
+        if (cookie != null) {
+            @SuppressWarnings("unchecked")
+            IContinue<Integer> callback = (IContinue<Integer>) cookie;
+            callback.kontinue(result);
+        }
     }
 
-    public void updateAsync(Uri uri, String select, String[] selectArgs) {
+    public void updateAsync(Uri uri, ContentValues values, String select, String[] selectArgs) {
         // TODO
+        IContinue<Integer> callback = new IContinue<Integer>() {
+            @Override
+            public void kontinue(Integer value) {
+                // Something should go here ... TODO
+            }
+        };
+        this.startUpdate(0, callback, uri, values, select, selectArgs);
     }
 
     @Override
     protected void onUpdateComplete(int token, Object cookie, int result) {
         super.onUpdateComplete(token, cookie, result);
         // TODO
+        if (cookie != null) {
+            @SuppressWarnings("unchecked")
+            IContinue<Integer> callback = (IContinue<Integer>) cookie;
+            callback.kontinue(result);
+        }
     }
 
 }

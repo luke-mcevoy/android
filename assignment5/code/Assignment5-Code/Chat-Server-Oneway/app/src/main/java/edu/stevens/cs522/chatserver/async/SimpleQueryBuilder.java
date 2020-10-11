@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,12 +19,18 @@ public class SimpleQueryBuilder<T> implements IContinue<Cursor>{
 
     private IEntityCreator<T> creator;
 
-    private IQueryListener<T> listener;
+    // Originally was a QueryListener
+//    private IQueryListener<T> listener;
+
+    private ISimpleQueryListener<T> listener;
 
     private SimpleQueryBuilder(String tag,
                                IEntityCreator<T> creator,
                                ISimpleQueryListener<T> listener) {
         // TODO
+        this.tag = tag;
+        this.creator = creator;
+        this.listener = listener;
     }
 
     public static <T> void executeQuery(String tag,
@@ -51,8 +58,16 @@ public class SimpleQueryBuilder<T> implements IContinue<Cursor>{
     }
 
     @Override
-    public void kontinue(Cursor value) {
+    public void kontinue(Cursor cursor) {
         // TODO complete this
+        List<T> instances = new ArrayList<T>();
+        if (cursor.moveToFirst()) {
+            do {
+                T instance = creator.create(cursor);
+                instances.add(instance);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        listener.handleResults(instances);
     }
-
 }

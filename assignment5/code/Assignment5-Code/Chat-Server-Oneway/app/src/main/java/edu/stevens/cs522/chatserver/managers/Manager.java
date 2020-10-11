@@ -57,6 +57,7 @@ public abstract class Manager<T> {
     protected void executeSimpleQuery(Uri uri,
                                       ISimpleQueryListener<T> listener) {
         // TODO
+        SimpleQueryBuilder.executeQuery(tag, (Activity) context, uri, creator, listener);
     }
 
     protected void executeSimpleQuery(Uri uri,
@@ -65,11 +66,13 @@ public abstract class Manager<T> {
                                       String[] selectionArgs,
                                       ISimpleQueryListener<T> listener) {
         // TODO
+        SimpleQueryBuilder.executeQuery(tag, (Activity) context,  uri, projection, selection, selectionArgs, creator, listener);
     }
 
     protected void executeQuery(Uri uri,
                                 IQueryListener<T> listener) {
         // TODO
+        QueryBuilder.executeQuery(tag, (Activity) context, uri, loaderID, creator, listener);
     }
 
     protected void executeQuery(Uri uri,
@@ -79,6 +82,7 @@ public abstract class Manager<T> {
                                 String order,
                                 IQueryListener<T> listener) {
         // TODO
+        QueryBuilder.executeQuery(tag, (Activity) context, uri, projection, selection, selectionArgs, order, loaderID, creator, listener);
     }
 
     protected void reexecuteQuery(Uri uri,
@@ -93,6 +97,7 @@ public abstract class Manager<T> {
                                   String order,
                                   IQueryListener<T> listener) {
         // TODO
+        QueryBuilder.executeQuery(tag, (Activity) context, uri, projection, selection, selectionArgs, order, loaderID, creator, listener);
     }
 
 }

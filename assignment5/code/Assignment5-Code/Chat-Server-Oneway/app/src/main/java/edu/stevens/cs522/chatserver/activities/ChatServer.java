@@ -106,8 +106,9 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
         next.setOnClickListener(this);
 
         // TODO create the message and peer managers, and initiate a query for all messages
-
-
+        messageManager = new MessageManager(this);
+        peerManager = new PeerManager(this);
+        messageManager.getAllMessagesAsync(this);
 	}
 
     public void onClick(View v) {
@@ -174,11 +175,13 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
     @Override
     public void handleResults(TypedCursor<Message> results) {
         // TODO swap the cursor into the adapter
+        messagesAdapter.swapCursor(results.getCursor());
     }
 
     @Override
     public void closeResults() {
         // TODO set the current cursor to be null
+        messagesAdapter.swapCursor(null);
     }
 
     public void onDestroy() {
