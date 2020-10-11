@@ -12,6 +12,7 @@ import edu.stevens.cs522.chatserver.contracts.PeerContract;
 import edu.stevens.cs522.chatserver.entities.Message;
 import edu.stevens.cs522.chatserver.entities.Peer;
 import edu.stevens.cs522.chatserver.managers.MessageManager;
+import edu.stevens.cs522.chatserver.managers.PeerManager;
 import edu.stevens.cs522.chatserver.managers.TypedCursor;
 
 /**
@@ -37,13 +38,16 @@ public class ViewPeerActivity extends Activity implements IQueryListener<Message
         }
 
         // TODO init the UI and initiate query of message database
-        TextView username = (TextView)findViewById(R.id.view_user_name);
-        TextView lastSeen = (TextView)findViewById(R.id.view_timestamp);
-        TextView address = (TextView)findViewById(R.id.view_address);
+        messageManager = new MessageManager(this);
+        messageManager.getMessagesByPeerAsync(peer, this);
 
-        username.setText(peer.name);
-        lastSeen.setText(peer.timestamp.toString());
-        address.setText(peer.address.toString());
+//        TextView username = (TextView)findViewById(R.id.view_user_name);
+//        TextView lastSeen = (TextView)findViewById(R.id.view_timestamp);
+//        TextView address = (TextView)findViewById(R.id.view_address);
+//
+//        username.setText(peer.name);
+//        lastSeen.setText(peer.timestamp.toString());
+//        address.setText(peer.address.toString());
     }
 
     @Override

@@ -149,10 +149,7 @@ public class ChatServer extends Activity implements OnClickListener, IQueryListe
                     messageManager.persistAsync(message);
                 }
             });
-
-
         } catch (Exception e) {
-
             Log.e(TAG, "Problems receiving packet: " + e.getMessage());
             socketOK = false;
         }

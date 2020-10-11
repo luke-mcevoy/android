@@ -45,11 +45,11 @@ public class MessageManager extends Manager<Message> {
     public void getMessagesByPeerAsync(Peer peer, IQueryListener<Message> listener) {
         // TODO use QueryBuilder to complete this
         // Remember to reset the loader!
-        listener.closeResults();
-//        String[] projection = new String[]{};
-        String selection = PeerContract.ID + "=?";
-        String[] selectionArgs = new String[]{String.valueOf(peer.id)};
-        executeQuery(PeerContract.CONTENT_URI, null, selection, selectionArgs, null, listener);
+//        listener.closeResults();
+        String[] projection = new String[]{MessageContract._ID, MessageContract.MESSAGE_TEXT};
+        String selection = MessageContract.SENDER + "=?";
+        String[] selectionArgs = new String[]{String.valueOf(peer.name)};
+        executeQuery(PeerContract.CONTENT_URI, projection, selection, selectionArgs, null, listener);
     }
 
     public void persistAsync(final Message message) {

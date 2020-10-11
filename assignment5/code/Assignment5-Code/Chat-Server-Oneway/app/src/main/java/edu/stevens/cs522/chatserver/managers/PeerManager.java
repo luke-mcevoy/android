@@ -36,20 +36,28 @@ public class PeerManager extends Manager<Peer> {
     public void getAllPeersAsync(IQueryListener<Peer> listener) {
         // TODO get a list of all peers in the database
         // use QueryBuilder to complete this
-        executeQuery(PeerContract.CONTENT_URI, listener);
+        String[] projection = new String[]{PeerContract._ID, PeerContract.NAME, PeerContract.TIMESTAMP, PeerContract.ADDRESS};
+        executeQuery(PeerContract.CONTENT_URI, projection, null, null, PeerContract.NAME + " ASC", listener);
     }
 
-    public void persistAsync(Peer peer, final IContinue<Long> callback) {
+    public void persistAsync(final Peer peer, final IContinue<Long> callback) {
         // TODO upsert the peer into the database
         // use AsyncContentResolver to complete this
-        AsyncContentResolver cr = getAsyncResolver();
-        ContentValues out = new ContentValues();
+        final AsyncContentResolver cr = getAsyncResolver();
+        final ContentValues out = new ContentValues();
         peer.writeToProvider(out);
         cr.insertAsync(PeerContract.CONTENT_URI, out,
                 new IContinue<Uri>() {
                     @Override
                     public void kontinue(Uri uri) {
-                        callback.kontinue(PeerContract.getId(uri));
+                        if (uri == null) {
+                            String select = PeerContract.NAME + " = ?";
+                            String[] selectArgs = new String[]{peer.name};
+                            cr.updateAsync(PeerContract.CONTENT_URI, out, select, selectArgs);
+                            callback.kontinue((long) -1);
+                        } else {
+                            callback.kontinue(PeerContract.getId(uri));
+                        }
                     }
                 });
     }

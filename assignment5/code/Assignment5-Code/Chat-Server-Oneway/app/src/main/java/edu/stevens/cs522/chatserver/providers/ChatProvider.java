@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -54,7 +55,7 @@ public class ChatProvider extends ContentProvider {
         private static final String PEER_CREATE =
                 "CREATE TABLE " + PEERS_TABLE + " (" +
                         PeerContract.ID + " integer primary key," +
-                        PeerContract.NAME + " text not null," +
+                        PeerContract.NAME + " text not null unique," +
                         PeerContract.TIMESTAMP + " long not null," +
                         PeerContract.ADDRESS + " text not null);";
 
@@ -152,7 +153,12 @@ public class ChatProvider extends ContentProvider {
             case PEERS_ALL_ROWS:
                 // TODO: Implement this to handle requests to insert a new peer.
                 // Make sure to notify any observers
-                long peersRow = db.insert(PEERS_TABLE, null, values);
+                long peersRow = 0;
+                try {
+                    peersRow = db.insertOrThrow(PEERS_TABLE, null, values);
+                } catch (SQLiteConstraintException e) {
+                    return null;
+                }
                 if (peersRow > 0) {
                     Uri instanceUri = PeerContract.CONTENT_URI(peersRow);
                     ContentResolver contentResolver = getContext().getContentResolver();
@@ -211,7 +217,7 @@ public class ChatProvider extends ContentProvider {
                 return cursor;
             case PEERS_SINGLE_ROW:
                 // TODO: Implement this to handle query of a specific peer.
-                selection = PeerContract.ID + "=?";
+                selection = PeerContract.ID + " =?";
                 selectionArgs = new String[]{String.valueOf(PeerContract.getId(uri))};
                 cursor = db.query(PEERS_TABLE,
                         projection,
@@ -239,11 +245,11 @@ public class ChatProvider extends ContentProvider {
             case PEERS_ALL_ROWS:
                 return db.update(PEERS_TABLE, values, selection, selectionArgs);
             case MESSAGES_SINGLE_ROW:
-                selection = MessageContract._ID + "=?";
+                selection = MessageContract._ID + " =?";
                 selectionArgs = new String[]{String.valueOf(MessageContract.getId(uri))};
                 return db.update(MESSAGES_TABLE, values, selection, selectionArgs);
             case PEERS_SINGLE_ROW:
-                selection = PeerContract._ID + "=?";
+                selection = PeerContract._ID + " =?";
                 selectionArgs = new String[]{String.valueOf(PeerContract.getId(uri))};
                 return db.update(PEERS_TABLE, values, selection, selectionArgs);
             default:
@@ -261,11 +267,11 @@ public class ChatProvider extends ContentProvider {
             case PEERS_ALL_ROWS:
                 return db.delete(PEERS_TABLE, selection, selectionArgs);
             case MESSAGES_SINGLE_ROW:
-                selection = MessageContract._ID + "=?";
+                selection = MessageContract._ID + " =?";
                 selectionArgs = new String[]{String.valueOf(MessageContract.getId(uri))};
                 return db.delete(MESSAGES_TABLE, selection, selectionArgs);
             case PEERS_SINGLE_ROW:
-                selection = PeerContract._ID + "=?";
+                selection = PeerContract._ID + " =?";
                 selectionArgs = new String[]{String.valueOf(PeerContract.getId(uri))};
                 return db.delete(PEERS_TABLE, selection, selectionArgs);
             default:
