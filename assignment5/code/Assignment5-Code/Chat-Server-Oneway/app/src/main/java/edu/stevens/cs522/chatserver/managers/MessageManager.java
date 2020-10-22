@@ -49,7 +49,7 @@ public class MessageManager extends Manager<Message> {
         String[] projection = new String[]{MessageContract._ID, MessageContract.MESSAGE_TEXT};
         String selection = MessageContract.SENDER + "=?";
         String[] selectionArgs = new String[]{String.valueOf(peer.name)};
-        executeQuery(PeerContract.CONTENT_URI, projection, selection, selectionArgs, null, listener);
+        executeQuery(MessageContract.CONTENT_URI, projection, selection, selectionArgs, null, listener);
     }
 
     public void persistAsync(final Message message) {

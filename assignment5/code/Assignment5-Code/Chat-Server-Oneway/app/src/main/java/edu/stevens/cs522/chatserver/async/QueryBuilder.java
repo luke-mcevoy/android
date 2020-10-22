@@ -8,6 +8,7 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import edu.stevens.cs522.chatserver.managers.TypedCursor;
 
@@ -136,6 +137,7 @@ public class QueryBuilder<T> implements LoaderManager.LoaderCallbacks<Cursor> {
         // TODO
         if (loader.getId() == loaderID) {
             listener.handleResults(new TypedCursor<T>(cursor, creator));
+            Log.i("TAG", "*** results");
         } else {
             throw new IllegalStateException("Unexpected loader callback");
         }

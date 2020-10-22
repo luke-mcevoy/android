@@ -41,8 +41,8 @@ public class ViewPeerActivity extends Activity implements IQueryListener<Message
 //        String[] from = {MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
 //        int[] to = {android.R.id.text1, android.R.id.text2};
 //        messageAdapter = new SimpleCursorAdapter(this, android.R.layout.s)
-//        messageManager = new MessageManager(this);
-//        messageManager.getMessagesByPeerAsync(peer, this);
+        messageManager = new MessageManager(this);
+        messageManager.getMessagesByPeerAsync(peer, this);
 
         TextView username = (TextView)findViewById(R.id.view_user_name);
         TextView lastSeen = (TextView)findViewById(R.id.view_timestamp);
