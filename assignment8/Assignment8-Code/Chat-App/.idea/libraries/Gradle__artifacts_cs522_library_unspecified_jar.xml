@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: artifacts:cs522-library:unspecified@jar">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/cs522-library/build/.transforms/db2079039c2d3ce89dfa0f3a263b92b7/cs522-library/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/cs522-library/build/.transforms/db2079039c2d3ce89dfa0f3a263b92b7/cs522-library/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/cs522-library/build/.transforms/db2079039c2d3ce89dfa0f3a263b92b7/cs522-library/res" />
+      <root url="file://$PROJECT_DIR$/cs522-library/build/.transforms/2a168b6709d11ea39c8fa23068bf430a/cs522-library/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/cs522-library/build/.transforms/2a168b6709d11ea39c8fa23068bf430a/cs522-library/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/cs522-library/build/.transforms/2a168b6709d11ea39c8fa23068bf430a/cs522-library/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
