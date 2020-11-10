@@ -8,6 +8,15 @@
   <component name="ChangeListManager">
     <list default="true" id="692466a8-051b-44a9-8cf6-0365c49c9041" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ChatActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ChatActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/RegisterActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ViewPeerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ViewPeerActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ViewPeersActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ViewPeersActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/async/AsyncContentResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/async/AsyncContentResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/async/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/async/QueryBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/async/SimpleQueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/async/SimpleQueryBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/contracts/MessageContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/contracts/MessageContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/contracts/PeerContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/contracts/PeerContract.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

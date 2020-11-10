@@ -69,9 +69,11 @@ public class RegisterActivity extends Activity implements OnClickListener, Resul
         setContentView(R.layout.register);
 
         // TODO instantiate helper for service
+        helper = new ChatHelper(this);
 
 
         // TODO initialize registerResultReceiver
+        registerResultReceiver = new ResultReceiverWrapper(new Handler());
 
 
         serverUriText = (EditText) findViewById(R.id.chat_server_text);
@@ -110,6 +112,7 @@ public class RegisterActivity extends Activity implements OnClickListener, Resul
             String userName = userNameText.getText().toString();
 
             // TODO use helper to register
+//            helper.register(serverUri, userName, registerResultReceiver);   // TODO need URI not String for 1st param
 
 
             // End todo
@@ -135,6 +138,7 @@ public class RegisterActivity extends Activity implements OnClickListener, Resul
                 break;
             default:
                 // TODO show a failure toast message
+                Toast.makeText(this, "Failure!", Toast.LENGTH_LONG).show();
                 break;
         }
     }

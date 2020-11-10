@@ -92,18 +92,32 @@ public class ChatActivity extends Activity implements OnClickListener, IQueryLis
         sendButton.setOnClickListener(this);
 
         // TODO use SimpleCursorAdapter to display the messages received.
+        String[] from = {MessageContract.SENDER, MessageContract.MESSAGE_TEXT};
+        int[] to = {android.R.id.text1, android.R.id.text2};
+        messagesAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, null, from, to, 0);
+        messageList = (ListView)findViewById(R.id.message_list);
+        messageList.setAdapter(messagesAdapter);
 
 
         // TODO create the message and peer managers, and initiate a query for all messages
+        messageManager = new MessageManager(this);
+        peerManager = new PeerManager(this);
+        messageManager.getAllMessagesAsync(this);
 
 
         // TODO instantiate helper for service
+        helper = new ChatHelper(this);
 
 
         // TODO initialize sendResultReceiver
-
+        sendResultReceiver = new ResultReceiverWrapper(new Handler());
 
         // TODO (SYNC) initialize serviceManager
+
+//        chatRoomName = (EditText) findViewById(R.id.chat_room);
+//        messageText = (EditText) findViewById(R.id.message_text);
+//        sendButton = (Button) findViewById(R.id.send_button);
+//        sendButton.setOnClickListener(this);
 
 
         /**
@@ -112,6 +126,8 @@ public class ChatActivity extends Activity implements OnClickListener, IQueryLis
         if (!Settings.isRegistered(this)) {
             Settings.getAppId(this);
             // Registration must be done manually
+            Intent registerIntent = new Intent(this, RegisterActivity.class);
+            startActivity(registerIntent);
         }
 
     }
@@ -140,6 +156,8 @@ public class ChatActivity extends Activity implements OnClickListener, IQueryLis
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         // TODO inflate a menu with PEERS and SETTINGS options
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.chatserver_menu, menu);
 
         return true;
     }
@@ -151,10 +169,14 @@ public class ChatActivity extends Activity implements OnClickListener, IQueryLis
 
             // TODO PEERS provide the UI for viewing list of peers
             case R.id.peers:
+                Intent viewPeersIntent = new Intent(this, ViewPeersActivity.class);
+                startActivity(viewPeersIntent);
                 break;
 
             // TODO REGISTER provide the UI for registering
             case R.id.register:
+                Intent registerIntent = new Intent(this, RegisterActivity.class);
+                startActivity(registerIntent);
                 break;
 
             // SETTINGS provide the UI for settings
@@ -186,7 +208,9 @@ public class ChatActivity extends Activity implements OnClickListener, IQueryLis
             String message = null;
 
             // TODO get chatRoom and message from UI, and use helper to post a message
-
+            chatRoom = chatRoomName.getText().toString();
+            message = messageText.getText().toString();
+//            helper.postMessage(chatRoom, message, this);    // TODO ResultReceiver
 
 
             // End todo
@@ -205,9 +229,11 @@ public class ChatActivity extends Activity implements OnClickListener, IQueryLis
         switch (resultCode) {
             case RESULT_OK:
                 // TODO show a success toast message
+                Toast.makeText(this, "success", Toast.LENGTH_LONG).show();
                 break;
             default:
                 // TODO show a failure toast message
+                Toast.makeText(this, "failure", Toast.LENGTH_LONG).show();
                 break;
         }
     }
@@ -215,11 +241,13 @@ public class ChatActivity extends Activity implements OnClickListener, IQueryLis
     @Override
     public void handleResults(TypedCursor<ChatMessage> results) {
         // TODO
+        messagesAdapter.swapCursor(results.getCursor());
     }
 
     @Override
     public void closeResults() {
         // TODO
+        messagesAdapter.swapCursor(null);
     }
 
 }
