@@ -47,108 +47,121 @@ public class MessageContract extends BaseContract {
 
     // TODO remaining columns in Messages table
 
-    private int sequenceNumberColumn = -1;
+    private static int idColumn = -1;
 
-    public String getSequenceNumber(Cursor cursor) {
+    public static long getId(Cursor cursor) {
+        if (idColumn < 0) {
+            idColumn = cursor.getColumnIndexOrThrow(_ID);
+        }
+        return Long.parseLong(cursor.getString(idColumn));
+    }
+
+    public static void putId(ContentValues out, long id) {
+        out.put(ID, id);
+    }
+
+    private static int sequenceNumberColumn = -1;
+
+    public static long getSequenceNumber(Cursor cursor) {
         if (sequenceNumberColumn < 0) {
             sequenceNumberColumn = cursor.getColumnIndexOrThrow(SEQUENCE_NUMBER);
         }
-        return cursor.getString(sequenceNumberColumn);
+        return cursor.getLong(sequenceNumberColumn);
     }
 
-    public void putSequenceNumberColumn(ContentValues out, String messageText) {
-        out.put(SEQUENCE_NUMBER, messageText);
+    public static void putSequenceNumber(ContentValues out, long sequenceNumber) {
+        out.put(SEQUENCE_NUMBER, sequenceNumber);
     }
 
-    private int messageTextColumn = -1;
+    private static int messageTextColumn = -1;
 
-    public String getMessageText(Cursor cursor) {
+    public static String getMessageText(Cursor cursor) {
         if (messageTextColumn < 0) {
             messageTextColumn = cursor.getColumnIndexOrThrow(MESSAGE_TEXT);
         }
         return cursor.getString(messageTextColumn);
     }
 
-    public void putMessageText(ContentValues out, String messageText) {
+    public static void putMessageText(ContentValues out, String messageText) {
         out.put(MESSAGE_TEXT, messageText);
     }
 
     // TODO remaining getter and putter operations for other columns
-    private int chatRoomColumn = -1;
+    private static int chatRoomColumn = -1;
 
-    public int getChatRoom(Cursor cursor) {
+    public static String getChatRoom(Cursor cursor) {
         if (chatRoomColumn < 0) {
             chatRoomColumn = cursor.getColumnIndexOrThrow(CHAT_ROOM);
         }
-        return cursor.getInt(chatRoomColumn);
+        return cursor.getString(chatRoomColumn);
     }
 
-    public void putChatRoom(ContentValues out, int chatRoom) {
+    public static void putChatRoom(ContentValues out, String chatRoom) {
         out.put(CHAT_ROOM, chatRoom);
     }
 
-    private int timeStampColumn = -1;
+    private static int timeStampColumn = -1;
 
-    public long getTimeStampColumn(Cursor cursor) {
+    public static long getTimeStamp(Cursor cursor) {
         if (timeStampColumn < 0) {
             timeStampColumn = cursor.getColumnIndexOrThrow(TIMESTAMP);
         }
         return cursor.getLong(timeStampColumn);
     }
 
-    public void putTimeStampColumn(ContentValues out, long timestamp) {
+    public static void putTimeStamp(ContentValues out, long timestamp) {
         out.put(TIMESTAMP, timestamp);
     }
 
-    private int latitudeColumn = -1;
+    private static int latitudeColumn = -1;
 
-    public double getLatitude(Cursor cursor) {
+    public static Double getLatitude(Cursor cursor) {
         if (latitudeColumn < 0) {
             latitudeColumn = cursor.getColumnIndexOrThrow(LATITUDE);
         }
         return cursor.getDouble(latitudeColumn);
     }
 
-    public void putLatitude(ContentValues out, double latitude) {
+    public static void putLatitude(ContentValues out, Double latitude) {
         out.put(LATITUDE, latitude);
     }
 
-    private int longitudeColumn = -1;
+    private static int longitudeColumn = -1;
 
-    public double getLongitude(Cursor cursor) {
+    public static Double getLongitude(Cursor cursor) {
         if (longitudeColumn < 0) {
             longitudeColumn = cursor.getColumnIndexOrThrow(LONGITUDE);
         }
         return cursor.getDouble(longitudeColumn);
     }
 
-    public void putLongitude(ContentValues out, double longitude) {
+    public static void putLongitude(ContentValues out, Double longitude) {
         out.put(LONGITUDE, longitude);
     }
 
-    private int senderColumn = -1;
+    private static int senderColumn = -1;
 
-    public String getSender(Cursor cursor) {
+    public static String getSender(Cursor cursor) {
         if (senderColumn < 0) {
             senderColumn = cursor.getColumnIndexOrThrow(SENDER);
         }
         return cursor.getString(senderColumn);
     }
 
-    public void putSender(ContentValues out, String sender) {
+    public static void putSender(ContentValues out, String sender) {
         out.put(SENDER, sender);
     }
 
-    private int senderIDColumn = -1;
+    private static int senderIDColumn = -1;
 
-    public int getSenderID(Cursor cursor) {
+    public static long getSenderID(Cursor cursor) {
         if (senderIDColumn < 0) {
             senderIDColumn = cursor.getColumnIndexOrThrow(SENDER_ID);
         }
         return cursor.getInt(senderIDColumn);
     }
 
-    public void putSenderID(ContentValues out, int senderID) {
+    public static void putSenderID(ContentValues out, long senderID) {
         out.put(SENDER_ID, senderID);
     }
 

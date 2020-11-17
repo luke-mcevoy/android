@@ -4,8 +4,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import edu.stevens.cs522.chat.R;
+import edu.stevens.cs522.chat.settings.Settings;
 
 /**
  * Created by dduggan.
@@ -25,8 +27,8 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
 
             // Use a non-standard file name for default preferences
-            // PreferenceManager prefMgr = getPreferenceManager();
-            // prefMgr.setSharedPreferencesName(Settings.SETTINGS);
+             PreferenceManager prefMgr = getPreferenceManager();
+             prefMgr.setSharedPreferencesName(Settings.SETTINGS);
 
         }
 

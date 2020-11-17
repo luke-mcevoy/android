@@ -1,6 +1,9 @@
 package edu.stevens.cs522.chat.rest;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.ResultReceiver;
 import android.util.JsonReader;
@@ -12,10 +15,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.Set;
 
 import edu.stevens.cs522.base.DateUtils;
+import edu.stevens.cs522.chat.contracts.MessageContract;
+import edu.stevens.cs522.chat.contracts.PeerContract;
 import edu.stevens.cs522.chat.entities.ChatMessage;
 import edu.stevens.cs522.chat.entities.Peer;
+import edu.stevens.cs522.chat.managers.MessageManager;
 import edu.stevens.cs522.chat.managers.PeerManager;
 import edu.stevens.cs522.chat.managers.RequestManager;
 import edu.stevens.cs522.chat.managers.TypedCursor;
@@ -60,6 +67,9 @@ public class RequestProcessor {
             new PeerManager(context).persist(myself);
 
             // TODO update the server URI, user name and sender id in settings
+            Settings.saveServerUri(context, request.chatServer);
+            Settings.saveChatName(context, myself.name);
+            Settings.saveSenderId(context, myself.id);
 
         }
         return response;
@@ -68,11 +78,63 @@ public class RequestProcessor {
     public Response perform(PostMessageRequest request) {
         if (!Settings.SYNC) {
             // TODO insert the message into the local database
+            ContentResolver contentResolver = context.getContentResolver();
+            ChatMessage chatMessage = new ChatMessage();
+
+//            chatMessage.seqNum = request.senderId;
+            chatMessage.chatRoom = request.chatRoom;
+            chatMessage.timestamp = request.timestamp;
+            chatMessage.latitude = request.latitude;
+            chatMessage.longitude = request.longitude;
+            chatMessage.sender = Settings.getChatName(context);
+            chatMessage.senderId = request.senderId;
+            chatMessage.messageText = request.message;
+            requestManager.persist(chatMessage);
+
+//            Peer peer = new Peer();
+//            peer.name = chatMessage.sender;
+//            peer.timestamp = chatMessage.timestamp;
+//            peer.longitude = chatMessage.longitude;
+//            peer.latitude = chatMessage.latitude;
+
+
+
+//            String selection = PeerContract.NAME + "=?";
+//            String[] selectionArgs = {peer.name};
+//            Cursor cursor = contentResolver.query(PeerContract.CONTENT_URI,
+//                    null,
+//                    selection,
+//                    selectionArgs,
+//                    null);
+//            ContentValues contentValues = new ContentValues();
+//
+//            if (cursor != null && cursor.getCount() > 0) {
+//                cursor.moveToFirst();
+//                Peer client = new Peer(cursor);
+//                client.id = peer.id;
+//                client.writeToProvider(contentValues);
+//                contentResolver.update(PeerContract.CONTENT_URI(peer.id),
+//                        contentValues,
+//                        null,
+//                        null);
+//            } else {
+//                peer.writeToProvider(contentValues);
+//                Uri uri = contentResolver.insert(PeerContract.CONTENT_URI, contentValues);
+//                peer.id = PeerContract.getId(uri);
+//            }
+//
+//            contentValues = new ContentValues();
+//            chatMessage.senderId = peer.id;
+//            chatMessage.writeToProvider(contentValues);
+//            contentResolver.insert(MessageContract.CONTENT_URI, contentValues);
+
+
 
             Response response = restMethod.perform(request);
             if (response instanceof PostMessageResponse) {
                 // TODO update the message in the database with the sequence number
-
+                chatMessage.seqNum = ((PostMessageResponse) response).getMessageId();
+//                requestManager.updateSeqNum(request.senderId, requestManager.getLastSequenceNumber());
             }
             return response;
         } else {
@@ -82,6 +144,12 @@ public class RequestProcessor {
              */
             ChatMessage chatMessage = new ChatMessage();
             // TODO fill the fields with values from the request message
+            chatMessage.messageText = request.message;
+            chatMessage.longitude = request.longitude;
+            chatMessage.latitude = request.latitude;
+            chatMessage.timestamp = request.timestamp;
+            chatMessage.sender = Settings.getChatName(context);
+            chatMessage.senderId = request.senderId;
 
             requestManager.persist(chatMessage);
             return request.getDummyResponse();
@@ -118,6 +186,14 @@ public class RequestProcessor {
                                  *   text : ...
                                  * }
                                  */
+                                ChatMessage message = messages.getEntity();
+                                wr.beginObject();
+                                wr.name("chatroom").value(message.chatRoom);
+                                wr.name("timestamp").value(message.timestamp.getDate());
+                                wr.name("latitude").value(message.latitude);
+                                wr.name("longitude").value(message.longitude);
+                                wr.name("text").value(message.messageText);
+                                wr.endObject();
                             } while (messages.moveToNext());
                         }
 
@@ -140,6 +216,8 @@ public class RequestProcessor {
             JsonReader rd = new JsonReader(new InputStreamReader(new BufferedInputStream(response.getInputStream()), StringUtils.CHARSET));
             // TODO parse data from server (messages and peers) and update database
             // See RequestManager for operations to help with this.
+//            requestManager.persist();
+
 
 
             /*

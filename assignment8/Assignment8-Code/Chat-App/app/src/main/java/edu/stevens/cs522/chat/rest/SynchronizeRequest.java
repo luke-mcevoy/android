@@ -19,10 +19,13 @@ public class SynchronizeRequest extends Request {
     // Added by request processor
     public long lastSequenceNumber;
 
+    public static String LAST_SEQUENCE_NUMBER = "X-Last_Sequence_Number";
+
     @Override
     public Map<String, String> getRequestHeaders() {
         Map<String,String> headers = super.getRequestHeaders();
         // TODO add headers
+//        headers.put(LAST_SEQUENCE_NUMBER, String.valueOf(lastSequenceNumber));
         return headers;
     }
 
@@ -65,6 +68,8 @@ public class SynchronizeRequest extends Request {
     public SynchronizeRequest(Parcel in) {
         super(in);
         // TODO
+        senderId = in.readLong();
+        appID = UUID.fromString(in.readString());
     }
 
     public static Creator<SynchronizeRequest> CREATOR = new Creator<SynchronizeRequest>() {

@@ -26,10 +26,17 @@ public class RegisterRequest extends Request {
         this.chatname = chatname;
     }
 
+
+    public static String CHAT_SERVER = "X-Chat-Server";
+
+    public static String CHAT_NAME = "X-Chat-Name";
+
     @Override
     public Map<String, String> getRequestHeaders() {
         Map<String,String> headers = super.getRequestHeaders();
         // TODO add headers
+//        headers.put(CHAT_SERVER, chatServer.toString());
+//        headers.put(CHAT_NAME, chatname);
         return headers;
     }
 

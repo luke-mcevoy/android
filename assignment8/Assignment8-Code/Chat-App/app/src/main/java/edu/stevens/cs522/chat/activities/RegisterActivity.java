@@ -11,6 +11,7 @@
 package edu.stevens.cs522.chat.activities;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -112,7 +113,7 @@ public class RegisterActivity extends Activity implements OnClickListener, Resul
             String userName = userNameText.getText().toString();
 
             // TODO use helper to register
-//            helper.register(serverUri, userName, registerResultReceiver);   // TODO need URI not String for 1st param
+            helper.register(Uri.parse(serverUri), userName, registerResultReceiver);   // TODO need URI not String for 1st param
 
 
             // End todo

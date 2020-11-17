@@ -19,7 +19,8 @@ public class RegisterResponse extends Response {
     public RegisterResponse(HttpURLConnection connection) throws IOException {
         super(connection);
         // TODO String location = connection.getHeaderField(LOCATION);
-        String location = null;
+        String location = connection.getHeaderField(LOCATION);
+//      String location = null;
         if (location != null) {
             Uri uri = Uri.parse(location);
             senderId = Long.parseLong((uri.getLastPathSegment()));

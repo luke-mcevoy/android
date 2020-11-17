@@ -68,6 +68,8 @@ public class ChatActivity extends Activity implements OnClickListener, IQueryLis
 
     private Button sendButton;
 
+    private boolean beenRegistered = false;
+
 
     /*
      * Helper for Web service
@@ -113,22 +115,37 @@ public class ChatActivity extends Activity implements OnClickListener, IQueryLis
         sendResultReceiver = new ResultReceiverWrapper(new Handler());
 
         // TODO (SYNC) initialize serviceManager
+        serviceManager = new ServiceManager(this);
 
-//        chatRoomName = (EditText) findViewById(R.id.chat_room);
-//        messageText = (EditText) findViewById(R.id.message_text);
-//        sendButton = (Button) findViewById(R.id.send_button);
-//        sendButton.setOnClickListener(this);
+        chatRoomName = (EditText) findViewById(R.id.chat_room);
+        messageText = (EditText) findViewById(R.id.message_text);
 
 
         /**
          * Initialize settings to default values.
          */
+
+//        Settings.getAppId(this);
+//        Intent registerIntent = new Intent(this, RegisterActivity.class);
+//        startActivity(registerIntent);
+
+        /*
+        if (!beenRegistered) {
+            beenRegistered = true;
+            Settings.getAppId(this);
+            // Registration must be done manually
+            Intent registerIntent = new Intent(this, RegisterActivity.class);
+            startActivity(registerIntent);
+        }
+         */
+
         if (!Settings.isRegistered(this)) {
             Settings.getAppId(this);
             // Registration must be done manually
             Intent registerIntent = new Intent(this, RegisterActivity.class);
             startActivity(registerIntent);
         }
+
 
     }
 
@@ -210,7 +227,7 @@ public class ChatActivity extends Activity implements OnClickListener, IQueryLis
             // TODO get chatRoom and message from UI, and use helper to post a message
             chatRoom = chatRoomName.getText().toString();
             message = messageText.getText().toString();
-//            helper.postMessage(chatRoom, message, this);    // TODO ResultReceiver
+            helper.postMessage(chatRoom, message, sendResultReceiver);
 
 
             // End todo

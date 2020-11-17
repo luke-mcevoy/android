@@ -40,6 +40,7 @@
         android:id="@+id/message_list"
         android:layout_width="match_parent"
         android:layout_height="0dip"
+        android:layout_weight="1.0"
         android:stackFromBottom="true"
         android:transcriptMode="alwaysScroll" >
     </ListView>

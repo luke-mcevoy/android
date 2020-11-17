@@ -6,9 +6,12 @@ import android.net.Uri;
 import android.os.ResultReceiver;
 import android.widget.Toast;
 
+import java.util.Set;
 import java.util.UUID;
 
 import edu.stevens.cs522.chat.R;
+import edu.stevens.cs522.chat.contracts.MessageContract;
+import edu.stevens.cs522.chat.contracts.PeerContract;
 import edu.stevens.cs522.chat.settings.Settings;
 
 
@@ -37,7 +40,10 @@ public class ChatHelper {
         if (chatName != null && !chatName.isEmpty()) {
             // TODO save the chat name and add a registration request to the request queue
             // Registraton will be done (immediately) on a background thread by RequestService.
-
+            RegisterRequest registerRequest = new RegisterRequest(uri, chatName, appID);
+            if (senderId > 0) { return; }
+            Settings.saveChatName(context, chatName);
+            addRequest(registerRequest, resultReceiver);
         }
     }
 
@@ -49,8 +55,12 @@ public class ChatHelper {
             // TODO add a post message request to the request queue (see addRequest)
             // Depending on Settings.SYNC, message will be sent immediately on background
             // thread, or just added locally and eventually synchronized with server database.
-
-
+            PostMessageRequest postMessageRequest = new PostMessageRequest(
+                    Settings.getSenderId(context),
+                    appID,
+                    chatRoom,
+                    text);
+            addRequest(postMessageRequest, receiver);
         }
     }
 

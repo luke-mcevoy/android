@@ -5,9 +5,11 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.ResultReceiver;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.UUID;
 
+import edu.stevens.cs522.chat.activities.RegisterActivity;
 import edu.stevens.cs522.chat.settings.Settings;
 
 /**
@@ -50,9 +52,18 @@ public class RequestService extends IntentService {
         if (receiver != null) {
             if (response instanceof ErrorResponse) {
                 // TODO let activity know request failed
+//                receiver.send(7776, intent.getExtras());
+//                receiver.send(0, null);
+                receiver.send(RegisterActivity.RESULT_CANCELED, null);
+//                Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show();
             } else {
                 // TODO let activity know request succeeded
+//                receiver.send(7777, intent.getExtras());
+//                receiver.send(1, null);
+//                Toast.makeText(this, "Succeeded", Toast.LENGTH_LONG).show();
+                receiver.send(RegisterActivity.RESULT_OK, null);
             }
+
 
         } else {
             Log.i(TAG, "Missing receiver");

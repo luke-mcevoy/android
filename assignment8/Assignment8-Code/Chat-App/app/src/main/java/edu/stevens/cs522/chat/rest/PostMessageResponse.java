@@ -37,11 +37,18 @@ public class PostMessageResponse extends Response {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         // TODO
+        super.writeToParcel(dest, flags);
+        dest.writeLong(messageId);
     }
 
     public PostMessageResponse(Parcel in) {
         super(in);
         // TODO
+        messageId = in.readLong();
+    }
+
+    public long getMessageId() {
+        return messageId;
     }
 
     public static Creator<PostMessageResponse> CREATOR = new Creator<PostMessageResponse>() {

@@ -18,7 +18,7 @@ public class Settings {
 
     public static final String SETTINGS = "settings";
 
-    public static final boolean SYNC = true;
+    public static final boolean SYNC = false;
 
     private static String APPID_KEY = "app-id";
 

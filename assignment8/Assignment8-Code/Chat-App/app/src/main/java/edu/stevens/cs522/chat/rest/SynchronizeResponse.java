@@ -28,6 +28,7 @@ public class SynchronizeResponse extends Response {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         // TODO
+        super.writeToParcel(dest, flags);
     }
 
     public SynchronizeResponse(Parcel in) {
