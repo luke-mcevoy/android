@@ -194,7 +194,7 @@ public class RestMethod {
         if (syncMessagesUri == null) {
             Uri serverUri = Settings.getServerUri(context);
             long senderId = Settings.getSenderId(context);
-            String uri = String.format("%s/%d/sync?last-seq-num=", serverUri, senderId, lastSeqNum);
+            String uri = String.format("%s/%d/sync?last-seq-num=%d", serverUri, senderId, lastSeqNum);
             syncMessagesUri = fromURI(uri);
         }
         return syncMessagesUri;

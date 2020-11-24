@@ -29,3 +29,5 @@ Nov 24, 2020 3:23:15 AM edu.stevens.cs522.chat.webservice.ChatResource postMessa
 INFO: Received postMessage request (id = 1)
 Nov 24, 2020 3:23:15 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
 INFO: Received message ddd (chatroom _default)
+Nov 24, 2020 3:26:50 AM org.glassfish.grizzly.http.server.NetworkListener shutdownNow
+INFO: Stopped listener bound to [localhost:8080]
