@@ -52,15 +52,9 @@ public class RequestService extends IntentService {
         if (receiver != null) {
             if (response instanceof ErrorResponse) {
                 // TODO let activity know request failed
-//                receiver.send(7776, intent.getExtras());
-//                receiver.send(0, null);
                 receiver.send(RegisterActivity.RESULT_CANCELED, null);
-//                Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show();
             } else {
                 // TODO let activity know request succeeded
-//                receiver.send(7777, intent.getExtras());
-//                receiver.send(1, null);
-//                Toast.makeText(this, "Succeeded", Toast.LENGTH_LONG).show();
                 receiver.send(RegisterActivity.RESULT_OK, null);
             }
 

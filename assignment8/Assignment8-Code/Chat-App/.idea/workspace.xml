@@ -10,47 +10,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="692466a8-051b-44a9-8cf6-0365c49c9041" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/network_security_config.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ChatActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ChatActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/RegisterActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/SettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/SettingsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/contracts/MessageContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/contracts/MessageContract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/contracts/PeerContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/contracts/PeerContract.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/entities/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/entities/ChatMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/entities/Peer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/entities/Peer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/MessageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/MessageManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/PeerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/PeerManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/providers/ChatProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/providers/ChatProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/ChatHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/ChatHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/PostMessageRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/PostMessageRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/PostMessageResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/PostMessageResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RegisterRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RegisterResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RegisterResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/SynchronizeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/SynchronizeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/SynchronizeResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/SynchronizeResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/settings/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/settings/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/messages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/messages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/chatserver_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/chatserver_menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../server.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../server.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -178,26 +150,30 @@
       <screen x="1792" y="0" width="1920" height="1080" />
     </state>
     <state x="2340" y="302" key="AndroidCreateResourceFileDialog/1792.0.1920.1080/0.0.1792.1120@1792.0.1920.1080" timestamp="1605574491512" />
-    <state width="1790" height="357" key="GridCell.Tab.0.bottom" timestamp="1605636516437">
+    <state x="2368" y="324" key="AndroidProcessChooserDialog" timestamp="1606199918020">
+      <screen x="1792" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2368" y="324" key="AndroidProcessChooserDialog/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606199918020" />
+    <state width="1295" height="429" key="GridCell.Tab.0.bottom" timestamp="1606202925844">
       <screen x="1792" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="203" key="GridCell.Tab.0.bottom/1792.0.1920.1080/0.0.1792.1120@1792.0.1920.1080" timestamp="1605574654211" />
-    <state width="1790" height="357" key="GridCell.Tab.0.bottom/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1605636516437" />
-    <state width="1790" height="357" key="GridCell.Tab.0.center" timestamp="1605636516437">
+    <state width="1295" height="429" key="GridCell.Tab.0.bottom/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606202925844" />
+    <state width="1295" height="429" key="GridCell.Tab.0.center" timestamp="1606202925843">
       <screen x="1792" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="203" key="GridCell.Tab.0.center/1792.0.1920.1080/0.0.1792.1120@1792.0.1920.1080" timestamp="1605574654208" />
-    <state width="1790" height="357" key="GridCell.Tab.0.center/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1605636516437" />
-    <state width="1790" height="357" key="GridCell.Tab.0.left" timestamp="1605636516436">
+    <state width="1295" height="429" key="GridCell.Tab.0.center/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606202925843" />
+    <state width="1295" height="429" key="GridCell.Tab.0.left" timestamp="1606202925843">
       <screen x="1792" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="203" key="GridCell.Tab.0.left/1792.0.1920.1080/0.0.1792.1120@1792.0.1920.1080" timestamp="1605574654205" />
-    <state width="1790" height="357" key="GridCell.Tab.0.left/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1605636516436" />
-    <state width="1790" height="357" key="GridCell.Tab.0.right" timestamp="1605636516437">
+    <state width="1295" height="429" key="GridCell.Tab.0.left/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606202925843" />
+    <state width="1295" height="429" key="GridCell.Tab.0.right" timestamp="1606202925844">
       <screen x="1792" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="203" key="GridCell.Tab.0.right/1792.0.1920.1080/0.0.1792.1120@1792.0.1920.1080" timestamp="1605574654209" />
-    <state width="1790" height="357" key="GridCell.Tab.0.right/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1605636516437" />
+    <state width="1295" height="429" key="GridCell.Tab.0.right/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606202925844" />
     <state x="2398" y="378" key="com.intellij.ide.util.TipDialog" timestamp="1605379459655">
       <screen x="1792" y="0" width="1920" height="1080" />
     </state>
@@ -212,59 +188,39 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/providers/ChatProvider.java</url>
-          <line>152</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/providers/ChatProvider.java</url>
-          <line>153</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestProcessor.java</url>
-          <line>90</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestService.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestService.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/ChatHelper.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ChatActivity.java</url>
           <line>229</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestProcessor.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/PeerManager.java</url>
-          <line>89</line>
+          <line>105</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/PeerManager.java</url>
-          <line>95</line>
+          <line>111</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/PeerManager.java</url>
-          <line>86</line>
+          <line>101</line>
           <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestService.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestProcessor.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestProcessor.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

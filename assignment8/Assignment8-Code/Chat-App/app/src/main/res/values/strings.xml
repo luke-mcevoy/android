@@ -10,7 +10,7 @@
     <string name="server_uri_pref">ServerUri</string>
     <string name="server_uri_summary">Uri for chat server</string>
 <!--    <string name="server_uri_default">@string/base_uri</string>-->
-    <string name="server_uri_default">http://lukes-mbp.fios-router.home:8080/chat</string>
+    <string name="server_uri_default">http://10.0.2.2:8080/chat</string>
     <string name="app_id_pref">App ID</string>
     <string name="app_id_summary">UUID for this installation of the app</string>
     <string name="sender_id_pref">Sender ID</string>
@@ -21,7 +21,7 @@
 
     <!-- String literals in the UI -->
 
-    <string name="base_uri">http://127.0.0.1:8080/chat</string>
+    <string name="base_uri">http://10.0.2.2:8080/chat/</string>
 
 
     <string name="message_edit_text">Type your message here.</string>

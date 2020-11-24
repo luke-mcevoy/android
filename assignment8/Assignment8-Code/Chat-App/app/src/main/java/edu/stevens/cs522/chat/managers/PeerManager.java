@@ -80,12 +80,28 @@ public class PeerManager extends Manager<Peer> {
                 });
     }
 
+    public long getPeerSync(Peer peer) {
+        String selection = PeerContract.NAME + " = ?";
+        String[] selectionArgs = new String[]{peer.name};
+        Cursor result = getSyncResolver().query(PeerContract.CONTENT_URI, null, selection,
+                selectionArgs, null);
+        if(result.getCount() != 1) {
+            //Peer does not exist
+            return -1;
+        } else{
+            return 0;
+        }
+    }
+
     public long persist(Peer peer) {
         // TODO synchronous version that executes on background thread (in service)
-        final ContentResolver cr = getSyncResolver();
-        final ContentValues contentValues = new ContentValues();
+
+        long peerChecker = getPeerSync(peer);
+        ContentResolver cr = getSyncResolver();
+        ContentValues contentValues = new ContentValues();
         peer.writeToProvider(contentValues);
-        if (peer.id < 0) {
+
+        if (peerChecker < 0) {
             Uri uri = cr.insert(PeerContract.CONTENT_URI, contentValues);
             Long id = Long.parseLong(uri.getLastPathSegment());
             peer.id = id;
@@ -96,7 +112,6 @@ public class PeerManager extends Manager<Peer> {
                     contentValues,
                     where,
                     projection);
-
         }
         return peer.id;
     }

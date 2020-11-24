@@ -59,8 +59,8 @@ public class ChatProvider extends ContentProvider {
                         PeerContract._ID + " integer primary key," +
                         PeerContract.NAME + " text not null," +
                         PeerContract.TIMESTAMP + " long not null," +
-                        PeerContract.LONGITUDE + " double not null," +
-                        PeerContract.LATITUDE + " double not null);";
+                        PeerContract.LONGITUDE + " double," +
+                        PeerContract.LATITUDE + " double);";
 
         private static final String MESSAGE_CREATE =
                 "CREATE TABLE " + MESSAGES_TABLE + " (" +
@@ -69,8 +69,8 @@ public class ChatProvider extends ContentProvider {
                         MessageContract.MESSAGE_TEXT + " text," +
                         MessageContract.CHAT_ROOM + " integer not null," +
                         MessageContract.TIMESTAMP + " long not null," +
-                        MessageContract.LONGITUDE + " double not null," +
-                        MessageContract.LATITUDE + " double not null," +
+                        MessageContract.LONGITUDE + " double," +
+                        MessageContract.LATITUDE + " double," +
                         MessageContract.SENDER + " text not null," +
                         MessageContract.SENDER_ID + " integer not null);";
 
@@ -160,12 +160,7 @@ public class ChatProvider extends ContentProvider {
             case PEERS_ALL_ROWS:
                 // TODO: Implement this to handle requests to insert a new peer.
                 // Make sure to notify any observers
-                long peersRow = 0;
-                try {
-                    peersRow = db.insertOrThrow(PEERS_TABLE, null, values);
-                } catch (SQLiteConstraintException e) {
-                    return null;
-                }
+                long peersRow = db.insert(PEERS_TABLE, null, values);
                 if (peersRow > 0) {
                     Uri instanceUri = PeerContract.CONTENT_URI(peersRow);
                     ContentResolver contentResolver = Objects.requireNonNull(getContext()).getContentResolver();

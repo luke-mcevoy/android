@@ -1,23 +1,19 @@
-Nov 17, 2020 12:48:42 PM edu.stevens.cs522.chat.webservice.Main info
+Nov 24, 2020 2:28:35 AM edu.stevens.cs522.chat.webservice.Main info
 INFO: Starting HTTP server...
-Nov 17, 2020 12:48:42 PM org.glassfish.grizzly.http.server.NetworkListener start
-INFO: Started listener bound to [lukes-mbp.fios-router.home:8080]
-Nov 17, 2020 12:48:42 PM org.glassfish.grizzly.http.server.HttpServer start
+Nov 24, 2020 2:28:36 AM org.glassfish.grizzly.http.server.NetworkListener start
+INFO: Started listener bound to [localhost:8080]
+Nov 24, 2020 2:28:36 AM org.glassfish.grizzly.http.server.HttpServer start
 INFO: [HttpServer] Started.
-Nov 17, 2020 12:48:42 PM edu.stevens.cs522.chat.webservice.Main info
-INFO: Listening at http://lukes-mbp.fios-router.home:8080
-Nov 17, 2020 12:48:42 PM edu.stevens.cs522.chat.webservice.Main info
-INFO: Service available at http://lukes-mbp.fios-router.home:8080/chat
+Nov 24, 2020 2:28:36 AM edu.stevens.cs522.chat.webservice.Main info
+INFO: Listening at http://localhost:8080
+Nov 24, 2020 2:28:36 AM edu.stevens.cs522.chat.webservice.Main info
+INFO: Service available at http://localhost:8080/chat
 Hit enter to stop...
-Nov 17, 2020 12:49:05 PM edu.stevens.cs522.chat.webservice.ChatResource register
-INFO: Received registration request (appId=def2de78-5128-49ec-af8d-171a99d34311, username=_default, timestamp=1605635345623, latitude=0.0, longitude=0.0)
-Nov 17, 2020 12:49:05 PM edu.stevens.cs522.chat.webservice.ChatResource register
-INFO: Successfully registered user _default with UUID def2de78-5128-49ec-af8d-171a99d34311.
-Nov 17, 2020 12:50:16 PM edu.stevens.cs522.chat.webservice.ChatResource postMessage
+Nov 24, 2020 2:28:51 AM edu.stevens.cs522.chat.webservice.ChatResource register
+INFO: Received registration request (appId=ab1b873f-f9c2-44ce-b360-9df66f510587, username=asd, timestamp=1606202930762, latitude=0.0, longitude=0.0)
+Nov 24, 2020 2:28:51 AM edu.stevens.cs522.chat.webservice.ChatResource register
+INFO: Successfully registered user asd with UUID ab1b873f-f9c2-44ce-b360-9df66f510587.
+Nov 24, 2020 2:29:37 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
 INFO: Received postMessage request (id = 1)
-Nov 17, 2020 12:50:16 PM edu.stevens.cs522.chat.webservice.ChatResource postMessage
-INFO: Received message sdf (chatroom _default)
-Nov 17, 2020 12:50:34 PM edu.stevens.cs522.chat.webservice.ChatResource postMessage
-INFO: Received postMessage request (id = 1)
-Nov 17, 2020 12:50:34 PM edu.stevens.cs522.chat.webservice.ChatResource postMessage
-INFO: Received message asd (chatroom _default)
+Nov 24, 2020 2:29:37 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
+INFO: Received message asdasd (chatroom _default)
