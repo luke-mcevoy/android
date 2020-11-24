@@ -64,6 +64,8 @@ public class RequestProcessor {
             myself.id = registration.getSenderId();
             myself.name = request.chatname;
             myself.timestamp = DateUtils.now();
+            myself.longitude = 40.7440;
+            myself.latitude = -74.0324;
             new PeerManager(context).persist(myself);
 
             // TODO update the server URI, user name and sender id in settings
@@ -90,44 +92,6 @@ public class RequestProcessor {
             chatMessage.senderId = request.senderId;
             chatMessage.messageText = request.message;
             requestManager.persist(chatMessage);
-
-//            Peer peer = new Peer();
-//            peer.name = chatMessage.sender;
-//            peer.timestamp = chatMessage.timestamp;
-//            peer.longitude = chatMessage.longitude;
-//            peer.latitude = chatMessage.latitude;
-
-
-
-//            String selection = PeerContract.NAME + "=?";
-//            String[] selectionArgs = {peer.name};
-//            Cursor cursor = contentResolver.query(PeerContract.CONTENT_URI,
-//                    null,
-//                    selection,
-//                    selectionArgs,
-//                    null);
-//            ContentValues contentValues = new ContentValues();
-//
-//            if (cursor != null && cursor.getCount() > 0) {
-//                cursor.moveToFirst();
-//                Peer client = new Peer(cursor);
-//                client.id = peer.id;
-//                client.writeToProvider(contentValues);
-//                contentResolver.update(PeerContract.CONTENT_URI(peer.id),
-//                        contentValues,
-//                        null,
-//                        null);
-//            } else {
-//                peer.writeToProvider(contentValues);
-//                Uri uri = contentResolver.insert(PeerContract.CONTENT_URI, contentValues);
-//                peer.id = PeerContract.getId(uri);
-//            }
-//
-//            contentValues = new ContentValues();
-//            chatMessage.senderId = peer.id;
-//            chatMessage.writeToProvider(contentValues);
-//            contentResolver.insert(MessageContract.CONTENT_URI, contentValues);
-
 
 
             Response response = restMethod.perform(request);

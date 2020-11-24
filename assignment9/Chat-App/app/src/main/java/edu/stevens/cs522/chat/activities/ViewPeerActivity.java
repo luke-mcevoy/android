@@ -26,10 +26,17 @@ public class ViewPeerActivity extends Activity {
         }
 
         // TODO init the UI
-        TextView textView = findViewById(R.id.view_user_name);
-        textView.setText(peer.name);
-        textView = findViewById(R.id.view_timestamp);
-        textView.setText(peer.timestamp.toString());
+        TextView username = findViewById(R.id.view_user_name);
+        username.setText(peer.name);
+
+        TextView timestamp = findViewById(R.id.view_timestamp);
+        timestamp.setText(peer.timestamp.toString());
+
+        TextView latitude = findViewById(R.id.view_latitude);
+        latitude.setText(peer.latitude.toString());
+
+        TextView longitude = findViewById(R.id.view_longitude);
+        longitude.setText(peer.longitude.toString());
 
     }
 
