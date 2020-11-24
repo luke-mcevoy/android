@@ -18,11 +18,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/PeerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/managers/PeerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/providers/ChatProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/providers/ChatProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ViewPeerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/activities/ViewPeerActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../server.log" beforeDir="false" afterPath="$PROJECT_DIR$/../../server.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -154,26 +151,26 @@
       <screen x="1792" y="23" width="1920" height="1057" />
     </state>
     <state x="2368" y="324" key="AndroidProcessChooserDialog/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606199918020" />
-    <state width="1295" height="429" key="GridCell.Tab.0.bottom" timestamp="1606202925844">
+    <state width="1295" height="333" key="GridCell.Tab.0.bottom" timestamp="1606205682663">
       <screen x="1792" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="203" key="GridCell.Tab.0.bottom/1792.0.1920.1080/0.0.1792.1120@1792.0.1920.1080" timestamp="1605574654211" />
-    <state width="1295" height="429" key="GridCell.Tab.0.bottom/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606202925844" />
-    <state width="1295" height="429" key="GridCell.Tab.0.center" timestamp="1606202925843">
+    <state width="1295" height="333" key="GridCell.Tab.0.bottom/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606205682663" />
+    <state width="1295" height="333" key="GridCell.Tab.0.center" timestamp="1606205682662">
       <screen x="1792" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="203" key="GridCell.Tab.0.center/1792.0.1920.1080/0.0.1792.1120@1792.0.1920.1080" timestamp="1605574654208" />
-    <state width="1295" height="429" key="GridCell.Tab.0.center/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606202925843" />
-    <state width="1295" height="429" key="GridCell.Tab.0.left" timestamp="1606202925843">
+    <state width="1295" height="333" key="GridCell.Tab.0.center/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606205682662" />
+    <state width="1295" height="333" key="GridCell.Tab.0.left" timestamp="1606205682662">
       <screen x="1792" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="203" key="GridCell.Tab.0.left/1792.0.1920.1080/0.0.1792.1120@1792.0.1920.1080" timestamp="1605574654205" />
-    <state width="1295" height="429" key="GridCell.Tab.0.left/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606202925843" />
-    <state width="1295" height="429" key="GridCell.Tab.0.right" timestamp="1606202925844">
+    <state width="1295" height="333" key="GridCell.Tab.0.left/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606205682662" />
+    <state width="1295" height="333" key="GridCell.Tab.0.right" timestamp="1606205682663">
       <screen x="1792" y="23" width="1920" height="1057" />
     </state>
     <state width="1878" height="203" key="GridCell.Tab.0.right/1792.0.1920.1080/0.0.1792.1120@1792.0.1920.1080" timestamp="1605574654209" />
-    <state width="1295" height="429" key="GridCell.Tab.0.right/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606202925844" />
+    <state width="1295" height="333" key="GridCell.Tab.0.right/1792.23.1920.1057/0.23.1792.1097@1792.23.1920.1057" timestamp="1606205682663" />
     <state x="2398" y="378" key="com.intellij.ide.util.TipDialog" timestamp="1605379459655">
       <screen x="1792" y="0" width="1920" height="1080" />
     </state>
@@ -214,13 +211,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestProcessor.java</url>
-          <line>66</line>
+          <line>68</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/rest/RequestProcessor.java</url>
           <line>56</line>
           <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/entities/Peer.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/entities/Peer.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/edu/stevens/cs522/chat/entities/Peer.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

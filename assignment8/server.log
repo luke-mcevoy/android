@@ -1,19 +1,17 @@
-Nov 24, 2020 2:28:35 AM edu.stevens.cs522.chat.webservice.Main info
+Nov 24, 2020 3:18:59 AM edu.stevens.cs522.chat.webservice.Main info
 INFO: Starting HTTP server...
-Nov 24, 2020 2:28:36 AM org.glassfish.grizzly.http.server.NetworkListener start
+Nov 24, 2020 3:19:00 AM org.glassfish.grizzly.http.server.NetworkListener start
 INFO: Started listener bound to [localhost:8080]
-Nov 24, 2020 2:28:36 AM org.glassfish.grizzly.http.server.HttpServer start
+Nov 24, 2020 3:19:00 AM org.glassfish.grizzly.http.server.HttpServer start
 INFO: [HttpServer] Started.
-Nov 24, 2020 2:28:36 AM edu.stevens.cs522.chat.webservice.Main info
+Nov 24, 2020 3:19:00 AM edu.stevens.cs522.chat.webservice.Main info
 INFO: Listening at http://localhost:8080
-Nov 24, 2020 2:28:36 AM edu.stevens.cs522.chat.webservice.Main info
+Nov 24, 2020 3:19:00 AM edu.stevens.cs522.chat.webservice.Main info
 INFO: Service available at http://localhost:8080/chat
 Hit enter to stop...
-Nov 24, 2020 2:28:51 AM edu.stevens.cs522.chat.webservice.ChatResource register
-INFO: Received registration request (appId=ab1b873f-f9c2-44ce-b360-9df66f510587, username=asd, timestamp=1606202930762, latitude=0.0, longitude=0.0)
-Nov 24, 2020 2:28:51 AM edu.stevens.cs522.chat.webservice.ChatResource register
-INFO: Successfully registered user asd with UUID ab1b873f-f9c2-44ce-b360-9df66f510587.
-Nov 24, 2020 2:29:37 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
-INFO: Received postMessage request (id = 1)
-Nov 24, 2020 2:29:37 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
-INFO: Received message asdasd (chatroom _default)
+Nov 24, 2020 3:19:10 AM edu.stevens.cs522.chat.webservice.ChatResource register
+INFO: Received registration request (appId=386f714f-7399-4976-886e-a7ebf0cd3d07, username=asd, timestamp=1606205950736, latitude=0.0, longitude=0.0)
+Nov 24, 2020 3:19:10 AM edu.stevens.cs522.chat.webservice.ChatResource register
+INFO: Successfully registered user asd with UUID 386f714f-7399-4976-886e-a7ebf0cd3d07.
+Nov 24, 2020 3:19:38 AM org.glassfish.grizzly.http.server.NetworkListener shutdownNow
+INFO: Stopped listener bound to [localhost:8080]
