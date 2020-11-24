@@ -1,17 +1,31 @@
-Nov 24, 2020 3:18:59 AM edu.stevens.cs522.chat.webservice.Main info
+Nov 24, 2020 3:22:10 AM edu.stevens.cs522.chat.webservice.Main info
 INFO: Starting HTTP server...
-Nov 24, 2020 3:19:00 AM org.glassfish.grizzly.http.server.NetworkListener start
+Nov 24, 2020 3:22:10 AM org.glassfish.grizzly.http.server.NetworkListener start
 INFO: Started listener bound to [localhost:8080]
-Nov 24, 2020 3:19:00 AM org.glassfish.grizzly.http.server.HttpServer start
+Nov 24, 2020 3:22:10 AM org.glassfish.grizzly.http.server.HttpServer start
 INFO: [HttpServer] Started.
-Nov 24, 2020 3:19:00 AM edu.stevens.cs522.chat.webservice.Main info
+Nov 24, 2020 3:22:10 AM edu.stevens.cs522.chat.webservice.Main info
 INFO: Listening at http://localhost:8080
-Nov 24, 2020 3:19:00 AM edu.stevens.cs522.chat.webservice.Main info
+Nov 24, 2020 3:22:10 AM edu.stevens.cs522.chat.webservice.Main info
 INFO: Service available at http://localhost:8080/chat
 Hit enter to stop...
-Nov 24, 2020 3:19:10 AM edu.stevens.cs522.chat.webservice.ChatResource register
-INFO: Received registration request (appId=386f714f-7399-4976-886e-a7ebf0cd3d07, username=asd, timestamp=1606205950736, latitude=0.0, longitude=0.0)
-Nov 24, 2020 3:19:10 AM edu.stevens.cs522.chat.webservice.ChatResource register
-INFO: Successfully registered user asd with UUID 386f714f-7399-4976-886e-a7ebf0cd3d07.
-Nov 24, 2020 3:19:38 AM org.glassfish.grizzly.http.server.NetworkListener shutdownNow
-INFO: Stopped listener bound to [localhost:8080]
+Nov 24, 2020 3:22:44 AM edu.stevens.cs522.chat.webservice.ChatResource register
+INFO: Received registration request (appId=9005f5dd-b76a-4bf7-bdfa-4508f61ad05d, username=Luke McEvoy, timestamp=1606206163890, latitude=0.0, longitude=0.0)
+Nov 24, 2020 3:22:44 AM edu.stevens.cs522.chat.webservice.ChatResource register
+INFO: Successfully registered user Luke McEvoy with UUID 9005f5dd-b76a-4bf7-bdfa-4508f61ad05d.
+Nov 24, 2020 3:23:00 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
+INFO: Received postMessage request (id = 1)
+Nov 24, 2020 3:23:00 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
+INFO: Received message hello world (chatroom _default)
+Nov 24, 2020 3:23:12 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
+INFO: Received postMessage request (id = 1)
+Nov 24, 2020 3:23:12 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
+INFO: Received message test (chatroom _default)
+Nov 24, 2020 3:23:14 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
+INFO: Received postMessage request (id = 1)
+Nov 24, 2020 3:23:14 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
+INFO: Received message test (chatroom _default)
+Nov 24, 2020 3:23:15 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
+INFO: Received postMessage request (id = 1)
+Nov 24, 2020 3:23:15 AM edu.stevens.cs522.chat.webservice.ChatResource postMessage
+INFO: Received message ddd (chatroom _default)
