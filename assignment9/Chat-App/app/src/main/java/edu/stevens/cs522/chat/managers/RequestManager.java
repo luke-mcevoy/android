@@ -7,7 +7,9 @@ import android.net.Uri;
 
 import edu.stevens.cs522.chat.async.IEntityCreator;
 import edu.stevens.cs522.chat.contracts.MessageContract;
+import edu.stevens.cs522.chat.contracts.PeerContract;
 import edu.stevens.cs522.chat.entities.ChatMessage;
+import edu.stevens.cs522.chat.entities.Peer;
 
 /**
  * Created by dduggan.
@@ -38,6 +40,13 @@ public class RequestManager extends Manager<ChatMessage> {
         message.writeToProvider(values);
         Uri uri = getSyncResolver().insert(MessageContract.CONTENT_URI, values);
         message.id = MessageContract.getId(uri);
+    }
+
+    public void persist(Peer peer) {
+        ContentValues values = new ContentValues();
+        peer.writeToProvider(values);
+        Uri uri = getSyncResolver().insert(PeerContract.CONTENT_URI, values);
+        peer.id = PeerContract.getId(uri);
     }
 
     /**

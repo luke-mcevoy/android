@@ -67,7 +67,7 @@ public class ChatProvider extends ContentProvider {
                         PeerContract._ID + " integer primary key," +
                         MessageContract.SEQUENCE_NUMBER + " integer not null," +
                         MessageContract.MESSAGE_TEXT + " text," +
-                        MessageContract.CHAT_ROOM + " integer not null," +
+                        MessageContract.CHAT_ROOM + " text," +
                         MessageContract.TIMESTAMP + " long not null," +
                         MessageContract.LONGITUDE + " double," +
                         MessageContract.LATITUDE + " double," +
@@ -150,7 +150,7 @@ public class ChatProvider extends ContentProvider {
             case MESSAGES_ALL_ROWS:
                 // TODO: Implement this to handle requests to insert a new message.
                 // Make sure to notify any observers
-                long messagesRow = db.insertOrThrow(MESSAGES_TABLE, null, values);
+                long messagesRow = db.insert(MESSAGES_TABLE, null, values);
                 if (messagesRow > 0) {
                     Uri instanceUri = MessageContract.CONTENT_URI(messagesRow);
                     ContentResolver contentResolver = Objects.requireNonNull(getContext()).getContentResolver();
@@ -240,7 +240,6 @@ public class ChatProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
         // TODO Implement this to handle requests to update one or more rows.
-        // TODO Implement this to handle requests to update one or more rows.
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         switch (uriMatcher.match(uri)) {
             case MESSAGES_ALL_ROWS:
@@ -248,12 +247,12 @@ public class ChatProvider extends ContentProvider {
             case PEERS_ALL_ROWS:
                 return db.update(PEERS_TABLE, values, selection, selectionArgs);
             case MESSAGES_SINGLE_ROW:
-                selection = MessageContract._ID + " =?";
-                selectionArgs = new String[]{String.valueOf(MessageContract.getId(uri))};
+//                selection = MessageContract._ID + " =?";
+//                selectionArgs = new String[]{String.valueOf(MessageContract.getId(uri))};
                 return db.update(MESSAGES_TABLE, values, selection, selectionArgs);
             case PEERS_SINGLE_ROW:
-                selection = PeerContract._ID + " =?";
-                selectionArgs = new String[]{String.valueOf(PeerContract.getId(uri))};
+//                selection = PeerContract._ID + " =?";
+//                selectionArgs = new String[]{String.valueOf(PeerContract.getId(uri))};
                 return db.update(PEERS_TABLE, values, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Unsupported URI: " + uri);

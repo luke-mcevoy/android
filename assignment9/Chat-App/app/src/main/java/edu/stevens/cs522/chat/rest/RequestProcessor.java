@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 
 import edu.stevens.cs522.base.DateUtils;
@@ -80,10 +82,8 @@ public class RequestProcessor {
     public Response perform(PostMessageRequest request) {
         if (!Settings.SYNC) {
             // TODO insert the message into the local database
-            ContentResolver contentResolver = context.getContentResolver();
             ChatMessage chatMessage = new ChatMessage();
 
-//            chatMessage.seqNum = request.senderId;
             chatMessage.chatRoom = request.chatRoom;
             chatMessage.timestamp = request.timestamp;
             chatMessage.latitude = request.latitude;
@@ -98,7 +98,6 @@ public class RequestProcessor {
             if (response instanceof PostMessageResponse) {
                 // TODO update the message in the database with the sequence number
                 chatMessage.seqNum = ((PostMessageResponse) response).getMessageId();
-//                requestManager.updateSeqNum(request.senderId, requestManager.getLastSequenceNumber());
             }
             return response;
         } else {
@@ -120,11 +119,13 @@ public class RequestProcessor {
         }
     }
 
+
     /**
      * For SYNC: perform a sync using a request manager.  These requests are
      * generated from an alarm that is scheduled at periodic intervals.
      */
     public Response perform(SynchronizeRequest request) {
+        final ArrayList<ChatMessage> messagesList = new ArrayList<>();
         RestMethod.StreamingResponse response = null;
         final TypedCursor<ChatMessage> messages = requestManager.getUnsentMessages();
         try {
@@ -151,16 +152,16 @@ public class RequestProcessor {
                                  * }
                                  */
                                 ChatMessage message = messages.getEntity();
+                                messagesList.add(message);
                                 wr.beginObject();
                                 wr.name("chatroom").value(message.chatRoom);
-                                wr.name("timestamp").value(message.timestamp.getDate());
+                                wr.name("timestamp").value(message.timestamp.getTime());
                                 wr.name("latitude").value(message.latitude);
                                 wr.name("longitude").value(message.longitude);
                                 wr.name("text").value(message.messageText);
                                 wr.endObject();
                             } while (messages.moveToNext());
                         }
-
                         wr.endArray();
                         wr.flush();
                     } finally {
@@ -171,6 +172,7 @@ public class RequestProcessor {
             /*
              * Connect to the server and upload messages not yet shared.
              */
+            request.lastSequenceNumber = requestManager.getLastSequenceNumber();
             response = restMethod.perform(request, out);
 
             /*
@@ -180,9 +182,81 @@ public class RequestProcessor {
             JsonReader rd = new JsonReader(new InputStreamReader(new BufferedInputStream(response.getInputStream()), StringUtils.CHARSET));
             // TODO parse data from server (messages and peers) and update database
             // See RequestManager for operations to help with this.
-//            requestManager.persist();
 
-
+            rd.beginObject();
+            while (rd.hasNext()) {
+                if (rd.nextName().equals("clients")) {
+                    rd.beginArray();
+                    while (rd.hasNext()){
+                        Peer peer = new Peer();
+                        rd.beginObject();
+                        while (rd.hasNext()) {
+                            String name = rd.nextName();
+                            switch (name) {
+                                case "id":
+                                    peer.id = rd.nextLong();
+                                    break;
+                                case "username":
+                                    peer.name = rd.nextString();
+                                    break;
+                                case "timestamp":
+                                    peer.timestamp = new Date(rd.nextLong());
+                                    break;
+                                case "latitude":
+                                    peer.latitude = rd.nextDouble();
+                                    break;
+                                case "longitude":
+                                    peer.longitude = rd.nextDouble();
+                                    break;
+                                default:
+                                    rd.skipValue();
+                                    break;
+                            }
+                        }
+                        rd.endObject();
+                        requestManager.persist(peer);
+                    }
+                    rd.endArray();
+                } else {
+                    rd.beginArray();
+                    while (rd.hasNext()) {
+                        ChatMessage chatMessage = new ChatMessage();
+                        rd.beginObject();
+                        while (rd.hasNext()) {
+                            String name = rd.nextName();
+                            switch (name) {
+                                case "seqnum":
+                                    chatMessage.seqNum = rd.nextLong();
+                                    break;
+                                case "timestamp":
+                                    chatMessage.timestamp = new Date(rd.nextLong());
+                                    break;
+                                case "text":
+                                    chatMessage.messageText = rd.nextString();
+                                    break;
+                                case "chatroom":
+                                    chatMessage.chatRoom = rd.nextString();
+                                    break;
+                                case "latitude":
+                                    chatMessage.latitude = rd.nextDouble();
+                                    break;
+                                case "longitude":
+                                    chatMessage.longitude = rd.nextDouble();
+                                    break;
+                                case "sender":
+                                    chatMessage.senderId = rd.nextLong();
+                                    break;
+                                default:
+                                    rd.skipValue();
+                                    break;
+                            }
+                        }
+                        rd.endObject();
+                    }
+                    rd.endArray();
+                }
+            }
+            rd.endObject();
 
             /*
              *
